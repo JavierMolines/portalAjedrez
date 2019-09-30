@@ -1,0 +1,35 @@
+.body {
+	background-color: rgb(0, 0, 0, 0.7);
+}
+
+.video {
+	margin-left: 5%; 
+	margin-top: 2%; 
+	margin-bottom: 5%; 
+	width: 90%;
+	height: 500px;
+}
+
+@media only screen and (max-width: 800px) {
+	.video {
+		height: 500px;
+	}
+}
+
+.conteconte {
+	margin-top: 6%;
+	width: 100%;
+	float: left;
+}
+
+.pica {
+	text-align: center;
+	font-size: 60px;
+	color: rgb(1, 255, 1);
+}
+
+.pica2 {
+	margin-left: 5%;
+	font-size: 30px;
+	color: white;
+}

@@ -1,0 +1,144 @@
+@media only screen and (max-width: 400px) {
+
+	#normal {
+		display: none;
+	}
+
+	#menu  {
+		display: block;
+	}
+
+	#flecha_arriba {
+		display: none;
+	}
+
+	.navbar {
+		padding: 5%;
+	}
+
+	.contenedor {
+		margin-top: 18%;	
+	}
+
+	.titulo {
+		font-size: 40px;
+	}
+
+	.barra {
+		font-size: 15px;
+		text-align: justify;
+	}
+
+	.mitadmitad {
+		width: 80%;
+		float: left;
+	}
+
+	.subtitu {
+		font-size: 28px;
+	}
+	
+	.texto {
+		font-size: 16px;
+	}
+
+	.other {
+		margin: 2%;
+		width: 96%;
+		font-size: 10px;
+	}
+
+	#presentacion_imagen_partida {
+		display: none;
+	}
+
+	.abajo {
+		margin-top: 25%; 
+	}
+
+	.s3s {
+		font-size: 14px; 
+	}
+
+	.principal {
+		margin-bottom: 2%;
+		font-size: 28px; 
+	}
+
+	.parra {
+		font-size: 14px; 
+	}
+
+	.inicio {
+		margin-top: 25%;
+	}
+
+	.tecno {
+		font-size: 30px; 
+	}
+
+	.inicio p {
+		font-size: 15px; 
+	}
+
+	.dividor {
+		margin: 3%;
+		width: 94%;
+	}
+
+	.tablita {
+		width: 94%;
+		margin-left: 2.5%; 
+	}
+
+	.dividor div {
+		font-size: 17px;
+	}
+
+	.textoetapa {
+		font-size: 15px;
+	}
+
+	.plaquetas {
+		margin-left: 5%; 
+		width: 90%;
+	}
+
+	.capsula {
+		width: 30%;
+		height: 100px;
+	}
+
+	.titulo3 {
+		font-size: 25px;  
+	}
+
+	.tabcontent {
+		margin-left: 5%; 
+		width: 90%;
+	}
+
+	.recall {
+		font-size: 18px;  
+	}
+
+	.sepasepasepa, .normativas, .normativas2  {
+		font-size: 15px; 
+	}
+
+	.conteconte {
+		margin-top: 25%;
+	}
+
+	.pica {
+		font-size: 28px;
+	}
+	
+	.pica2 {
+		font-size: 18px;
+	}
+
+	.video {
+		height: 300px;
+	}
+}

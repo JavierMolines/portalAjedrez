@@ -1,0 +1,148 @@
+.principal {
+	font-size: 70px;
+	text-align: center;
+	width: 100%;
+	float: left;
+	color: rgb(1, 255, 1);
+}
+
+.s50 {
+	float: left;
+	width: 46%;
+	padding: 2%;
+	color: white;
+	font-size: 2vw;
+	text-align: justify;
+}
+
+.s3s {
+	padding-left: 5%;
+	padding-right: 5%;
+	padding-top: 1%;
+	width: 90%;
+	float: left;
+	color: white;
+	text-align: justify;
+	font-size: 30px;
+}
+
+.blueblu {
+	background-color: blue;
+}
+
+.redre {
+	background-color: red;
+}
+
+.parra {
+	color: white;
+	font-size: 30px;
+	text-align: justify;
+	padding-left: 5%;
+	padding-right: 5%;
+	padding-top: 2%;
+	padding-bottom: 2%;
+	width: 90%;
+	float: left;
+}
+
+.abajo {
+	margin-top: 5%;
+}
+
+.ghostrider {
+	font-size: 4vw;
+	text-align: center;
+	width: 94%;
+	padding: 3%;
+	background-color: black;
+	color: rgb(1, 255, 1);
+	float: left;
+}
+
+.negro {
+	float: left;
+	background-color: rgb(0, 0, 0, 0.7);
+}
+
+.esfera {
+	color: white;
+	font-size: 2vw;
+	padding: 1%;
+	margin-left: 1%;
+	margin-right: 1%;
+	margin-top: 0.5%;
+	margin-bottom: 0.5%;
+	width: 29%;
+	text-align: center;
+}
+
+.posicentro {
+	margin-left: 34%;
+}
+
+.posiderecha {
+	margin-left: 68%;
+}
+
+.diva {
+	font-size: 2vw;
+	padding: 2%;
+	color: rgb(1, 255, 74);
+	background-color: black;
+	-webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 10s; /* Safari 4.0 - 8.0 */
+    -webkit-animation-iteration-count: infinite;
+    animation-name: example;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes poncho {
+    0%   {background-color: black;}
+    25%  {background-color: orange;}
+    50%  {background-color: black;}
+    75%  {background-color: blue;}
+    100% {background-color: black;}
+}
+
+@keyframes poncho {
+    0%   {background-color: black;}
+    25%  {background-color: orange;}
+    50%  {background-color: black;}
+    75%  {background-color: blue;}
+    100% {background-color: black;}
+}
+
+.asdasdsdsds {
+	background-color: white;
+	color: black;
+}
+
+.asdasdasdasd {
+	background-color: white;
+	color: black;
+}
+
+.tabcontent {
+	text-align: center;
+	color: black;
+	font-size: 2.3vw;
+	padding: 1%;
+	margin: 1%;
+	width: 43%;
+	border-radius: 70px;
+	float: left;
+	background-color: white;
+}
+
+th {
+	color: rgb(1, 255, 1); 
+}
+
+table {
+	font-size: 4vw;
+	color: white;
+	width: 90%;
+	margin: 5%;
+}

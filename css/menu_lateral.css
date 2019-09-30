@@ -1,0 +1,29 @@
+.menu_lateral {
+    display: none;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    position: fixed;
+    background: gray;
+    float: left;
+}
+
+.ajustar_cerrar {
+    cursor: pointer;
+    width: 12%;
+    float: left;
+    margin-left: 5%;
+    margin-top: 5%;
+}
+
+.labeles {
+    text-align: center;
+    font-size: 30px;
+    width: 94%;
+    color: rgb(1, 255, 1);
+    float: left;
+    padding: 2%;
+    margin: 1%;
+}
