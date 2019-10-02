@@ -15,12 +15,14 @@
 .mitadmitad div {
 	float: left;
 	width: 80%;
+	margin-left: 5%;
+	font-size: 22px;
 	text-align: center;
 	color: rgb(102, 255, 51);
 }
 
-#salida_por_nav:hover {
-	color: white;
+#salida_por_nav {
+	color: black;
 }
 
 a {
@@ -28,19 +30,18 @@ a {
 }
 
 .menu_responsive {
-	width: 15%;
-	height: auto;
+	width: 12.5%;
 	float: left;
 	cursor: pointer;
 }
 
 .navselec {
-	font-size: 2vw;
+	font-size: 17px;
 	background-color: gray;
 	padding-right: 1%;
 	padding-left: 1%;
-	padding-top: 0.2%;
-	padding-bottom: 0.2%;
+	padding-top: 1%;
+	padding-bottom: 1%;
 	color: rgb(102, 255, 51);
 	text-decoration: none;
 	float: left;

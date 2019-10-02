@@ -12,7 +12,7 @@
 
 .ajustar_cerrar {
     cursor: pointer;
-    width: 12%;
+    width: 10%;
     float: left;
     margin-left: 5%;
     margin-top: 5%;
@@ -25,5 +25,33 @@
     color: rgb(1, 255, 1);
     float: left;
     padding: 2%;
-    margin: 1%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.menu_del_menu {
+    text-align: center;
+    float: left;
+    font-size: 25px;
+    position: fixed;
+    left: 39%;
+    top: 3%;
+    color: white;
+}
+
+#espacio_para_direcciones {
+    float: left;
+    width: 100%;
+    margin-top: 23%;
+}
+
+#espacio_para_direcciones a {
+    text-align: center;
+    font-size: 30px;
+    width: 94%;
+    color: rgb(1, 255, 1);
+    float: left;
+    padding: 2%;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
