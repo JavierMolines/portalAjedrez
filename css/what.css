@@ -146,3 +146,11 @@ table {
 	width: 90%;
 	margin: 5%;
 }
+
+@media screen and (max-width: 600px){
+
+	.abajo {
+		margin-top: 9%;
+	}
+
+}

@@ -1,15 +1,10 @@
-function cerrar_menu() {
-    
-  var estado = document.getElementById('menu_desplegar');
-  
-  estado.style.display = 'none';
-  
-}
+function menu_desplegable(yomismo) {
 
-function abrir_menu() {
-    
-  var estado = document.getElementById('menu_desplegar');
+    var contenedor = yomismo.nextElementSibling;
+    if (contenedor.style.maxHeight) {
+        contenedor.style.maxHeight = null;
+    } else {
+        contenedor.style.maxHeight = contenedor.scrollHeight + "px";
+    }
 
-  estado.style.display = 'block';
-  
 }

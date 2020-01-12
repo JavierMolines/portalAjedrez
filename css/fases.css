@@ -189,6 +189,11 @@ p {
 }
 
 @media only screen and (max-width: 600px) {
+
+	.inicio {
+		margin-top: 9%;
+	}
+
 	.capsula {
 		height: 100px;
 	}
