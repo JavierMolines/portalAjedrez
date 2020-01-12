@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>AjedrezDidactico - ejm</title>
   <meta charset="utf-8">
@@ -13,67 +14,35 @@
   <link rel="stylesheet" href="../css/responsive.css">
   <link rel="stylesheet" href="../css/menu_lateral.css">
 </head>
+
 <body>
 
-<div class="body">
-  
-    <div class="menu_lateral" id="menu_desplegar">
+  <div class="body">
 
-        <img src="../imagenes/menu.png" onclick="cerrar_menu()" class="ajustar_cerrar">
-    
-        <div class="menu_del_menu">MENU</div>
 
-        <div id="espacio_para_direcciones">
 
-            <a href="index.html">Inicio</a>
-            <a href="what.html">Conocelo</a>
-            <a href="how.html">Jugabilidad</a>
-            <a href="ejm.html">Realidad</a>
+    <div id="cargar_nav"></div>
 
-        </div>
-    
-    </div>
-    
-    <div class="navbar">
-        <div class="mitadmitad" id="normal">
-             <a href="index.html" class="navselec">Inicio</a>
-             <a href="what.html" class="navselec">Conocelo</a>
-             <a href="how.html" class="navselec">Jugabilidad</a>
-             <a href="ejm.html" class="navselec">Realidad</a>
-        </div>
 
-        <div class="mitadmitad" id="menu">
-                <img src="../imagenes/menu.png" onclick="abrir_menu()" class="menu_responsive">
-                <div>Visita <a id="salida_por_nav" href="https://www.chess.com/">CHESS.com</a></div>
-           </div>
+    <div class="conteconte" id="ini">
+
+      <div class="pica">TORNEO DE AJEDREZ EN NORUEGA 2018!!</div>
+      <div class="pica2">Partida disputada entre:...</div>
+      <div class="pica2">Magnus Carlsen VS Fabiano Caruana</div>
+      <div class="pica2">(Actual Campeon del Mundo) VS (Candidado a Campeon del mundo)</div>
+
     </div>
 
-
-<div class="conteconte" id="ini">
-
-  <div class="pica">TORNEO DE AJEDREZ EN NORUEGA 2018!!</div>
-  <div class="pica2">Partida disputada entre:...</div>
-  <div class="pica2">Magnus Carlsen VS Fabiano Caruana</div>
-  <div class="pica2">(Actual Campeon del Mundo) VS (Candidado a Campeon del mundo)</div>
-
-</div>
+    <iframe class="video" src="https://www.youtube.com/embed/rMJlcrLjoUg" frameborder="0"
+      allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 
-<iframe class="video" src="https://www.youtube.com/embed/rMJlcrLjoUg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <div id="cargar_footer"></div>
 
 
-
-
-
-<div class="final">
-  <a id="flecha_arriba" href="#ini"><img class="romeo" src="../imagenes/flecha.png"></a>
-  <div class="other">Para mas informacion sobre el ajedrez y poder disfrutar de este fantastico juego ingrese en <a class="direccion" href="https://www.chess.com/">CHESS.COM</a></div>
-  <div class="other">Contact: javiermolines.sybven@hotmail.com</div>
-</div>
-
-
-
-</div>
-<script src="../js/menu.js"></script>
+  </div>
+  <script src="../js/menu.js"></script>
+  <script src="../js/cargar.js"></script>
 </body>
+
 </html>
