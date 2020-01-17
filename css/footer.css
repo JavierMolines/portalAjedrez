@@ -70,4 +70,23 @@
 	
 	}
 
+	.findMe div {
+
+		font-size: 14px;
+	
+	}
+	
+	.findMe div i {
+	
+		font-size: 17px;
+	
+	}
+	
+
+	.copyright {
+
+		font-size: 9px;
+
+	}
+
 }
