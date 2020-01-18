@@ -4,14 +4,14 @@
 	width: 100%;
 	background-color: white;
 	display: grid;
-	grid-template-columns: repeat(6, 16.6%);
+	grid-template-columns: repeat(6, 16.67%);
 	
 }
 
 #footer h3 {
 
 	font-size: 25px;
-	line-height: 2;
+	line-height: 3;
 	grid-column: 2 / 4;
 	text-align: center;
 	vertical-align: middle;
@@ -25,19 +25,23 @@
 
 }
 
-.findMe div {
+.findMe a {
 
-	margin-top: 2%;
-	padding: 0.5%;
+	text-decoration: none;
+	float: left;
+	padding: 1%;
+	width: 100%;
 	font-size: 20px;
+	text-align: center;
+	color: rgb(0, 77, 0);
 
 }
 
-.findMe div i {
+.findMe a i {
 
+	margin-right: 5%;
 	font-size: 25px;
-	margin-right: 2%;
-	color: rgb(0, 51, 0);
+	color: black;
 
 }
 
