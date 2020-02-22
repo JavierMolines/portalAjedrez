@@ -131,16 +131,17 @@
     }
 
     #tablero_principal_ajedrez div {
-        height: 75px;
+        height: 50px;
     }
 
     .ficha_blanca i, .ficha_negro i {
         font-size: 35px;
-        line-height: 2;
+        position: relative;
+        top: calc(50% - 50px)/* 50% - 3/4 of icon height */
     }
 
     .botones_opciones {
-        font-size: 10px;
+        font-size: 15px;
     }
 
 }

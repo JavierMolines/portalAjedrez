@@ -62,8 +62,9 @@
 
 	#footer h3 {
 
+		margin-top: 0%;
 		grid-column: 1 / 7;
-		margin-bottom: 1%;
+		margin-bottom: 0%;
 	
 	}
 	
