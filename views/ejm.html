@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <title>AjedrezDidactico - ejm</title>
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
   <link type="image/ico" href="https://i.pinimg.com/originals/69/75/f4/6975f4c1d171fb2381162cb72dc899ec.png" rel="icon">
   <link rel="stylesheet" href="../css/nav.css">
   <link rel="stylesheet" href="../css/cargador.css">
@@ -14,20 +15,18 @@
   <link rel="stylesheet" href="../css/responsive.css">
   <link rel="stylesheet" href="../css/menu_lateral.css">
   <link rel="stylesheet" href="../css/nuevo_menu/menu.css">
+  <link rel="stylesheet" href="../css/tablero.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gelasio&display=swap"> 
 </head>
 
 <body>
 
+  <div id="cargar_nav"></div>
+
   <div class="body">
 
-
-
-    <div id="cargar_nav"></div>
-
-
-    <div class="conteconte" id="ini">
+    <div class="conteconte">
 
       <div class="pica">COMIENZO DEL CAMPEONATO MUNDIAL</div>
       <div class="pica2">AJEDREZ BLITZ</div>
@@ -38,13 +37,33 @@
 
     <iframe class="video" src="https://www.youtube.com/embed/i5dDBEbCrbg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
+    <!--
 
-    <div id="cargar_footer"></div>
+      TABLERO AJEDREZ
 
+    -->
+
+    <div class="pica">TABLERO INTERACTIVO PARA PRACTICA</div>
+    <div class="pica2">A continuacion se presenta un tablero de ajedrez para que practiques los conceptos vistos en la pagina</div>
+    <div class="pica2">Para mas dudas o experimentar lo fantastico de este juego ve a CHESS.COM</div>
+    <div class="pica2">Puedes jugar con un amigo o tu solo moviento las respectivas piezas de ambos lados.</div>
+
+    <div id="botones_opciones_tablero" class="espacio_botones"></div>
+    <div id="tablero_principal_ajedrez"></div>
 
   </div>
+
+  <div id="cargar_footer"></div>
+  
   <script src="../js/menu.js"></script>
   <script src="../js/cargar.js"></script>
+  
+  <script src="../js/tablero/globales.js"></script>
+  <script src="../js/tablero/movimientos.js"></script>
+  <script src="../js/tablero/mini_filtros.js"></script>
+  <script src="../js/tablero/botones.js"></script>
+  <script src="../js/tablero/creacion.js"></script>
+  <script src="../js/tablero/funcionalidad.js"></script>
+  <script src="../js/tablero/engine.js"></script>
 </body>
-
 </html>
