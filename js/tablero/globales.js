@@ -30,10 +30,10 @@ var enroque_negro      = [true, true];
 */
 
 var colorAyudaCasilla  = "aqua";
-var coloresTablero     = ["white", "gray"];
-var colores            = ["darkgreen", "darkred"];
-var ggValidaciones     = ["darkgreen", "darkred"];
-var movimiento_actual  = "darkred";
+var coloresTablero     = ["#a6a6a6", "#404040"];
+var colores            = ["black", "white"];
+var ggValidaciones     = ["black", "white"];
+var movimiento_actual  = "white";
 
 /*
     Nota: 

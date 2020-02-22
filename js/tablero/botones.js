@@ -36,7 +36,7 @@ function crear_botones() {
                 jaque              = false;
                 enroque_blanco     = [true, true];
                 enroque_negro      = [true, true];
-                movimiento_actual  = "darkred";
+                movimiento_actual  = colores[1];
                 borrar_premovimiento();
 
                 // -- FINAL REINICIAR VARIABLES GLOBALES
