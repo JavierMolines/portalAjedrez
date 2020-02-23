@@ -1,7 +1,6 @@
 function crear_botones() {
 
     let contenedor = document.getElementById("botones_opciones_tablero");
-    //let contenedor = document.createElement("div");
 
     for (let contador = 0; contador < 3; contador++) {
 
@@ -11,24 +10,15 @@ function crear_botones() {
         if (contador == 0) {
 
             botones.id = "boton_reiniciar";
-            //botones.classList.add("botones_apagados");
             botones.innerHTML = "REINICIAR";
-            botones.disabled = true;
-            botones.classList.add("botones_apagados");
+            botones.disabled = false;
+            botones.classList.add("botones_tablero");
             botones.addEventListener("click", () => {
 
                 let piezas = document.querySelectorAll("div > i");
                 for (let contador = 0; contador < piezas.length; contador++) {
-
                     piezas[contador].parentNode.removeChild(piezas[contador]);
-                    
                 }
-
-                botones.disabled = true;
-                botones.classList.replace("botones_tablero", "botones_apagados");
-
-                boton_arrancar.disabled = false;
-                boton_arrancar.classList.replace("botones_apagados", "botones_tablero");
 
                 // -- INICIO REINICIAR VARIABLES GLOBALES
 
@@ -37,25 +27,24 @@ function crear_botones() {
                 enroque_blanco     = [true, true];
                 enroque_negro      = [true, true];
                 movimiento_actual  = colores[1];
-                borrar_premovimiento();
 
                 // -- FINAL REINICIAR VARIABLES GLOBALES
+
+                borrar_premovimiento();
+                crear_piezas();
 
             });
 
         } else if (contador == 1) {
 
-            botones.id = "boton_arrancar";
+            botones.id = "boton_regresar";
             botones.classList.add("botones_tablero");
-            botones.innerHTML = "JUGAR";
+            botones.classList.add("botones_apagados");
+            botones.disabled = true;
+            botones.innerHTML = "RETROCEDER";
             botones.addEventListener("click", () => {
 
-                crear_piezas();
-                botones.disabled = true;
-                botones.classList.replace("botones_tablero", "botones_apagados");
-
-                boton_reiniciar.disabled = false;
-                boton_reiniciar.classList.replace("botones_apagados", "botones_tablero");
+                console.log("PROXIMAMENTE");
 
             });
 
@@ -89,8 +78,5 @@ function crear_botones() {
         contenedor.appendChild(botones);
 
     }
-
-    //contenedor.classList.add("espacio_botones");
-    //document.body.appendChild(contenedor);
 
 }
