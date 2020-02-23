@@ -79,6 +79,7 @@ function crear_botones() {
 
                 }
 
+                borrar_premovimiento();
                 console.log(`AYUDA ESTADO: ${ayuda_movimientos}`);
 
             });

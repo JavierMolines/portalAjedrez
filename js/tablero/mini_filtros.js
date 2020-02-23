@@ -6,8 +6,18 @@ function mostrar_premovimiento(posiA, posiB) {
 
     let casilla_modificar = document.getElementById(`cuadro[${posiA},${posiB}]`);
     casilla_modificar.classList.add("previzualizar");
-    //casilla_modificar.innerHTML = "&#10060;";
+    //let validacionPiezaColocada = casilla_modificar.innerHTML;
     casilla_modificar.style.backgroundColor = colorAyudaCasilla;
+
+    /*
+    if(/<\/i>/.test(validacionPiezaColocada)){
+        casilla_modificar.innerHTML += "<p style='text-align: center; line-height: 0.6; position: relative; top: calc(50% - 150px); z-index: 10;'>&#10060;</p>";
+        console.log("ENTRE TIENE I");
+    } else {
+        casilla_modificar.innerHTML += "<p style='text-align: center; line-height: 0.6; position: relative; top: calc(50% - 40px); z-index: 10;'>&#10060;</p>";
+        console.log("ENTRE NO TIENE I");
+    }
+    */
     
 }
 
@@ -18,6 +28,9 @@ function borrar_premovimiento() {
 
         for (let contador = 0; contador < selector.length; contador++) {
             selector[contador].classList.remove("previzualizar");
+            //selector[contador].remove();
+
+            
             if (selector[contador].classList[0] == "ficha_blanca") {
                 selector[contador].style.backgroundColor = coloresTablero[0];
                 //selector[contador].innerHTML = "";
@@ -25,6 +38,8 @@ function borrar_premovimiento() {
                 selector[contador].style.backgroundColor = coloresTablero[1];
                 //selector[contador].innerHTML = "";
             }
+            
+
         }
 
     }

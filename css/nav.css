@@ -1,58 +1,8 @@
 
-.navbar {
-	width: 100%;
-	float: left;
-	position: fixed;
-    z-index: 1;
-	background-color: gray;
-}
-
-.mitadmitad {
-	width: 50%;
-	float: right;
-}
-
-.mitadmitad div {
-	float: left;
-	width: 80%;
-	margin-left: 5%;
-	font-size: 22px;
-	text-align: center;
-	color: rgb(102, 255, 51);
-}
-
-#salida_por_nav {
-	color: black;
+#navegacion_principal_ubicacion {
+	z-index: 100;
 }
 
 a {
 	text-decoration: none;
-}
-
-.menu_responsive {
-	width: 12.5%;
-	float: left;
-	cursor: pointer;
-}
-
-.navselec {
-	font-size: 17px;
-	background-color: gray;
-	padding-right: 1%;
-	padding-left: 1%;
-	padding-top: 1%;
-	padding-bottom: 1%;
-	color: rgb(102, 255, 51);
-	text-decoration: none;
-	float: left;
-	width: 23%;
-	text-align: center;
-}
-
-.navselec:hover {
-	background-color: black;
-}
-
-#menu {
-	display: none;
 }
