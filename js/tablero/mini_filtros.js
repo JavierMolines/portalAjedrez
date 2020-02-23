@@ -9,21 +9,21 @@ function mostrar_premovimiento(posiA, posiB) {
     let pre_movimiento_puntero = document.createElement("p");
     let parametros_enviar = {
         propiedad_pantalla: screen.width,
-        propiedad_mayor_que: "100% - 300%",
-        propiedad_menor_que: "100% - 170%",
+        propiedad_mayor_que: "50% - 140%",
+        propiedad_menor_que: "50% - 85%",
     };
 
     // TELEFONOS PEQUEÑOS
     if (parametros_enviar.propiedad_pantalla < 330) {
 
-        parametros_enviar.propiedad_mayor_que = "100% - 300%";
-        parametros_enviar.propiedad_menor_que = "100% - 130%";
+        parametros_enviar.propiedad_mayor_que = "50% - 135%";
+        parametros_enviar.propiedad_menor_que = "50% - 85%";
         
     // TELEFONOS NORMAL
     } else if (parametros_enviar.propiedad_pantalla < 450) {
         
-        parametros_enviar.propiedad_mayor_que = "100% - 350%";
-        parametros_enviar.propiedad_menor_que = "100% - 145%";
+        parametros_enviar.propiedad_mayor_que = "50% - 130%";
+        parametros_enviar.propiedad_menor_que = "50% - 70%";
 
     } 
 

@@ -36,7 +36,6 @@
 .ficha_blanca, .ficha_negro, .previzualizar {
 
     font-size: 35px;
-    line-height: 3;
     text-align: center;
     color: rgb(1, 255, 1);
 
@@ -44,11 +43,13 @@
 
 .ficha_blanca i, .ficha_negro i {
 
+    float: left;
     font-size: 60px;
     width: 100%;
     height: 100%;
     text-align: center;
-    line-height: 1.3;
+    position: relative;
+    top: calc(50% - 30px);
 
 }
 
@@ -103,7 +104,6 @@
     .ficha_blanca i, .ficha_negro i {
 
         font-size: 50px;
-        line-height: 1.5;
 
     }
 
@@ -131,7 +131,7 @@
     .ficha_blanca i, .ficha_negro i {
         font-size: 35px;
         position: relative;
-        top: calc(50% - 50px)/* 50% - 3/4 of icon height */
+        top: calc(50% - 17px);
     }
 
     .botones_opciones {
@@ -148,12 +148,11 @@
     }
 
     #tablero_principal_ajedrez div {
-        height: 60px;
+        height: 40px;
     }
 
     .ficha_blanca i, .ficha_negro i {
         font-size: 30px;
-        line-height: 1.8;
     }
 
     .botones_opciones {
