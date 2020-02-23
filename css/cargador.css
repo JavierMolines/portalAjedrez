@@ -2,7 +2,7 @@ body {
 	font-family: 'Gelasio', serif;
 	margin: 0px;
 	padding: 0px;
-    background-image: url("../imagenes/fondo.png");
+    background-image: url("../imagenes/fondo3.png");
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
@@ -139,10 +139,10 @@ body {
 
 	body {
 
-		background: #bdc3c7;  /* fallback for old browsers */
-		background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);  /* Chrome 10-25, Safari 5.1-6 */
-		background: linear-gradient(to right, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+		background: #373B44;  /* fallback for old browsers */
+		background: -webkit-linear-gradient(to right, #4286f4, #373B44);  /* Chrome 10-25, Safari 5.1-6 */
+		background: linear-gradient(to right, #4286f4, #373B44); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+		
 	}
 
 	.tarjeta_presentacion {
@@ -153,7 +153,7 @@ body {
 
 	.tarjeta_presentacion > p {
 
-		font-size: 15px;
+		font-size: 11px;
 	
 	}
 

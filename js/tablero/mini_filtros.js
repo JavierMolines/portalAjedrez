@@ -7,17 +7,28 @@ function mostrar_premovimiento(posiA, posiB) {
     let casilla_modificar = document.getElementById(`cuadro[${posiA},${posiB}]`);
     let validacionPiezaColocada = casilla_modificar.innerHTML;
     let pre_movimiento_puntero = document.createElement("p");
-    
-    pre_movimiento_puntero.style.textAlign = "center";
-    pre_movimiento_puntero.style.lineHeight = "0.6";
-    pre_movimiento_puntero.style.position = "relative";
-    pre_movimiento_puntero.style.zIndex = "10";
+    let parametros_enviar = {
+        propiedad_pantalla: screen.width,
+        propiedad_mayor_que: "100% - 300%",
+        propiedad_menor_que: "100% - 170%",
+    };
+
+    // TELEFONOS PEQUEÑOS
+    if (parametros_enviar.propiedad_pantalla < 330) {
+        
+    // TELEFONOS NORMAL
+    } else if (parametros_enviar.propiedad_pantalla < 450) {
+        
+      
+    } 
+
+    pre_movimiento_puntero.classList.add("parrafo_pre_movimiento");
     pre_movimiento_puntero.innerHTML = "&#10060;";
 
     if(/<\/i>/.test(validacionPiezaColocada)){
-        pre_movimiento_puntero.style.top = "calc(50% - 150px)";
+        pre_movimiento_puntero.style.top = `calc(${parametros_enviar.propiedad_mayor_que})`;
     } else {
-        pre_movimiento_puntero.style.top = "calc(50% - 40px)";
+        pre_movimiento_puntero.style.top = `calc(${parametros_enviar.propiedad_menor_que})`;
     }
 
     casilla_modificar.appendChild(pre_movimiento_puntero);

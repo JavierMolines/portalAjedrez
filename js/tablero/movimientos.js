@@ -562,7 +562,6 @@ function validar_premovimiento_peon(localizacion, propiedades_pieza) {
 
                     let pieza_contenida = nueva_casilla_comer1.childNodes[0].id.split("_");
                     if (pieza_contenida[1] != propiedades_pieza.color) {
-                        console.log("ENTRE AQUI DERECHA");
                         mostrar_premovimiento(localizacion.posY + 1, localizacion.posX + 1);
 
                     }
@@ -577,7 +576,6 @@ function validar_premovimiento_peon(localizacion, propiedades_pieza) {
 
                     let pieza_contenida = nueva_casilla_comer2.childNodes[0].id.split("_");
                     if (pieza_contenida[1] != propiedades_pieza.color) {
-                        console.log("ENTRE AQUI IZQUIERDA");
                         mostrar_premovimiento(localizacion.posY + 1, localizacion.posX - 1);
 
                     }
@@ -859,7 +857,7 @@ function validar_premovimiento_rey(localizacion, propiedades_pieza) {
             for (let contador = 1; contador <= 3; contador++) {
                 let casillas_latelares = document.getElementById(`cuadro[${localizacion.posY},${localizacion.posX - contador}]`);
 
-                if (casillas_latelares.childNodes.length > 0) {
+                if (casillas_latelares.childNodes.length > 0 && casillas_latelares.childNodes[0].localName !== "p") {
                     break;
                 } else {
                     if (contador == 1 || contador == 2) {
@@ -876,7 +874,7 @@ function validar_premovimiento_rey(localizacion, propiedades_pieza) {
             for (let contador = 1; contador <= 2; contador++) {
                 let casillas_latelares = document.getElementById(`cuadro[${localizacion.posY},${localizacion.posX + contador}]`);
 
-                if (casillas_latelares.childNodes.length > 0) {
+                if (casillas_latelares.childNodes.length > 0 && casillas_latelares.childNodes[0].localName !== "p") {
                     break;
                 } else {
                     if (contador == 1) {
@@ -896,7 +894,7 @@ function validar_premovimiento_rey(localizacion, propiedades_pieza) {
             for (let contador = 1; contador <= 3; contador++) {
                 let casillas_latelares = document.getElementById(`cuadro[${localizacion.posY},${localizacion.posX - contador}]`);
 
-                if (casillas_latelares.childNodes.length > 0) {
+                if (casillas_latelares.childNodes.length > 0 && casillas_latelares.childNodes[0].localName !== "p") {
                     break;
                 } else {
                     if (contador == 1 || contador == 2) {
@@ -913,7 +911,7 @@ function validar_premovimiento_rey(localizacion, propiedades_pieza) {
             for (let contador = 1; contador <= 2; contador++) {
                 let casillas_latelares = document.getElementById(`cuadro[${localizacion.posY},${localizacion.posX + contador}]`);
 
-                if (casillas_latelares.childNodes.length > 0) {
+                if (casillas_latelares.childNodes.length > 0 && casillas_latelares.childNodes[0].localName !== "p") {
                     break;
                 } else {
                     if (contador == 1) {
