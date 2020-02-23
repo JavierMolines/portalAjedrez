@@ -15,11 +15,16 @@ function mostrar_premovimiento(posiA, posiB) {
 
     // TELEFONOS PEQUEÑOS
     if (parametros_enviar.propiedad_pantalla < 330) {
+
+        parametros_enviar.propiedad_mayor_que = "100% - 300%";
+        parametros_enviar.propiedad_menor_que = "100% - 130%";
         
     // TELEFONOS NORMAL
     } else if (parametros_enviar.propiedad_pantalla < 450) {
         
-      
+        parametros_enviar.propiedad_mayor_que = "100% - 350%";
+        parametros_enviar.propiedad_menor_que = "100% - 145%";
+
     } 
 
     pre_movimiento_puntero.classList.add("parrafo_pre_movimiento");
