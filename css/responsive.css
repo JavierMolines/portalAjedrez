@@ -1,4 +1,4 @@
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 500px) {
 
 	#normal {
 		display: none;
@@ -35,11 +35,11 @@
 	}
 
 	.subtitu {
-		font-size: 28px;
+		font-size: 20px;
 	}
 	
 	.texto {
-		font-size: 16px;
+		font-size: 14px;
 	}
 
 	.other {
