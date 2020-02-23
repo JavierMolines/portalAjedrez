@@ -558,11 +558,11 @@ function validar_premovimiento_peon(localizacion, propiedades_pieza) {
 
             if (nueva_casilla_comer1 !== null) {
 
-                if (nueva_casilla_comer1.childNodes.length > 0) {
+                if (nueva_casilla_comer1.childNodes.length > 0 && contador < 2) {
 
                     let pieza_contenida = nueva_casilla_comer1.childNodes[0].id.split("_");
                     if (pieza_contenida[1] != propiedades_pieza.color) {
-
+                        console.log("ENTRE AQUI DERECHA");
                         mostrar_premovimiento(localizacion.posY + 1, localizacion.posX + 1);
 
                     }
@@ -573,11 +573,11 @@ function validar_premovimiento_peon(localizacion, propiedades_pieza) {
 
             if (nueva_casilla_comer2 !== null) {
 
-                if (nueva_casilla_comer2.childNodes.length > 0) {
+                if (nueva_casilla_comer2.childNodes.length > 0 && contador < 2) {
 
                     let pieza_contenida = nueva_casilla_comer2.childNodes[0].id.split("_");
                     if (pieza_contenida[1] != propiedades_pieza.color) {
-
+                        console.log("ENTRE AQUI IZQUIERDA");
                         mostrar_premovimiento(localizacion.posY + 1, localizacion.posX - 1);
 
                     }
@@ -609,7 +609,7 @@ function validar_premovimiento_peon(localizacion, propiedades_pieza) {
 
             if (nueva_casilla_comer1 !== null) {
 
-                if (nueva_casilla_comer1.childNodes.length > 0) {
+                if (nueva_casilla_comer1.childNodes.length > 0 && contador < 2) {
 
                     let pieza_contenida = nueva_casilla_comer1.childNodes[0].id.split("_");
                     if (pieza_contenida[1] != propiedades_pieza.color) {
@@ -624,7 +624,7 @@ function validar_premovimiento_peon(localizacion, propiedades_pieza) {
 
             if (nueva_casilla_comer2 !== null) {
 
-                if (nueva_casilla_comer2.childNodes.length > 0) {
+                if (nueva_casilla_comer2.childNodes.length > 0 && contador < 2) {
 
                     let pieza_contenida = nueva_casilla_comer2.childNodes[0].id.split("_");
                     if (pieza_contenida[1] != propiedades_pieza.color) {

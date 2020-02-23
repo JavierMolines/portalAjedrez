@@ -5,43 +5,32 @@ function mostrar_premovimiento(posiA, posiB) {
     }
 
     let casilla_modificar = document.getElementById(`cuadro[${posiA},${posiB}]`);
-    casilla_modificar.classList.add("previzualizar");
-    //let validacionPiezaColocada = casilla_modificar.innerHTML;
-    casilla_modificar.style.backgroundColor = colorAyudaCasilla;
+    let validacionPiezaColocada = casilla_modificar.innerHTML;
+    let pre_movimiento_puntero = document.createElement("p");
+    
+    pre_movimiento_puntero.style.textAlign = "center";
+    pre_movimiento_puntero.style.lineHeight = "0.6";
+    pre_movimiento_puntero.style.position = "relative";
+    pre_movimiento_puntero.style.zIndex = "10";
+    pre_movimiento_puntero.innerHTML = "&#10060;";
 
-    /*
     if(/<\/i>/.test(validacionPiezaColocada)){
-        casilla_modificar.innerHTML += "<p style='text-align: center; line-height: 0.6; position: relative; top: calc(50% - 150px); z-index: 10;'>&#10060;</p>";
-        console.log("ENTRE TIENE I");
+        pre_movimiento_puntero.style.top = "calc(50% - 150px)";
     } else {
-        casilla_modificar.innerHTML += "<p style='text-align: center; line-height: 0.6; position: relative; top: calc(50% - 40px); z-index: 10;'>&#10060;</p>";
-        console.log("ENTRE NO TIENE I");
+        pre_movimiento_puntero.style.top = "calc(50% - 40px)";
     }
-    */
+
+    casilla_modificar.appendChild(pre_movimiento_puntero);
     
 }
 
 function borrar_premovimiento() {
 
-    let selector = document.querySelectorAll(".previzualizar");
+    let selector = document.querySelectorAll("p");
     if (selector.length > 0) {
-
         for (let contador = 0; contador < selector.length; contador++) {
-            selector[contador].classList.remove("previzualizar");
-            //selector[contador].remove();
-
-            
-            if (selector[contador].classList[0] == "ficha_blanca") {
-                selector[contador].style.backgroundColor = coloresTablero[0];
-                //selector[contador].innerHTML = "";
-            } else {
-                selector[contador].style.backgroundColor = coloresTablero[1];
-                //selector[contador].innerHTML = "";
-            }
-            
-
+            selector[contador].remove();
         }
-
     }
 
 }
