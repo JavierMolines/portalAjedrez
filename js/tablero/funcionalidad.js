@@ -141,7 +141,7 @@ function interaccion_pieza(pieza, casilla) {
     if (acciones === true) {
 
         deshabilitar_enroque(pieza_seleccionada[2]);
-        //comprobar_jaque(pieza[0]);
+        comprobar_jaque(pieza[0]);
         cambiar_turno(pieza[0].style.color);
         
     }
