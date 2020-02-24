@@ -35,9 +35,7 @@ var colores            = ["black", "white"];
 var ggValidaciones     = ["black", "white"];
 var movimiento_actual  = "white";
 
-/*
-    Nota: 
-            Si se modifican los colores para las piezas, por ende tambien se modifica la variable //movimiento_actual// para indicar cual color es el que empieza,
-            Luego del mismo, para evitar errores, irse al archivo botones.js a la linea 38 para modificar la misma variable para limpiarla
-
-*/
+// CREAR TABLERO, Y LAS PIEZAS DE JUEGO, ADEMAS ARRANCAR EL INICIO DEL JUEGO
+crear_botones();
+crear_cuadros_vectores();
+crear_piezas();

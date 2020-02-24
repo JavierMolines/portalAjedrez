@@ -8,10 +8,8 @@ function crear_cuadros_vectores() {
         for (let cuadros = 1; cuadros < 9; cuadros++) {
 
             let cuadro = document.createElement("div");
-            //cuadro.id = `cuadro[${lista[contador]},${cuadros}]`;
             cuadro.id = `cuadro[${contador},${cuadros}]`;
-            //cuadro.innerHTML = "&#10060;";
-            cuadro.addEventListener("click", movimiento_piezas);
+            cuadro.addEventListener("click", asignar_movimiento_piezas);
             document.getElementById("tablero_principal_ajedrez").appendChild(cuadro);
 
             if (indicador_color == 0) {

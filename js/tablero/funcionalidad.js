@@ -52,7 +52,7 @@ function pre_movimiento(pieza) {
 
 }
 
-function movimiento_piezas() {
+function asignar_movimiento_piezas() {
 
     borrar_premovimiento();
 
