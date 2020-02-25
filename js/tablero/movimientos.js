@@ -422,8 +422,10 @@ function validar_premovimiento_rey(localizacion, propiedades_pieza) {
 
 */
 function validar_movimiento_peon(posicionamiento, casilla_destino_final) {
-    
+
     let casilla_delantera;
+    let movimiento_valido = false;
+    let enviar_interaccion = [];
 
     if (posicionamiento.flujo == ggValidaciones[1]) {
 
@@ -446,7 +448,8 @@ function validar_movimiento_peon(posicionamiento, casilla_destino_final) {
                         }
                     }
 
-                    interaccion_pieza(pieza_seleccionada, casilla_destino_final);
+                    movimiento_valido = true;
+                    enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
 
                 }
 
@@ -460,7 +463,8 @@ function validar_movimiento_peon(posicionamiento, casilla_destino_final) {
                     if (casilla_diagonal_1.childNodes.length > 0) {
                         let identificador = casilla_diagonal_1.id.split("_");
                         if (identificador[1] != ggValidaciones[1] && posicionamiento.targetPosX == posicionamiento.posX + 1) {
-                            interaccion_pieza(pieza_seleccionada, casilla_destino_final);
+                            movimiento_valido = true;
+                            enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
                         }
                     }
 
@@ -471,7 +475,8 @@ function validar_movimiento_peon(posicionamiento, casilla_destino_final) {
                     if (casilla_diagonal_2.childNodes.length > 0) {
                         let identificador = casilla_diagonal_2.id.split("_");
                         if (identificador[1] != ggValidaciones[1] && posicionamiento.targetPosX == posicionamiento.posX - 1) {
-                            interaccion_pieza(pieza_seleccionada, casilla_destino_final);
+                            movimiento_valido = true;
+                            enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
                         }
                     }
 
@@ -489,7 +494,8 @@ function validar_movimiento_peon(posicionamiento, casilla_destino_final) {
                         return;
                     }
 
-                    interaccion_pieza(pieza_seleccionada, casilla_destino_final);
+                    movimiento_valido = true;
+                    enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
 
                 }
 
@@ -503,7 +509,8 @@ function validar_movimiento_peon(posicionamiento, casilla_destino_final) {
                     if (casilla_diagonal_1.childNodes.length > 0) {
                         let identificador = casilla_diagonal_1.id.split("_");
                         if (identificador[1] != ggValidaciones[1] && posicionamiento.targetPosX == posicionamiento.posX + 1) {
-                            interaccion_pieza(pieza_seleccionada, casilla_destino_final);
+                            movimiento_valido = true;
+                            enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
                         }
                     }
 
@@ -514,7 +521,8 @@ function validar_movimiento_peon(posicionamiento, casilla_destino_final) {
                     if (casilla_diagonal_2.childNodes.length > 0) {
                         let identificador = casilla_diagonal_2.id.split("_");
                         if (identificador[1] != ggValidaciones[1] && posicionamiento.targetPosX == posicionamiento.posX - 1) {
-                            interaccion_pieza(pieza_seleccionada, casilla_destino_final);
+                            movimiento_valido = true;
+                            enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
                         }
                     }
 
@@ -545,7 +553,8 @@ function validar_movimiento_peon(posicionamiento, casilla_destino_final) {
                         }
                     }
 
-                    interaccion_pieza(pieza_seleccionada, casilla_destino_final);
+                    movimiento_valido = true;
+                    enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
 
                 }
 
@@ -559,7 +568,8 @@ function validar_movimiento_peon(posicionamiento, casilla_destino_final) {
                     if (casilla_diagonal_1.childNodes.length > 0) {
                         let identificador = casilla_diagonal_1.id.split("_");
                         if (identificador[1] != ggValidaciones[0] && posicionamiento.targetPosX == posicionamiento.posX + 1) {
-                            interaccion_pieza(pieza_seleccionada, casilla_destino_final);
+                            movimiento_valido = true;
+                            enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
                         }
                     }
 
@@ -570,7 +580,8 @@ function validar_movimiento_peon(posicionamiento, casilla_destino_final) {
                     if (casilla_diagonal_2.childNodes.length > 0) {
                         let identificador = casilla_diagonal_2.id.split("_");
                         if (identificador[1] != ggValidaciones[0] && posicionamiento.targetPosX == posicionamiento.posX - 1) {
-                            interaccion_pieza(pieza_seleccionada, casilla_destino_final);
+                            movimiento_valido = true;
+                            enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
                         }
                     }
 
@@ -588,7 +599,8 @@ function validar_movimiento_peon(posicionamiento, casilla_destino_final) {
                         return;
                     }
 
-                    interaccion_pieza(pieza_seleccionada, casilla_destino_final);
+                    movimiento_valido = true;
+                    enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
 
                 }
 
@@ -602,7 +614,8 @@ function validar_movimiento_peon(posicionamiento, casilla_destino_final) {
                     if (casilla_diagonal_1.childNodes.length > 0) {
                         let identificador = casilla_diagonal_1.id.split("_");
                         if (identificador[1] != ggValidaciones[0] && posicionamiento.targetPosX == posicionamiento.posX + 1) {
-                            interaccion_pieza(pieza_seleccionada, casilla_destino_final);
+                            movimiento_valido = true;
+                            enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
                         }
                     }
 
@@ -613,7 +626,8 @@ function validar_movimiento_peon(posicionamiento, casilla_destino_final) {
                     if (casilla_diagonal_2.childNodes.length > 0) {
                         let identificador = casilla_diagonal_2.id.split("_");
                         if (identificador[1] != ggValidaciones[0] && posicionamiento.targetPosX == posicionamiento.posX - 1) {
-                            interaccion_pieza(pieza_seleccionada, casilla_destino_final);
+                            movimiento_valido = true;
+                            enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
                         }
                     }
 
@@ -624,6 +638,15 @@ function validar_movimiento_peon(posicionamiento, casilla_destino_final) {
         }
 
     }
+
+
+    if (movimiento_valido === true) {
+
+        interaccion_pieza(enviar_interaccion[0], enviar_interaccion[1]);
+
+    }
+
+
 }
 
 function validar_movimiento_caballo(posicionamiento, casilla_destino_final) {
@@ -644,11 +667,15 @@ function validar_movimiento_caballo(posicionamiento, casilla_destino_final) {
 
 function validar_movimiento_bishop(posicionamiento, casilla_destino_final) {
 
+    let movimiento_valido = false;
+    let enviar_interaccion = [];
+
     for (let move = 1; move < 8; move++) {
         if (posicionamiento.posY + move == posicionamiento.targetPosY && posicionamiento.posX + move == posicionamiento.targetPosX) {
             let indicador = filtrar_movimientos_alfil(posicionamiento, move, "cuadranteI");
             if (indicador !== true) {
-                interaccion_pieza(pieza_seleccionada, casilla_destino_final);
+                movimiento_valido = true;
+                enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
                 break;
             }
         }
@@ -658,7 +685,8 @@ function validar_movimiento_bishop(posicionamiento, casilla_destino_final) {
         if (posicionamiento.posY + move == posicionamiento.targetPosY && posicionamiento.posX - move == posicionamiento.targetPosX) {
             let indicador = filtrar_movimientos_alfil(posicionamiento, move, "cuadranteII");
             if (indicador !== true) {
-                interaccion_pieza(pieza_seleccionada, casilla_destino_final);
+                movimiento_valido = true;
+                enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
                 break;
             }
         }
@@ -668,7 +696,8 @@ function validar_movimiento_bishop(posicionamiento, casilla_destino_final) {
         if (posicionamiento.posY - move == posicionamiento.targetPosY && posicionamiento.posX - move == posicionamiento.targetPosX) {
             let indicador = filtrar_movimientos_alfil(posicionamiento, move, "cuadranteIII");
             if (indicador !== true) {
-                interaccion_pieza(pieza_seleccionada, casilla_destino_final);
+                movimiento_valido = true;
+                enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
                 break;
             }
         }
@@ -678,30 +707,49 @@ function validar_movimiento_bishop(posicionamiento, casilla_destino_final) {
         if (posicionamiento.posY - move == posicionamiento.targetPosY && posicionamiento.posX + move == posicionamiento.targetPosX) {
             let indicador = filtrar_movimientos_alfil(posicionamiento, move, "cuadranteIV");
             if (indicador !== true) {
-                interaccion_pieza(pieza_seleccionada, casilla_destino_final);
+                movimiento_valido = true;
+                enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
                 break;
             }
         }
+    }
+
+    if(movimiento_valido === true){
+
+        interaccion_pieza(enviar_interaccion[0], enviar_interaccion[1]);
+
     }
 }
 
 function validar_movimiento_torre(posicionamiento, casilla_destino_final) {
 
+    let movimiento_valido = false;
+    let enviar_interaccion = [];
+
     if (posicionamiento.posX == posicionamiento.targetPosX) {
 
         let indicador = filtrar_movimientos_torre(posicionamiento, "vertical");
         if (indicador !== true) {
-            interaccion_pieza(pieza_seleccionada, casilla_destino_final);
+            movimiento_valido = true;
+            enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
         }
 
     } else if (posicionamiento.posY == posicionamiento.targetPosY) {
 
         let indicador = filtrar_movimientos_torre(posicionamiento, "horizontal");
         if (indicador !== true) {
-            interaccion_pieza(pieza_seleccionada, casilla_destino_final);
+            movimiento_valido = true;
+            enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
         }
 
     }
+
+    if(movimiento_valido === true){
+
+        interaccion_pieza(enviar_interaccion[0], enviar_interaccion[1]);
+
+    }
+    
 }
 
 function validar_movimiento_rey(posicionamiento, casilla_destino_final) {
