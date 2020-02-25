@@ -137,6 +137,8 @@ body {
 
 .contenedor_principal_detalle_pieza {
 
+	float: left;
+	overflow-x: hidden;
 	z-index: 5;
 	position: fixed;
 	left: 0px;
@@ -191,6 +193,7 @@ body {
 .contenedor_principal_detalle_pieza > p {
 
 	text-align: justify;
+	padding-bottom: 10%;
 
 }
 
@@ -226,7 +229,7 @@ body {
 
 		font-size: 30px;
 		right: 4%;
-		top: 7%;
+		top: 10%;
 	
 	}
 
