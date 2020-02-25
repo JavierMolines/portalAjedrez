@@ -490,7 +490,7 @@ function comprobar_jaque(pieza) {
         // REGRESAR COLOR
         setTimeout(()=>{
             casilla_jaque.style.backgroundColor = color_respaldo;
-        }, 3000);
+        }, 1000);
 
     }
 
