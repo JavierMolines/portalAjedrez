@@ -15,14 +15,14 @@
   <link rel="stylesheet" href="../css/menu_lateral.css">
   <link rel="stylesheet" href="../css/nuevo_menu/menu.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gelasio&display=swap"> 
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gelasio&display=swap">
   <script src="../js/control.js"></script>
 </head>
 
 <body>
   <div class="negro" id="ini">
 
-    
+
     <div id="cargar_nav"></div>
 
 
@@ -65,122 +65,32 @@
 
     <div class="titulo3">PIEZAS DEL JUEGO</div>
 
-    <div class="perepuripare">
-      <div class="plaquetas">
-        <img class="capsula" src="../imagenes/p.jpg" onclick="openCity(event, 'a')">
-        <img class="capsula" src="../imagenes/c.jpg" onclick="openCity(event, 'c')">
-        <img class="capsula" src="../imagenes/a.jpg" onclick="openCity(event, 'b')">
-        <img class="capsula" src="../imagenes/t.jpg" onclick="openCity(event, 'd')">
-        <img class="capsula" src="../imagenes/d.jpg" onclick="openCity(event, 'e')">
-        <img class="capsula" src="../imagenes/r.jpg" onclick="openCity(event, 'f')">
-      </div>
-
-      <div id="a" class="tabcontent">
-        <div class="centrado">PEON</div>
-        <img class="responsive" src="../imagenes/p.jpg">
-        <div class="recall">
-          Es la pieza más numerosa y la menos poderosa del tablero de ajedrez. Los peones tienen un movimiento inusual.
-          Normalmente, el peón solo se mueve hacia delante, una casilla cada vez. Una excepción es la primera vez que se
-          mueve un peón, que se puede mover dos casillas hacia delante. El peón no puede saltar sobre otras piezas,
-          cualquier pieza que esté justo delante de un peón bloquea su avance a esa casilla. El peón es la única pieza
-          que no captura de la misma manera que se mueve, sino que lo hace en diagonal. No puede capturar moviéndose
-          hacia delante.
-        </div>
-      </div>
-
-      <div id="b" class="tabcontent">
-        <div class="centrado">ALFIL</div>
-        <img class="responsive" src="../imagenes/a.jpg">
-        <div class="recall">
-          Se mueve sobre el tablero en una línea recta diagonal. Se puede mover tantas casillas como se quiera, hasta
-          que se encuentre con el final del tablero o con otra pieza. El alfil no puede saltar sobre otras piezas.
-          Captura del mismo modo que se desplaza, colocándose en la casilla de la pieza oponente. Debido a la manera en
-          la que se mueve el alfil, la pieza siempre permanece en las casillas del mismo color que su casilla original.
-          Cada jugador empieza con dos alfiles, uno en la casilla blanca y otro en la casilla negra. Con frecuencia se
-          le llaman alfil de las casillas “negras” y alfil de las casillas “blancas”. Los alfiles también se pueden
-          llamar según el lado en el que empiezan, alfil del rey o alfil de la reina.
-        </div>
-      </div>
-
-      <div id="c" class="tabcontent">
-        <div class="centrado">CABALLO</div>
-        <img class="responsive" src="../imagenes/c.jpg">
-        <div class="recall">
-          Es la pieza más especial en el ajedrez, ya que tiene una flexibilidad que le hace una pieza poderosa, es la
-          única pieza del tablero que puede saltar sobre otras piezas, el caballo se mueve dos casillas en dirección
-          horizontal o vertical y después una casilla más en ángulo recto. El movimiento del caballo tiene la forma de
-          una “L ”, siempre se cae sobre una casilla del color contrario a la de su casilla inicial. El caballo puede
-          saltar sobre piezas de cualquier color mientras se mueve hasta su casilla de destino, pero no captura a
-          ninguna de las piezas sobre las que salte. El caballo realiza la captura colocándose en la casilla de la pieza
-          oponente. El caballo no puede colocarse en una casilla ocupada por una pieza del mismo color. Como el
-          movimiento del caballo no es en línea recta, puede atacar a una reina, a un alfil o a una torre sin ser
-          atacado por dichas piezas de manera recíproca.
-        </div>
-      </div>
-
-      <div id="d" class="tabcontent">
-        <div class="centrado">TORRE</div>
-        <img class="responsive" src="../imagenes/t.jpg">
-        <div class="recall">
-          Se mueve en una línea recta horizontal o vertical a lo largo de cualquier número de casillas desocupadas,
-          hasta que alcanza el final del tablero o es bloqueado por otra pieza. No puede saltar sobre otras piezas. La
-          torre captura de la misma manera en la que se mueve, ocupando la casilla en la que está la pieza oponente. La
-          torre puede colocarse en cualquier casilla del tablero, por tanto es una de las piezas más poderosas.
-        </div>
-      </div>
-
-      <div id="e" class="tabcontent">
-        <div class="centrado">DAMA</div>
-        <img class="responsive" src="../imagenes/d.jpg">
-        <div class="recall">
-          Se considera como la pieza más poderosa del tablero. Se puede mover cualquier número de casillas en línea
-          recta, tanto de manera horizontal como vertical o diagonal. La reina se mueve como la torre y el alfil juntos.
-          Excepto en una captura, la reina se debe mover a una casilla desocupada y no puede saltar sobre otras piezas.
-          La reina captura de la misma manera en la que se desplaza, colocándose en la casilla de la pieza oponente.
-        </div>
-      </div>
-
-      <div id="f" class="tabcontent">
-        <div class="centrado">REY</div>
-        <img class="responsive" src="../imagenes/r.jpg">
-        <div class="recall">
-          Es la pieza más importante del ajedrez. Si el rey está sitiado, de manera que su captura es inevitable, la
-          partida se termina y ese jugador pierde. El rey tiene poca movilidad, por eso está considerado como una de las
-          piezas más débiles del juego. El rey puede moverse a cualquier casilla adyacente, es decir, se puede mover una
-          casilla en cualquier dirección: horizontal, vertical o diagonal. No se puede mover a una casilla ocupada por
-          otra pieza del mismo color. El rey captura de la misma manera en que se mueve, colocándose en la casilla de la
-          pieza oponente. Hay otra limitación adicional al movimiento del rey: no puede moverse a ninguna casilla que le
-          expusiera al ataque de una pieza oponente (lo que se llama “jaque ”). Como resultado de dicha limitación, dos
-          reyes nunca se pueden situar uno al lado del otro, ya que cualquier movimiento hacia el rey oponente pondría
-          al rey que se está moviendo en jaque. El rey también se puede ver forzado a mover o capturar si está siendo
-          atacado (“jaque”) y la única forma de detener el ataque es mover el rey.
-        </div>
-      </div>
-
+    <div id="indicador_detalles_pieza" class="plaquetas">
+      <img class="capsula" title="Peon" src="../imagenes/p.jpg" onclick="mostrar_detalles(this);">
+      <img class="capsula" title="Caballo" src="../imagenes/c.jpg" onclick="mostrar_detalles(this);">
+      <img class="capsula" title="Alfin" src="../imagenes/a.jpg" onclick="mostrar_detalles(this);">
+      <img class="capsula" title="Torre" src="../imagenes/t.jpg" onclick="mostrar_detalles(this);">
+      <img class="capsula" title="Dama" src="../imagenes/d.jpg" onclick="mostrar_detalles(this);">
+      <img class="capsula" title="Rey" src="../imagenes/r.jpg" onclick="mostrar_detalles(this);">
     </div>
 
-    <div class="">
+    <div class="titulo3">NORMATIVAS RESUMIDAS</div>
 
-      <div class="titulo3">NORMATIVAS RESUMIDAS</div>
-
-      <div class="normativas">
-        El ajedrez se juega con una sola mano, ya que el uso de ambas sera penalizado. Para jugar, primero se asigna que
-        jugador lleva las piezas de un respectivo color, un jugador utiliza las piezas blancas (en ajedrez hablamos de
-        piezas no de fichas), y el otro jugador usa las piezas negras. Cada jugador tiene dieciséis piezas al comienzo
-        de la partida: un rey, una dama (no se dice reina), dos torres, dos alfiles, dos caballos y ocho peones. Además
-        de piezas necesitamos un tablero. El tablero de ajedrez, tiene 64 casillas: ocho filas y ocho columnas. El
-        tablero siempre se coloca con una casilla blanca a la derecha.
-        <br><br>
-        Cada jugador solo puede mover 1 pieza por turno (exceptuando el enroque, ya que para realizarlo se debe mover
-        primero el rey y luego torre), se deben de mover las piezas de una manera en la cual te permita desarrollarte
-        eficientemente por el tablero y te permita capturar al Rey enemigo y asi ganar la partida (con capturar nos
-        referimos a inmovilizar al rey del contrario y asi no pueda escapar a otra casilla o defenderse con otra pieza).
-        Pero en determinados casos realizando los movimentos correctos la partida puede quedar en empate (lo que en el
-        ajedrez se conoce como Tablas)
-      </div>
-
+    <div class="normativas">
+      El ajedrez se juega con una sola mano, ya que el uso de ambas sera penalizado. Para jugar, primero se asigna que
+      jugador lleva las piezas de un respectivo color, un jugador utiliza las piezas blancas (en ajedrez hablamos de
+      piezas no de fichas), y el otro jugador usa las piezas negras. Cada jugador tiene dieciséis piezas al comienzo
+      de la partida: un rey, una dama (no se dice reina), dos torres, dos alfiles, dos caballos y ocho peones. Además
+      de piezas necesitamos un tablero. El tablero de ajedrez, tiene 64 casillas: ocho filas y ocho columnas. El
+      tablero siempre se coloca con una casilla blanca a la derecha.
+      <br><br>
+      Cada jugador solo puede mover 1 pieza por turno (exceptuando el enroque, ya que para realizarlo se debe mover
+      primero el rey y luego torre), se deben de mover las piezas de una manera en la cual te permita desarrollarte
+      eficientemente por el tablero y te permita capturar al Rey enemigo y asi ganar la partida (con capturar nos
+      referimos a inmovilizar al rey del contrario y asi no pueda escapar a otra casilla o defenderse con otra pieza).
+      Pero en determinados casos realizando los movimentos correctos la partida puede quedar en empate (lo que en el
+      ajedrez se conoce como Tablas)
     </div>
-
 
     <div class="">
 
