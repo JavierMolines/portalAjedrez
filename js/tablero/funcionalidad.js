@@ -106,6 +106,7 @@ function asignar_movimiento_piezas() {
 
     // LIMPIAR PIEZA SELECCIONADA PARA QUE SEA NECESARIO DAR CLICK
     pieza_seleccionada = "";
+    borrar_premovimiento();
 
 }
 
