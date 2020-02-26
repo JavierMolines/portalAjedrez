@@ -416,119 +416,13 @@ function comprobar_jaque(pieza) {
 
         let color_respaldo = casilla_jaque.style.backgroundColor;
         casilla_jaque.style.backgroundColor = "red";
-        jaque = true;
+        jaque = rey_en_jaque;
         
         // REGRESAR COLOR
-        setTimeout(()=>{
+        setTimeout(() => {
             casilla_jaque.style.backgroundColor = color_respaldo;
         }, 1000);
 
     }
-
-    /*
-    if (tipo_pieza[0] === "rey") {
-
-        let vectorYmas1 = localizacion.posY + 1;
-        let vectorXmas1 = localizacion.posX + 1;
-        let vectorYmenos1 = localizacion.posY - 1;
-        let vectorXmenos1 = localizacion.posX - 1;
-
-        if (vectorYmas1 < 9 && vectorXmas1 < 9) {
-            let nueva_casilla = document.getElementById(`cuadro[${vectorYmas1},${vectorXmas1}]`);
-            if (nueva_casilla.childNodes.length > 0) {
-                let colorsito = nueva_casilla.childNodes[0].id.split("_");
-                if (colorsito[1] != movimiento_actual) {
-                    mostrar_premovimiento(vectorYmas1, vectorXmas1);
-                }
-            } else {
-                mostrar_premovimiento(vectorYmas1, vectorXmas1);
-            }
-        }
-
-        if (vectorYmas1 < 9 && vectorXmenos1 > 0) {
-            let nueva_casilla = document.getElementById(`cuadro[${vectorYmas1},${vectorXmenos1}]`);
-            if (nueva_casilla.childNodes.length > 0) {
-                let colorsito = nueva_casilla.childNodes[0].id.split("_");
-                if (colorsito[1] != movimiento_actual) {
-                    mostrar_premovimiento(vectorYmas1, vectorXmenos1);
-                }
-            } else {
-                mostrar_premovimiento(vectorYmas1, vectorXmenos1);
-            }
-        }
-
-        if (vectorYmenos1 > 0 && vectorXmenos1 > 0) {
-            let nueva_casilla = document.getElementById(`cuadro[${vectorYmenos1},${vectorXmenos1}]`);
-            if (nueva_casilla.childNodes.length > 0) {
-                let colorsito = nueva_casilla.childNodes[0].id.split("_");
-                if (colorsito[1] != movimiento_actual) {
-                    mostrar_premovimiento(vectorYmenos1, vectorXmenos1);
-                }
-            } else {
-                mostrar_premovimiento(vectorYmenos1, vectorXmenos1);
-            }
-        }
-
-        if (vectorYmenos1 > 0 && vectorXmas1 < 9) {
-            let nueva_casilla = document.getElementById(`cuadro[${vectorYmenos1},${vectorXmas1}]`);
-            if (nueva_casilla.childNodes.length > 0) {
-                let colorsito = nueva_casilla.childNodes[0].id.split("_");
-                if (colorsito[1] != movimiento_actual) {
-                    mostrar_premovimiento(vectorYmenos1, vectorXmas1);
-                }
-            } else {
-                mostrar_premovimiento(vectorYmenos1, vectorXmas1);
-            }
-        }
-
-        if (vectorXmas1 < 9) {
-            let nueva_casilla = document.getElementById(`cuadro[${localizacion.posY},${vectorXmas1}]`);
-            if (nueva_casilla.childNodes.length > 0) {
-                let colorsito = nueva_casilla.childNodes[0].id.split("_");
-                if (colorsito[1] != movimiento_actual) {
-                    mostrar_premovimiento(localizacion.posY, vectorXmas1);
-                }
-            } else {
-                mostrar_premovimiento(localizacion.posY, vectorXmas1);
-            }
-        }
-
-        if (vectorXmenos1 > 0) {
-            let nueva_casilla = document.getElementById(`cuadro[${localizacion.posY},${vectorXmenos1}]`);
-            if (nueva_casilla.childNodes.length > 0) {
-                let colorsito = nueva_casilla.childNodes[0].id.split("_");
-                if (colorsito[1] != movimiento_actual) {
-                    mostrar_premovimiento(localizacion.posY, vectorXmenos1);
-                }
-            } else {
-                mostrar_premovimiento(localizacion.posY, vectorXmenos1);
-            }
-        }
-
-        if (vectorYmas1 < 9) {
-            let nueva_casilla = document.getElementById(`cuadro[${vectorYmas1},${localizacion.posX}]`);
-            if (nueva_casilla.childNodes.length > 0) {
-                let colorsito = nueva_casilla.childNodes[0].id.split("_");
-                if (colorsito[1] != movimiento_actual) {
-                    mostrar_premovimiento(vectorYmas1, localizacion.posX);
-                }
-            } else {
-                mostrar_premovimiento(vectorYmas1, localizacion.posX);
-            }
-        }
-
-        if (vectorYmenos1 > 0) {
-            let nueva_casilla = document.getElementById(`cuadro[${vectorYmenos1},${localizacion.posX}]`);
-            if (nueva_casilla.childNodes.length > 0) {
-                let colorsito = nueva_casilla.childNodes[0].id.split("_");
-                if (colorsito[1] != movimiento_actual) {
-                    mostrar_premovimiento(vectorYmenos1, localizacion.posX);
-                }
-            } else {
-                mostrar_premovimiento(vectorYmenos1, localizacion.posX);
-            }
-        }
-
-    }*/
 
 }

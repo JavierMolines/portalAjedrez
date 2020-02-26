@@ -143,6 +143,7 @@ function interaccion_pieza(pieza, casilla) {
 
         deshabilitar_enroque(pieza_seleccionada[2]);
         comprobar_jaque(pieza[0]);
+        validar_promocion_peon(pieza[0], casilla);
         cambiar_turno(pieza[0].style.color);
         
     }
