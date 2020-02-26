@@ -14,13 +14,7 @@ function comprobar_jaque(pieza) {
     let rey_en_jaque = false;
     let tipo_pieza = pieza.id.split("_");
     let localizacion = obtener_posicion_pieza_objeto(pieza);
-    let opciones_movimientos = [
-        "",
-        "++",
-        "+-",
-        "--",
-        "-+"
-    ];
+    let opciones_movimientos = ["", "++", "+-", "--", "-+"];
 
     if (tipo_pieza[0] === "bishop" || tipo_pieza[0] === "reina") {
         for (let casos = 1; casos <= 4; casos++) {
@@ -29,6 +23,7 @@ function comprobar_jaque(pieza) {
                 // NUEVAS POSICIONES
                 let nuevo_posY = 0;
                 let nuevo_posX = 0;
+                let posiposi = false;
 
                 switch (opciones_movimientos[casos]) {
 
@@ -40,20 +35,7 @@ function comprobar_jaque(pieza) {
 
                             let vector = ubicacion_plano(nuevo_posY, nuevo_posX);
                             if (vector !== false) {
-                                let posiposi = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
-
-                                if (posiposi.childNodes.length > 0) {
-
-                                    // DAR JAQUE
-                                    let coincidencia_pieza = posiposi.childNodes[0].id.split("_");
-                                    if (coincidencia_pieza[0] == "rey" && tipo_pieza[1] != coincidencia_pieza[1]) {
-                                        console.log(`El ${tipo_pieza[0]} de color ${tipo_pieza[1]} le dio jaque al ${coincidencia_pieza[0]} ${coincidencia_pieza[1]}`);
-                                        rey_en_jaque = true;
-                                        casilla_jaque = posiposi;
-                                    }
-
-                                }
-
+                                posiposi = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
                             }
 
                         }
@@ -68,20 +50,7 @@ function comprobar_jaque(pieza) {
 
                             let vector = ubicacion_plano(nuevo_posY, nuevo_posX);
                             if (vector !== false) {
-                                let posiposi = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
-
-                                if (posiposi.childNodes.length > 0) {
-
-                                    // DAR JAQUE
-                                    let coincidencia_pieza = posiposi.childNodes[0].id.split("_");
-                                    if (coincidencia_pieza[0] == "rey" && tipo_pieza[1] != coincidencia_pieza[1]) {
-                                        console.log(`El ${tipo_pieza[0]} de color ${tipo_pieza[1]} le dio jaque al ${coincidencia_pieza[0]} ${coincidencia_pieza[1]}`);
-                                        rey_en_jaque = true;
-                                        casilla_jaque = posiposi;
-                                    }
-
-                                }
-
+                                posiposi = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
                             }
 
                         }
@@ -96,20 +65,7 @@ function comprobar_jaque(pieza) {
 
                             let vector = ubicacion_plano(nuevo_posY, nuevo_posX);
                             if (vector !== false) {
-                                let posiposi = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
-
-                                if (posiposi.childNodes.length > 0) {
-
-                                    // DAR JAQUE
-                                    let coincidencia_pieza = posiposi.childNodes[0].id.split("_");
-                                    if (coincidencia_pieza[0] == "rey" && tipo_pieza[1] != coincidencia_pieza[1]) {
-                                        console.log(`El ${tipo_pieza[0]} de color ${tipo_pieza[1]} le dio jaque al ${coincidencia_pieza[0]} ${coincidencia_pieza[1]}`);
-                                        rey_en_jaque = true;
-                                        casilla_jaque = posiposi;
-                                    }
-
-                                }
-
+                                posiposi = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
                             }
 
                         }
@@ -124,20 +80,7 @@ function comprobar_jaque(pieza) {
 
                             let vector = ubicacion_plano(nuevo_posY, nuevo_posX);
                             if (vector !== false) {
-                                let posiposi = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
-
-                                if (posiposi.childNodes.length > 0) {
-
-                                    // DAR JAQUE
-                                    let coincidencia_pieza = posiposi.childNodes[0].id.split("_");
-                                    if (coincidencia_pieza[0] == "rey" && tipo_pieza[1] != coincidencia_pieza[1]) {
-                                        console.log(`El ${tipo_pieza[0]} de color ${tipo_pieza[1]} le dio jaque al ${coincidencia_pieza[0]} ${coincidencia_pieza[1]}`);
-                                        rey_en_jaque = true;
-                                        casilla_jaque = posiposi;
-                                    }
-
-                                }
-
+                                posiposi = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
                             }
 
                         }
@@ -147,6 +90,26 @@ function comprobar_jaque(pieza) {
                     default:
                         console.warn("ALGO NO ESTA BIEN..");
                         break;
+                }
+
+                // INSERTAR JAQUE NUEVO
+                if(posiposi !== false){
+                    if (posiposi.childNodes.length > 0) {
+
+                        // DAR JAQUE
+                        let coincidencia_pieza = posiposi.childNodes[0].id.split("_");
+                        if (coincidencia_pieza[0] == "rey" && tipo_pieza[1] != coincidencia_pieza[1]) {
+                            console.log(`El ${tipo_pieza[0]} de color ${tipo_pieza[1]} le dio jaque al ${coincidencia_pieza[0]} ${coincidencia_pieza[1]}`);
+                            rey_en_jaque = true;
+                            casilla_jaque = posiposi;
+                        } else {
+
+                            contador = 9;
+
+                        }
+
+                    }
+
                 }
 
             }
@@ -160,6 +123,7 @@ function comprobar_jaque(pieza) {
                 // NUEVAS POSICIONES
                 let nuevo_posY = 0;
                 let nuevo_posX = 0;
+                let posiposi = false;
 
                 switch (opciones_movimientos[casos]) {
 
@@ -171,20 +135,7 @@ function comprobar_jaque(pieza) {
 
                             let vector = ubicacion_plano(nuevo_posY, nuevo_posX);
                             if (vector !== false) {
-                                let posiposi = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
-
-                                if (posiposi.childNodes.length > 0) {
-
-                                    // DAR JAQUE
-                                    let coincidencia_pieza = posiposi.childNodes[0].id.split("_");
-                                    if (coincidencia_pieza[0] == "rey" && tipo_pieza[1] != coincidencia_pieza[1]) {
-                                        console.log(`El ${tipo_pieza[0]} de color ${tipo_pieza[1]} le dio jaque al ${coincidencia_pieza[0]} ${coincidencia_pieza[1]}`);
-                                        rey_en_jaque = true;
-                                        casilla_jaque = posiposi;
-                                    }
-
-                                }
-
+                                posiposi = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
                             }
 
                         }
@@ -199,20 +150,7 @@ function comprobar_jaque(pieza) {
 
                             let vector = ubicacion_plano(nuevo_posY, nuevo_posX);
                             if (vector !== false) {
-                                let posiposi = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
-
-                                if (posiposi.childNodes.length > 0) {
-
-                                    // DAR JAQUE
-                                    let coincidencia_pieza = posiposi.childNodes[0].id.split("_");
-                                    if (coincidencia_pieza[0] == "rey" && tipo_pieza[1] != coincidencia_pieza[1]) {
-                                        console.log(`El ${tipo_pieza[0]} de color ${tipo_pieza[1]} le dio jaque al ${coincidencia_pieza[0]} ${coincidencia_pieza[1]}`);
-                                        rey_en_jaque = true;
-                                        casilla_jaque = posiposi;
-                                    }
-
-                                }
-
+                                posiposi = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
                             }
 
                         }
@@ -227,20 +165,7 @@ function comprobar_jaque(pieza) {
 
                             let vector = ubicacion_plano(nuevo_posY, nuevo_posX);
                             if (vector !== false) {
-                                let posiposi = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
-
-                                if (posiposi.childNodes.length > 0) {
-
-                                    // DAR JAQUE
-                                    let coincidencia_pieza = posiposi.childNodes[0].id.split("_");
-                                    if (coincidencia_pieza[0] == "rey" && tipo_pieza[1] != coincidencia_pieza[1]) {
-                                        console.log(`El ${tipo_pieza[0]} de color ${tipo_pieza[1]} le dio jaque al ${coincidencia_pieza[0]} ${coincidencia_pieza[1]}`);
-                                        rey_en_jaque = true;
-                                        casilla_jaque = posiposi;
-                                    }
-
-                                }
-
+                                posiposi = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
                             }
 
                         }
@@ -255,20 +180,7 @@ function comprobar_jaque(pieza) {
 
                             let vector = ubicacion_plano(nuevo_posY, nuevo_posX);
                             if (vector !== false) {
-                                let posiposi = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
-
-                                if (posiposi.childNodes.length > 0) {
-
-                                    // DAR JAQUE
-                                    let coincidencia_pieza = posiposi.childNodes[0].id.split("_");
-                                    if (coincidencia_pieza[0] == "rey" && tipo_pieza[1] != coincidencia_pieza[1]) {
-                                        console.log(`El ${tipo_pieza[0]} de color ${tipo_pieza[1]} le dio jaque al ${coincidencia_pieza[0]} ${coincidencia_pieza[1]}`);
-                                        rey_en_jaque = true;
-                                        casilla_jaque = posiposi;
-                                    }
-
-                                }
-
+                                posiposi = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
                             }
 
                         }
@@ -280,6 +192,25 @@ function comprobar_jaque(pieza) {
                         break;
                 }
 
+                // INSERTAR NUEVO JAQUE
+                if(posiposi !== false){
+                    if (posiposi.childNodes.length > 0) {
+
+                        // DAR JAQUE
+                        let coincidencia_pieza = posiposi.childNodes[0].id.split("_");
+                        if (coincidencia_pieza[0] == "rey" && tipo_pieza[1] != coincidencia_pieza[1]) {
+                            console.log(`El ${tipo_pieza[0]} de color ${tipo_pieza[1]} le dio jaque al ${coincidencia_pieza[0]} ${coincidencia_pieza[1]}`);
+                            rey_en_jaque = true;
+                            casilla_jaque = posiposi;
+                        } else {
+
+                            contador = 9;
+
+                        }
+
+                    }
+
+                }
 
             }
         }
@@ -494,6 +425,7 @@ function comprobar_jaque(pieza) {
 
     }
 
+    /*
     if (tipo_pieza[0] === "rey") {
 
         let vectorYmas1 = localizacion.posY + 1;
@@ -597,6 +529,6 @@ function comprobar_jaque(pieza) {
             }
         }
 
-    }
+    }*/
 
 }

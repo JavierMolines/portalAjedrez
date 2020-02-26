@@ -38,7 +38,6 @@ function crear_botones() {
         } else if (contador == 1) {
 
             botones.id = "boton_regresar";
-            botones.classList.add("botones_tablero");
             botones.classList.add("botones_apagados");
             botones.disabled = true;
             botones.innerHTML = "RETROCEDER";
