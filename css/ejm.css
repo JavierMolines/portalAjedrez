@@ -94,5 +94,18 @@
 	.conteconte {
 		margin-top: 9%;
 	}
+
+	.contenedor_general_promocion > div {
+
+		width: 30%;
+		left: 35.5%;
+
+	}
+
+	.contenedor_general_promocion > div > i {
+
+		font-size: 45px;
+	
+	}
 	
 }
