@@ -113,34 +113,32 @@ function asignar_movimiento_piezas() {
 function interaccion_pieza(pieza, casilla) {
 
     // INDICAR JUGADA
-    let acciones = false;
+    let movimiento_valido = false;
+    let comer_pieza = false;
 
     // SI LA CASILLA DESTINO ESTA OCUPADA SE PROCEDE A VALIDAR
     if (casilla.childNodes.length > 0) {
         if (casilla.childNodes[0].style.color !== movimiento_actual) {
-
-            // INDICAR QUE HUBO MOVIMIENTOS
-            acciones = true;
-
-            // COMER PIEZA
-            pieza[0].parentElement.removeChild(pieza[0]);
-            casilla.removeChild(casilla.childNodes[0]);
-            casilla.appendChild(pieza[0]);
-
+            movimiento_valido = true;
+            comer_pieza = true;
         }
     } else {
+        movimiento_valido = true;
+    }
 
-        // INDICAR QUE HUBO MOVIMIENTOS
-        acciones = true;
+    // ACCIONES CUANDO SE MUEVE LA PIEZA
+    if (movimiento_valido === true) {
+
+        // COMER PIEZA SI LA CASILLA ES VALIDA
+        if (comer_pieza === true) {
+            casilla.removeChild(casilla.childNodes[0]);
+        }
 
         // MOVER PIEZA
         pieza[0].parentElement.removeChild(pieza[0]);
         casilla.appendChild(pieza[0]);
 
-    }
-
-    if (acciones === true) {
-
+        // CONTINUAR FLUJO
         deshabilitar_enroque(pieza_seleccionada[2]);
         comprobar_jaque(pieza[0]);
         validar_promocion_peon(pieza[0], casilla);
