@@ -15,6 +15,7 @@ function comprobar_jaque(pieza) {
     let tipo_pieza = pieza.id.split("_");
     let localizacion = obtener_posicion_pieza_objeto(pieza);
     let opciones_movimientos = ["", "++", "+-", "--", "-+"];
+    let coincidencia_detectada = [];
 
     if (tipo_pieza[0] === "bishop" || tipo_pieza[0] === "reina") {
         for (let casos = 1; casos <= 4; casos++) {
@@ -99,7 +100,7 @@ function comprobar_jaque(pieza) {
                         // DAR JAQUE
                         let coincidencia_pieza = posiposi.childNodes[0].id.split("_");
                         if (coincidencia_pieza[0] == "rey" && tipo_pieza[1] != coincidencia_pieza[1]) {
-                            console.log(`El ${tipo_pieza[0]} de color ${tipo_pieza[1]} le dio jaque al ${coincidencia_pieza[0]} ${coincidencia_pieza[1]}`);
+                            coincidencia_detectada = [coincidencia_pieza[0], coincidencia_pieza[1]];
                             rey_en_jaque = true;
                             casilla_jaque = posiposi;
                         } else {
@@ -199,7 +200,7 @@ function comprobar_jaque(pieza) {
                         // DAR JAQUE
                         let coincidencia_pieza = posiposi.childNodes[0].id.split("_");
                         if (coincidencia_pieza[0] == "rey" && tipo_pieza[1] != coincidencia_pieza[1]) {
-                            console.log(`El ${tipo_pieza[0]} de color ${tipo_pieza[1]} le dio jaque al ${coincidencia_pieza[0]} ${coincidencia_pieza[1]}`);
+                            coincidencia_detectada = [coincidencia_pieza[0], coincidencia_pieza[1]];
                             rey_en_jaque = true;
                             casilla_jaque = posiposi;
                         } else {
@@ -259,7 +260,7 @@ function comprobar_jaque(pieza) {
                                 // DAR JAQUE
                                 let coincidencia_pieza = posiposi.childNodes[0].id.split("_");
                                 if (coincidencia_pieza[0] == "rey" && tipo_pieza[1] != coincidencia_pieza[1]) {
-                                    console.log(`El ${tipo_pieza[0]} de color ${tipo_pieza[1]} le dio jaque al ${coincidencia_pieza[0]} ${coincidencia_pieza[1]}`);
+                                    coincidencia_detectada = [coincidencia_pieza[0], coincidencia_pieza[1]];
                                     rey_en_jaque = true;
                                     casilla_jaque = posiposi;
                                 }
@@ -312,7 +313,7 @@ function comprobar_jaque(pieza) {
                                 // DAR JAQUE
                                 let coincidencia_pieza = posiposi.childNodes[0].id.split("_");
                                 if (coincidencia_pieza[0] == "rey" && tipo_pieza[1] != coincidencia_pieza[1]) {
-                                    console.log(`El ${tipo_pieza[0]} de color ${tipo_pieza[1]} le dio jaque al ${coincidencia_pieza[0]} ${coincidencia_pieza[1]}`);
+                                    coincidencia_detectada = [coincidencia_pieza[0], coincidencia_pieza[1]];
                                     rey_en_jaque = true;
                                     casilla_jaque = posiposi;
                                 }
@@ -358,7 +359,7 @@ function comprobar_jaque(pieza) {
                         // DAR JAQUE
                         let coincidencia_pieza = posiposi.childNodes[0].id.split("_");
                         if (coincidencia_pieza[0] == "rey" && tipo_pieza[1] != coincidencia_pieza[1]) {
-                            console.log(`El ${tipo_pieza[0]} de color ${tipo_pieza[1]} le dio jaque al ${coincidencia_pieza[0]} ${coincidencia_pieza[1]}`);
+                            coincidencia_detectada = [coincidencia_pieza[0], coincidencia_pieza[1]];
                             rey_en_jaque = true;
                             casilla_jaque = posiposi;
                         }
@@ -396,7 +397,7 @@ function comprobar_jaque(pieza) {
                         // DAR JAQUE
                         let coincidencia_pieza = posiposi.childNodes[0].id.split("_");
                         if (coincidencia_pieza[0] == "rey" && tipo_pieza[1] != coincidencia_pieza[1]) {
-                            console.log(`El ${tipo_pieza[0]} de color ${tipo_pieza[1]} le dio jaque al ${coincidencia_pieza[0]} ${coincidencia_pieza[1]}`);
+                            coincidencia_detectada = [coincidencia_pieza[0], coincidencia_pieza[1]];
                             rey_en_jaque = true;
                             casilla_jaque = posiposi;
                         }
@@ -414,10 +415,13 @@ function comprobar_jaque(pieza) {
     // SE REALIZO UN JAQUE
     if (rey_en_jaque === true) {
 
+        let mensaje_jaque = `${tipo_pieza[0].toUpperCase()} de color ${tipo_pieza[1]} le dio jaque al ${coincidencia_detectada[0]} ${coincidencia_detectada[1]}`;
         let color_respaldo = casilla_jaque.style.backgroundColor;
         casilla_jaque.style.backgroundColor = "red";
         jaque = rey_en_jaque;
         
+        console.log(mensaje_jaque);
+
         // REGRESAR COLOR
         setTimeout(() => {
             casilla_jaque.style.backgroundColor = color_respaldo;

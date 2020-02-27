@@ -112,9 +112,10 @@ function asignar_movimiento_piezas() {
 
 function interaccion_pieza(pieza, casilla) {
 
-    // INDICAR JUGADA
+    // VARIABLES DE JUGADA
     let movimiento_valido = false;
     let comer_pieza = false;
+    let pieza_en_movimiento = pieza[0];
 
     // SI LA CASILLA DESTINO ESTA OCUPADA SE PROCEDE A VALIDAR
     if (casilla.childNodes.length > 0) {
@@ -135,14 +136,14 @@ function interaccion_pieza(pieza, casilla) {
         }
 
         // MOVER PIEZA
-        pieza[0].parentElement.removeChild(pieza[0]);
-        casilla.appendChild(pieza[0]);
+        pieza_en_movimiento.parentElement.removeChild(pieza_en_movimiento);
+        casilla.appendChild(pieza_en_movimiento);
 
         // CONTINUAR FLUJO
-        deshabilitar_enroque(pieza_seleccionada[2]);
-        comprobar_jaque(pieza[0]);
-        validar_promocion_peon(pieza[0], casilla);
-        cambiar_turno(pieza[0].style.color);
+        deshabilitar_enroque(pieza[2]);
+        comprobar_jaque(pieza_en_movimiento);
+        validar_promocion_peon(pieza_en_movimiento, casilla);
+        cambiar_turno(pieza_en_movimiento.style.color);
         
     }
 
