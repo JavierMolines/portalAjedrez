@@ -421,12 +421,163 @@ function comprobar_jaque(pieza) {
         jaque = rey_en_jaque;
         
         console.log(mensaje_jaque);
-
+        
+        /*
         // REGRESAR COLOR
         setTimeout(() => {
             casilla_jaque.style.backgroundColor = color_respaldo;
-        }, 1000);
+        }, 1000);*/
 
     }
 
+}
+
+function validar_zonas_adjacentes_casilla_jaque(pieza_recibida, casilla_destino) {
+
+    let flujo_validacion = true;
+
+    let casillas_diagonales = [];
+    let casillas_lineales = [];
+    let casillas_ele = [];
+
+    let posicion = casilla_destino.id.replace("cuadro", "");
+    let final = posicion.replace("[", "").replace("]", "").split(",");
+    let localizacion = {
+
+        posY: parseInt(final[0]),
+        posX: parseInt(final[1])
+
+    };
+
+    // VERTICAL Y HORIZONTAL
+    for (let contador = 1; contador < 9; contador++) {
+        if (localizacion.posX + contador < 9) {
+            let cuadro = document.getElementById(`cuadro[${localizacion.posY},${localizacion.posX + contador}]`);
+            casillas_lineales.push(cuadro);
+        }
+    }
+
+    for (let contador = 1; contador < 9; contador++) {
+        if (localizacion.posX - contador > 0) {
+            let cuadro = document.getElementById(`cuadro[${localizacion.posY},${localizacion.posX - contador}]`);
+            casillas_lineales.push(cuadro);
+        }
+    }
+
+    for (let contador = 1; contador < 9; contador++) {
+        if (localizacion.posY + contador < 9) {
+            let cuadro = document.getElementById(`cuadro[${localizacion.posY + contador},${localizacion.posX}]`);
+            casillas_lineales.push(cuadro);
+        }
+    }
+
+    for (let contador = 1; contador < 9; contador++) {
+        if (localizacion.posY - contador > 0) {
+            let cuadro = document.getElementById(`cuadro[${localizacion.posY - contador},${localizacion.posX}]`);
+            casillas_lineales.push(cuadro);
+        }
+    }
+
+    // VERTICAL
+    for (let move = 1; move < 8; move++) {
+        if (localizacion.posY + move < 9 && localizacion.posX + move < 9) {
+            let cuadro = document.getElementById(`cuadro[${localizacion.posY + move},${localizacion.posX + move}]`);
+            casillas_diagonales.push(cuadro);
+        }
+    }
+
+    for (let move = 1; move < 8; move++) {
+        if (localizacion.posY + move < 9 && localizacion.posX - move > 0) {
+            let cuadro = document.getElementById(`cuadro[${localizacion.posY + move},${localizacion.posX - move}]`);
+            casillas_diagonales.push(cuadro);
+        }
+    }
+
+    for (let move = 1; move < 8; move++) {
+        if (localizacion.posY - move > 0 && localizacion.posX - move > 0) {
+            let cuadro = document.getElementById(`cuadro[${localizacion.posY - move},${localizacion.posX - move}]`);
+            casillas_diagonales.push(cuadro);
+        }
+    }
+
+    for (let move = 1; move < 8; move++) {
+        if (localizacion.posY - move > 0 && localizacion.posX + move < 9) {
+            let cuadro = document.getElementById(`cuadro[${localizacion.posY - move},${localizacion.posX + move}]`);
+            casillas_diagonales.push(cuadro);
+        }
+    }
+
+    // CABALLO
+    let movimiento_vertical = [
+        localizacion.posY + 2,
+        localizacion.posY - 2,
+        localizacion.posX + 1,
+        localizacion.posX - 1
+    ];
+
+    let movimiento_horizontal = [
+        localizacion.posX + 2,
+        localizacion.posX - 2,
+        localizacion.posY + 1,
+        localizacion.posY - 1
+    ];
+
+    for (let index = 0; index < 2; index++) {
+        for (let contador = 2; contador < 4; contador++) {
+            let vector = ubicacion_plano(movimiento_vertical[index], movimiento_vertical[contador]);
+            if (vector !== false) {
+                let nueva_casilla = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
+                casillas_ele.push(nueva_casilla);
+            }
+        }
+    }
+
+    for (let index = 0; index < 2; index++) {
+        for (let contador = 2; contador < 4; contador++) {
+            let vector = ubicacion_plano(movimiento_horizontal[contador], movimiento_horizontal[index]);
+            if (vector !== false) {
+                let nueva_casilla = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
+                casillas_ele.push(nueva_casilla);
+            }
+        }
+    }
+
+    // MOSTRAR COINCIDENCIAS
+    let nockTiming = 2000;
+
+    for (let contador = 0; contador < casillas_lineales.length; contador++) {
+        casillas_lineales[contador].style.backgroundColor = "yellow";
+
+        setTimeout(() => {
+            contenedor_repintar(casillas_lineales[contador]);
+        }, nockTiming);
+    }
+
+    for (let contador = 0; contador < casillas_diagonales.length; contador++) {
+        casillas_diagonales[contador].style.backgroundColor = "blue";
+
+        setTimeout(() => {
+            contenedor_repintar(casillas_diagonales[contador]);
+        }, nockTiming);
+    }
+
+    for (let contador = 0; contador < casillas_ele.length; contador++) {
+        casillas_ele[contador].style.backgroundColor = "red";
+
+        setTimeout(() => {
+            contenedor_repintar(casillas_ele[contador]);
+        }, nockTiming);
+    }
+
+    return flujo_validacion;
+}
+
+function contenedor_repintar(contenedor) {
+
+    if(contenedor.className === "ficha_negro"){
+        contenedor.style.backgroundColor = coloresTablero[1];
+    } else {
+        contenedor.style.backgroundColor = coloresTablero[0];
+    }
+    
 }

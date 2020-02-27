@@ -130,6 +130,13 @@ function interaccion_pieza(pieza, casilla) {
     // ACCIONES CUANDO SE MUEVE LA PIEZA
     if (movimiento_valido === true) {
 
+        if(pieza[2] === "rey"){
+            // COMPROBAR MOVIMIENTOS
+            if(validar_zonas_adjacentes_casilla_jaque(pieza_en_movimiento, casilla) === false){
+                return ;
+            }
+        }
+
         // COMER PIEZA SI LA CASILLA ES VALIDA
         if (comer_pieza === true) {
             casilla.removeChild(casilla.childNodes[0]);
