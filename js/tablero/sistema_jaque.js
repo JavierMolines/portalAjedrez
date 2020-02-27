@@ -419,14 +419,13 @@ function comprobar_jaque(pieza) {
         let color_respaldo = casilla_jaque.style.backgroundColor;
         casilla_jaque.style.backgroundColor = "red";
         jaque = rey_en_jaque;
-        
-        console.log(mensaje_jaque);
-        
-        /*
+            
         // REGRESAR COLOR
         setTimeout(() => {
             casilla_jaque.style.backgroundColor = color_respaldo;
-        }, 1000);*/
+        }, 1000);
+
+        console.log(mensaje_jaque);
 
     }
 
@@ -434,20 +433,17 @@ function comprobar_jaque(pieza) {
 
 function validar_zonas_adjacentes_casilla_jaque(pieza_recibida, casilla_destino) {
 
-    let flujo_validacion = true;
-
-    let casillas_diagonales = [];
-    let casillas_lineales = [];
-    let casillas_ele = [];
-
-    let posicion = casilla_destino.id.replace("cuadro", "");
-    let final = posicion.replace("[", "").replace("]", "").split(",");
-    let localizacion = {
-
-        posY: parseInt(final[0]),
-        posX: parseInt(final[1])
-
-    };
+    let posicion              = casilla_destino.id.replace("cuadro", "");
+    let final                 = posicion.replace("[", "").replace("]", "").split(",");
+    let localizacion          = { posY: parseInt(final[0]), posX: parseInt(final[1]) };
+    let movimiento_vertical   = [ localizacion.posY + 2, localizacion.posY - 2, localizacion.posX + 1, localizacion.posX - 1 ];
+    let movimiento_horizontal = [ localizacion.posX + 2, localizacion.posX - 2, localizacion.posY + 1, localizacion.posY - 1 ];
+    let colores_rey_chequeo   = ["yellow", "blue", "red"];
+    let flujo_validacion      = true;
+    let nockTiming            = 2000;
+    let casillas_diagonales   = [];
+    let casillas_lineales     = [];
+    let casillas_ele          = [];
 
     // VERTICAL Y HORIZONTAL
     for (let contador = 1; contador < 9; contador++) {
@@ -508,20 +504,6 @@ function validar_zonas_adjacentes_casilla_jaque(pieza_recibida, casilla_destino)
     }
 
     // CABALLO
-    let movimiento_vertical = [
-        localizacion.posY + 2,
-        localizacion.posY - 2,
-        localizacion.posX + 1,
-        localizacion.posX - 1
-    ];
-
-    let movimiento_horizontal = [
-        localizacion.posX + 2,
-        localizacion.posX - 2,
-        localizacion.posY + 1,
-        localizacion.posY - 1
-    ];
-
     for (let index = 0; index < 2; index++) {
         for (let contador = 2; contador < 4; contador++) {
             let vector = ubicacion_plano(movimiento_vertical[index], movimiento_vertical[contador]);
@@ -543,10 +525,8 @@ function validar_zonas_adjacentes_casilla_jaque(pieza_recibida, casilla_destino)
     }
 
     // MOSTRAR COINCIDENCIAS
-    let nockTiming = 2000;
-
     for (let contador = 0; contador < casillas_lineales.length; contador++) {
-        casillas_lineales[contador].style.backgroundColor = "yellow";
+        casillas_lineales[contador].style.backgroundColor = colores_rey_chequeo[0];
 
         setTimeout(() => {
             contenedor_repintar(casillas_lineales[contador]);
@@ -554,7 +534,7 @@ function validar_zonas_adjacentes_casilla_jaque(pieza_recibida, casilla_destino)
     }
 
     for (let contador = 0; contador < casillas_diagonales.length; contador++) {
-        casillas_diagonales[contador].style.backgroundColor = "blue";
+        casillas_diagonales[contador].style.backgroundColor = colores_rey_chequeo[1];
 
         setTimeout(() => {
             contenedor_repintar(casillas_diagonales[contador]);
@@ -562,7 +542,7 @@ function validar_zonas_adjacentes_casilla_jaque(pieza_recibida, casilla_destino)
     }
 
     for (let contador = 0; contador < casillas_ele.length; contador++) {
-        casillas_ele[contador].style.backgroundColor = "red";
+        casillas_ele[contador].style.backgroundColor = colores_rey_chequeo[2];
 
         setTimeout(() => {
             contenedor_repintar(casillas_ele[contador]);

@@ -130,10 +130,10 @@ function interaccion_pieza(pieza, casilla) {
     // ACCIONES CUANDO SE MUEVE LA PIEZA
     if (movimiento_valido === true) {
 
-        if(pieza[2] === "rey"){
-            // COMPROBAR MOVIMIENTOS
-            if(validar_zonas_adjacentes_casilla_jaque(pieza_en_movimiento, casilla) === false){
-                return ;
+        // COMPROBAR MOVIMIENTOS DEL REY PARA QUE NO ENTRE EN CASILLA DE JAQUE, Y VALIDAR LAS POSICIONES CUANDO SE ESTA EN JAQUE
+        if (pieza[2] === "rey" || jaque === true) {
+            if (validar_zonas_adjacentes_casilla_jaque(pieza_en_movimiento, casilla) === false) {
+                return;
             }
         }
 
