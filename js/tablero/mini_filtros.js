@@ -381,3 +381,40 @@ function filtrar_movimientos_torre(posicionamiento, movimiento) {
     return indicador;
 
 }
+
+function capturar_hijo_casilla(casilla, curso_del_flujo) {
+
+    let validacion = false;
+
+    if (casilla[1].childNodes.length > 0) {
+
+        let imperneable = casilla[1].childNodes[0];
+        let propiedades = obtener_ID_pieza(imperneable);
+
+        if (propiedades.tipo === "reina" && casilla[0] === "bishop" || propiedades.tipo === "reina" && casilla[0] === "torre") {
+            propiedades.tipo = casilla[0];
+        }
+
+        if (curso_del_flujo.color !== propiedades.color && propiedades.tipo === casilla[0]) {
+            validacion = true;
+        }
+
+    }
+
+    return validacion;
+
+}
+
+function vl_pieza_interna(casilla, flujo, casillas_obtenidas) {
+
+    let vl = false;
+    let cargar = [flujo, casilla];
+    casillas_obtenidas.push(cargar);
+
+    if (casilla.childNodes.length > 0) {
+        vl = true;
+    }
+
+    return vl;
+
+}
