@@ -130,11 +130,16 @@ function interaccion_pieza(pieza, casilla) {
     // ACCIONES CUANDO SE MUEVE LA PIEZA
     if (movimiento_valido === true) {
 
-        // COMPROBAR MOVIMIENTOS DEL REY PARA QUE NO ENTRE EN CASILLA DE JAQUE, Y VALIDAR LAS POSICIONES CUANDO SE ESTA EN JAQUE
-        if (pieza[2] === "rey" || jaque === true) {
-            if (validar_zonas_adjacentes_casilla_jaque(pieza_en_movimiento, casilla) === false) {
+        // COMPROBAR SI SE ESTA EN JAQUE
+        if(jaque === true){
+
+            console.log(`Las ${movimiento_actual} estan en jaque.`);
+
+            let retro = validar_jaque_iniciado(pieza_en_movimiento, casilla);
+            if(retro === true){
                 return;
             }
+    
         }
 
         // COMER PIEZA SI LA CASILLA ES VALIDA
@@ -147,6 +152,7 @@ function interaccion_pieza(pieza, casilla) {
         casilla.appendChild(pieza_en_movimiento);
 
         // CONTINUAR FLUJO
+        jaque = false;
         deshabilitar_enroque(pieza[2]);
         comprobar_jaque(pieza_en_movimiento);
         validar_promocion_peon(pieza_en_movimiento, casilla);

@@ -94,7 +94,7 @@ function comprobar_jaque(pieza) {
                 }
 
                 // INSERTAR JAQUE NUEVO
-                if(posiposi !== false){
+                if (posiposi !== false) {
                     if (posiposi.childNodes.length > 0) {
 
                         // DAR JAQUE
@@ -194,7 +194,7 @@ function comprobar_jaque(pieza) {
                 }
 
                 // INSERTAR NUEVO JAQUE
-                if(posiposi !== false){
+                if (posiposi !== false) {
                     if (posiposi.childNodes.length > 0) {
 
                         // DAR JAQUE
@@ -415,11 +415,12 @@ function comprobar_jaque(pieza) {
     // SE REALIZO UN JAQUE
     if (rey_en_jaque === true) {
 
+        pieza_del_jaque = obtener_ID_pieza(pieza);
         let mensaje_jaque = `${tipo_pieza[0].toUpperCase()} de color ${tipo_pieza[1]} le dio jaque al ${coincidencia_detectada[0]} ${coincidencia_detectada[1]}`;
         let color_respaldo = casilla_jaque.style.backgroundColor;
         casilla_jaque.style.backgroundColor = "red";
         jaque = rey_en_jaque;
-            
+
         // REGRESAR COLOR
         setTimeout(() => {
             casilla_jaque.style.backgroundColor = color_respaldo;
@@ -427,79 +428,134 @@ function comprobar_jaque(pieza) {
 
         console.log(mensaje_jaque);
 
+    } else {
+        jaque = rey_en_jaque;
     }
 
 }
 
-function validar_zonas_adjacentes_casilla_jaque(pieza_recibida, casilla_destino) {
+function validar_jaque_iniciado(pieza_en_movimiento, casilla_destino) {
 
-    let posicion              = casilla_destino.id.replace("cuadro", "");
-    let final                 = posicion.replace("[", "").replace("]", "").split(",");
-    let localizacion          = { posY: parseInt(final[0]), posX: parseInt(final[1]) };
-    let movimiento_vertical   = [ localizacion.posY + 2, localizacion.posY - 2, localizacion.posX + 1, localizacion.posX - 1 ];
-    let movimiento_horizontal = [ localizacion.posX + 2, localizacion.posX - 2, localizacion.posY + 1, localizacion.posY - 1 ];
-    let colores_rey_chequeo   = ["yellow", "blue", "red"];
-    let flujo_validacion      = true;
-    let nockTiming            = 2000;
-    let casillas_diagonales   = [];
-    let casillas_lineales     = [];
-    let casillas_ele          = [];
+    let validation = false;
+    let comer_pieza = false;
+    let local_pieza = obtener_ID_pieza(pieza_en_movimiento);
+    let local_pieza_enemiga;
+
+    if (casilla_destino.childNodes.length > 0) {
+        local_pieza_enemiga = casilla_destino.childNodes[0];
+        comer_pieza = true;
+    }
+
+    if (local_pieza.tipo === "rey") {
+        console.log("ESCAPANDO DEL JAQUE");
+        validation = validar_zonas_adjacentes_casilla_jaque(casilla_destino, local_pieza);
+    } else {
+        console.log("BLOQUEANDO EL JAQUE");
+    }
+
+    return validation;
+
+}
+
+function validar_zonas_adjacentes_casilla_jaque(casilla_destino, local_pieza) {
+
+    let posicion = casilla_destino.id.replace("cuadro", "");
+    let final = posicion.replace("[", "").replace("]", "").split(",");
+    let localizacion = { posY: parseInt(final[0]), posX: parseInt(final[1]) };
+    let movimiento_vertical = [localizacion.posY + 2, localizacion.posY - 2, localizacion.posX + 1, localizacion.posX - 1];
+    let movimiento_horizontal = [localizacion.posX + 2, localizacion.posX - 2, localizacion.posY + 1, localizacion.posY - 1];
+    let colores_rey_chequeo = ["yellow", "blue", "red"];
+    let flujo_validacion = false;
+    let nockTiming = 2000;
+    let casillas_obtenidas = [];
 
     // VERTICAL Y HORIZONTAL
     for (let contador = 1; contador < 9; contador++) {
         if (localizacion.posX + contador < 9) {
             let cuadro = document.getElementById(`cuadro[${localizacion.posY},${localizacion.posX + contador}]`);
-            casillas_lineales.push(cuadro);
+            let flujo = "torre";
+            let vl = vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
+            if (vl === true) {
+                break;
+            }
         }
     }
 
     for (let contador = 1; contador < 9; contador++) {
         if (localizacion.posX - contador > 0) {
             let cuadro = document.getElementById(`cuadro[${localizacion.posY},${localizacion.posX - contador}]`);
-            casillas_lineales.push(cuadro);
+            let flujo = "torre";
+            let vl = vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
+            if (vl === true) {
+                break;
+            }
         }
     }
 
     for (let contador = 1; contador < 9; contador++) {
         if (localizacion.posY + contador < 9) {
             let cuadro = document.getElementById(`cuadro[${localizacion.posY + contador},${localizacion.posX}]`);
-            casillas_lineales.push(cuadro);
+            let flujo = "torre";
+            let vl = vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
+            if (vl === true) {
+                break;
+            }
         }
     }
 
     for (let contador = 1; contador < 9; contador++) {
         if (localizacion.posY - contador > 0) {
             let cuadro = document.getElementById(`cuadro[${localizacion.posY - contador},${localizacion.posX}]`);
-            casillas_lineales.push(cuadro);
+            let flujo = "torre";
+            let vl = vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
+            if (vl === true) {
+                break;
+            }
         }
     }
 
-    // VERTICAL
+    // DIAGONAL
     for (let move = 1; move < 8; move++) {
         if (localizacion.posY + move < 9 && localizacion.posX + move < 9) {
             let cuadro = document.getElementById(`cuadro[${localizacion.posY + move},${localizacion.posX + move}]`);
-            casillas_diagonales.push(cuadro);
+            let flujo = "bishop";
+            let vl = vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
+            if (vl === true) {
+                break;
+            }
         }
     }
 
     for (let move = 1; move < 8; move++) {
         if (localizacion.posY + move < 9 && localizacion.posX - move > 0) {
             let cuadro = document.getElementById(`cuadro[${localizacion.posY + move},${localizacion.posX - move}]`);
-            casillas_diagonales.push(cuadro);
+            let flujo = "bishop";
+            let vl = vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
+            if (vl === true) {
+                break;
+            }
         }
     }
 
     for (let move = 1; move < 8; move++) {
         if (localizacion.posY - move > 0 && localizacion.posX - move > 0) {
             let cuadro = document.getElementById(`cuadro[${localizacion.posY - move},${localizacion.posX - move}]`);
-            casillas_diagonales.push(cuadro);
+            let flujo = "bishop";
+            let vl = vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
+            if (vl === true) {
+                break;
+            }
         }
     }
 
     for (let move = 1; move < 8; move++) {
         if (localizacion.posY - move > 0 && localizacion.posX + move < 9) {
             let cuadro = document.getElementById(`cuadro[${localizacion.posY - move},${localizacion.posX + move}]`);
-            casillas_diagonales.push(cuadro);
+            let flujo = "bishop";
+            let vl = vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
+            if (vl === true) {
+                break;
+            }
         }
     }
 
@@ -508,8 +564,12 @@ function validar_zonas_adjacentes_casilla_jaque(pieza_recibida, casilla_destino)
         for (let contador = 2; contador < 4; contador++) {
             let vector = ubicacion_plano(movimiento_vertical[index], movimiento_vertical[contador]);
             if (vector !== false) {
-                let nueva_casilla = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
-                casillas_ele.push(nueva_casilla);
+                let cuadro = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
+                let flujo = "caballo";
+                let vl = vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
+                if (vl === true) {
+                    break;
+                }
             }
         }
     }
@@ -518,46 +578,69 @@ function validar_zonas_adjacentes_casilla_jaque(pieza_recibida, casilla_destino)
         for (let contador = 2; contador < 4; contador++) {
             let vector = ubicacion_plano(movimiento_horizontal[contador], movimiento_horizontal[index]);
             if (vector !== false) {
-                let nueva_casilla = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
-                casillas_ele.push(nueva_casilla);
+                let cuadro = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
+                let flujo = "caballo";
+                let vl = vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
+                if (vl === true) {
+                    break;
+                }
             }
         }
     }
 
+    console.log("--FLUJO--");
+    console.log(local_pieza);
+
     // MOSTRAR COINCIDENCIAS
-    for (let contador = 0; contador < casillas_lineales.length; contador++) {
-        casillas_lineales[contador].style.backgroundColor = colores_rey_chequeo[0];
-
-        setTimeout(() => {
-            contenedor_repintar(casillas_lineales[contador]);
-        }, nockTiming);
-    }
-
-    for (let contador = 0; contador < casillas_diagonales.length; contador++) {
-        casillas_diagonales[contador].style.backgroundColor = colores_rey_chequeo[1];
-
-        setTimeout(() => {
-            contenedor_repintar(casillas_diagonales[contador]);
-        }, nockTiming);
-    }
-
-    for (let contador = 0; contador < casillas_ele.length; contador++) {
-        casillas_ele[contador].style.backgroundColor = colores_rey_chequeo[2];
-
-        setTimeout(() => {
-            contenedor_repintar(casillas_ele[contador]);
-        }, nockTiming);
+    for (let contador = 0; contador < casillas_obtenidas.length; contador++) {
+        let captura = capturar_hijo_casilla(casillas_obtenidas[contador], local_pieza);
+        if (captura === true) {
+            console.log(casillas_obtenidas[contador]);
+            flujo_validacion = true;
+            break;
+        }
     }
 
     return flujo_validacion;
 }
 
-function contenedor_repintar(contenedor) {
+function capturar_hijo_casilla(casilla, curso_del_flujo) {
 
-    if(contenedor.className === "ficha_negro"){
-        contenedor.style.backgroundColor = coloresTablero[1];
-    } else {
-        contenedor.style.backgroundColor = coloresTablero[0];
+    let validacion = false;
+
+    if (casilla[1].childNodes.length > 0) {
+
+        let imperneable = casilla[1].childNodes[0];
+        let propiedades = obtener_ID_pieza(imperneable);
+
+        if (propiedades.tipo === "reina" && casilla[0] === "bishop" || propiedades.tipo === "reina" && casilla[0] === "torre") {
+            propiedades.tipo = casilla[0];
+            console.log("MODIFICADO");
+        }
+
+        if (curso_del_flujo.color !== propiedades.color && propiedades.tipo === casilla[0]) {
+
+            console.log("JAQUE AGAIN");
+            validacion = true;
+            return validacion;
+
+        }
+
     }
-    
+
+    return validacion;
+
+}
+
+function vl_pieza_interna(casilla, flujo, casillas_obtenidas) {
+
+    let cargar = [flujo, casilla];
+    casillas_obtenidas.push(cargar);
+
+    if (casilla.childNodes.length > 0) {
+        return true;
+    }
+
+    return false;
+
 }
