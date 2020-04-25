@@ -434,32 +434,212 @@ function comprobar_jaque(pieza) {
 
 }
 
-function validar_jaque_iniciado(pieza_en_movimiento, casilla_destino) {
+function atunconpan(pieza_en_movimiento, casilla_destino, flujo_jaque) {
 
-    let indicador       = 0;
-    let validation      = false;
-    let local_pieza     = obtener_ID_pieza(pieza_en_movimiento);
-    let flujos_mensajes = ["escapando del jaque".toUpperCase(), "bloqueando el jaque".toUpperCase()];
-    
-    if (local_pieza.tipo === "rey") {
-        indicador = 0;
-        validation = validar_zonas_adjacentes_casilla_jaque(casilla_destino, local_pieza);
+    let indicador           = 0;
+    let validacion          = false;
+    let local_pieza         = obtener_ID_pieza(pieza_en_movimiento);
+    let casillas_obtenidas  = vl_casillas_entorno(casilla_destino);
+    let flujos_mensajes     = ["escapando del jaque".toUpperCase(), "bloqueando el jaque".toUpperCase()];
+
+    if (flujo_jaque === true) {
+
+        if (local_pieza.tipo !== "rey") {
+
+            // FLUJO MENSAJE
+            indicador = 1;
+        }
+
+        if (local_pieza.tipo === "rey") {
+
+            // VALIDAR HUIDA DEL REY
+            validacion = vl_casillas_capturadas(casillas_obtenidas, local_pieza, casilla_destino, flujo_jaque);
+
+        } else {
+
+            // VALIDAR PROTECCION DEL REY
+            validacion = comprobar_casillas_adyacentes_jaque(casillas_obtenidas);
+
+        }
+
+        let mostrar = { mensaje: flujos_mensajes[indicador], pieza: local_pieza };
+        console.log(mostrar);
+
     } else {
-        indicador = 1;
-        validation = true;
+
+        // VALIDAR MOVIMIENTO DE OTRA PIEZA PARA NO PRODUCIR JAQUE
+        let local_pieza_casilla = capturar_casilla_padre(pieza_en_movimiento);
+        casillas_obtenidas = vl_casillas_entorno(local_pieza_casilla);
+        validacion = vl_casillas_capturadas(casillas_obtenidas, local_pieza, casilla_destino, flujo_jaque);
+
     }
 
-    let mostrar = { mensaje: flujos_mensajes[indicador], pieza: local_pieza };
-    console.log(mostrar);
+    return validacion;
+
+}
+
+function comprobar_casillas_adyacentes_jaque(casillas_obtenidas) {
+
+    let vl_torre = [];
+    let vl_bisho = [];
+    let validation = true;
+
+    for (let contador = 0; contador < casillas_obtenidas.length; contador++) {
+
+        let info = casillas_obtenidas[contador];
+        let flujo = info[0];
+        let target = info[1];
+
+        if(flujo === "torre" && target.childNodes.length > 0){
+            vl_torre.push(target.childNodes[0]);
+        }
+
+        if(flujo === "bishop" && target.childNodes.length > 0){
+            vl_bisho.push(target.childNodes[0]);
+        }
+
+    }
 
     return validation;
 
 }
 
-function validar_zonas_adjacentes_casilla_jaque(casilla_destino, local_pieza) {
+function vl_casillas_capturadas(casillas_obtenidas, local_pieza, casilla_destino, flujo_jaque){
+
+    let validacion = false;
+
+    if(flujo_jaque === true){
+
+        for (let contador = 0; contador < casillas_obtenidas.length; contador++) {
+            let informacion = casillas_obtenidas[contador];
+            if (comparar_piezas_detectadas_jaque(informacion, local_pieza) === true) {
+                validacion = true;
+                break;
+            }
+        }
+
+    } else {
+
+        validacion = comparar_piezas_detectadas_normal(casillas_obtenidas, local_pieza, casilla_destino);
+
+    }
+
+    return validacion;
+
+}
+
+function vl_pieza_interna(casilla, flujo, casillas_obtenidas) {
+
+    let vl = false;
+    let cargar = [flujo, casilla];
+    casillas_obtenidas.push(cargar);
+
+    if (casilla.childNodes.length > 0) {
+        vl = true;
+    }
+
+    return vl;
+
+}
+
+function comparar_piezas_detectadas_jaque(casilla, curso_del_flujo) {
+
+    let validacion = false;
+
+    if (casilla[1].childNodes.length > 0) {
+
+        let impermeable = casilla[1].childNodes[0];
+        let propiedades = obtener_ID_pieza(impermeable);
+
+        if (propiedades.tipo === "reina" && casilla[0] === "bishop" || propiedades.tipo === "reina" && casilla[0] === "torre") {
+            propiedades.tipo = casilla[0];
+        }
+
+        if (curso_del_flujo.color !== propiedades.color && propiedades.tipo === casilla[0]) {
+            validacion = true;
+        }
+
+    }
+
+    return validacion;
+
+}
+
+function comparar_piezas_detectadas_normal(casillas_obtenidas, local_pieza, casilla_destino) {
+
+    let monarca_flujo         = "";
+    let coincidencias         = [];
+    let monarca_detectado     = false;
+    let validacion            = false;
+    let casillas_nuevas       = vl_casillas_entorno(casilla_destino);
+    let propiedades_validadas = obtener_propiedades(casillas_obtenidas, local_pieza);
+
+    coincidencias     = propiedades_validadas.array_coincidencias;
+    monarca_detectado = propiedades_validadas.monarca_detectado;
+    monarca_flujo     = propiedades_validadas.monarca_flujo;
+    
+    for(let contador = 0; contador < coincidencias.length; contador++){
+
+        let enemigo = coincidencias[contador];
+        if(monarca_detectado === true && monarca_flujo === enemigo.detalles.tipo && enemigo.detalles.tipo === enemigo.movimiento){
+            validacion = true;
+            break;
+        }
+
+    }
+
+    return validacion;
+}
+
+function obtener_propiedades(casillas_obtenidas, local_pieza){
+
+    let validacion_completa = {
+        monarca_detectado   : false,
+        monarca_flujo       : "",
+        array_coincidencias : []
+    };
+
+    for (let contador = 0; contador < casillas_obtenidas.length; contador++) {
+
+        let informacion = casillas_obtenidas[contador];
+        let accion      = informacion[0];
+        let casilla     = informacion[1];
+
+        if (casilla.childNodes.length > 0) {
+
+            let impermeable = casilla.childNodes[0];
+            let propiedades = obtener_ID_pieza(impermeable);
+
+            if (propiedades.tipo === "reina" && accion === "bishop" || propiedades.tipo === "reina" && accion === "torre") {
+                propiedades.tipo = accion;
+            }
+
+            if (accion === propiedades.tipo && propiedades.color !== local_pieza.color) {
+
+                let enemigo = {
+                    movimiento: accion,
+                    detalles: propiedades,
+                };
+
+                validacion_completa.array_coincidencias.push(enemigo);
+            }
+
+            if (propiedades.tipo === "rey" && propiedades.color === local_pieza.color) {
+                validacion_completa.monarca_flujo = accion;
+                validacion_completa.monarca_detectado = true;
+            }
+
+        }
+
+    }
+
+    return validacion_completa;
+
+}
+
+function vl_casillas_entorno(casilla_destino) {
 
     let casillas_obtenidas    = [];
-    let flujo_validacion      = false;
     let posicion              = casilla_destino.id.replace("cuadro", "");
     let final                 = posicion.replace("[", "").replace("]", "").split(",");
     let localizacion          = { posY: parseInt(final[0]), posX: parseInt(final[1]) };
@@ -563,10 +743,7 @@ function validar_zonas_adjacentes_casilla_jaque(casilla_destino, local_pieza) {
             if (vector !== false) {
                 let cuadro = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
                 let flujo = "caballo";
-                let vl = vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
-                if (vl === true) {
-                    break;
-                }
+                vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
             }
         }
     }
@@ -577,23 +754,11 @@ function validar_zonas_adjacentes_casilla_jaque(casilla_destino, local_pieza) {
             if (vector !== false) {
                 let cuadro = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
                 let flujo = "caballo";
-                let vl = vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
-                if (vl === true) {
-                    break;
-                }
+                vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
             }
         }
     }
 
-    // MOSTRAR COINCIDENCIAS
-    for (let contador = 0; contador < casillas_obtenidas.length; contador++) {
-        let captura = capturar_hijo_casilla(casillas_obtenidas[contador], local_pieza);
-        if (captura === true) {
-            //console.log(casillas_obtenidas[contador]);
-            flujo_validacion = true;
-            break;
-        }
-    }
+    return casillas_obtenidas;
 
-    return flujo_validacion;
 }

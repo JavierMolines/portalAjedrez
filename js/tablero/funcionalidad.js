@@ -132,14 +132,13 @@ function interaccion_pieza(pieza, casilla) {
 
         // COMPROBAR SI SE ESTA EN JAQUE
         if(jaque === true){
-
             console.log(`Las ${movimiento_actual} estan en jaque.`);
+        } else {
+            console.log(`Las ${movimiento_actual} estan jugando. Comprobar si reciben jaque`);
+        }
 
-            let retro = validar_jaque_iniciado(pieza_en_movimiento, casilla);
-            if(retro === true){
-                return;
-            }
-    
+        if (atunconpan(pieza_en_movimiento, casilla, jaque) === true) {
+            return;
         }
 
         // COMER PIEZA SI LA CASILLA ES VALIDA

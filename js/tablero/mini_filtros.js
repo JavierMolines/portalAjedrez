@@ -111,6 +111,19 @@ function obtener_posicion_base_ID(pieza) {
 
 }
 
+function crear_coordenadas_casilla(pieza) {
+
+    let string_con_posicion = pieza.id.replace("cuadro", "").replace("{", "").replace("}", "").replace("[", "").replace("]", "").split(",");
+    let convertir_objeto = {
+
+        posY: parseInt(string_con_posicion[0]),
+        posX: parseInt(string_con_posicion[1])
+
+    };
+    return convertir_objeto;
+
+}
+
 function obtener_posicion_pieza_objeto(elemento) {
 
     let posicion = elemento.parentElement.id.replace("cuadro", "");
@@ -122,6 +135,13 @@ function obtener_posicion_pieza_objeto(elemento) {
 
     };
     return propiedades;
+    
+}
+
+function capturar_casilla_padre(hijo) {
+
+    let posicion = hijo.parentElement;
+    return posicion;
     
 }
 
@@ -379,42 +399,5 @@ function filtrar_movimientos_torre(posicionamiento, movimiento) {
     }
 
     return indicador;
-
-}
-
-function capturar_hijo_casilla(casilla, curso_del_flujo) {
-
-    let validacion = false;
-
-    if (casilla[1].childNodes.length > 0) {
-
-        let imperneable = casilla[1].childNodes[0];
-        let propiedades = obtener_ID_pieza(imperneable);
-
-        if (propiedades.tipo === "reina" && casilla[0] === "bishop" || propiedades.tipo === "reina" && casilla[0] === "torre") {
-            propiedades.tipo = casilla[0];
-        }
-
-        if (curso_del_flujo.color !== propiedades.color && propiedades.tipo === casilla[0]) {
-            validacion = true;
-        }
-
-    }
-
-    return validacion;
-
-}
-
-function vl_pieza_interna(casilla, flujo, casillas_obtenidas) {
-
-    let vl = false;
-    let cargar = [flujo, casilla];
-    casillas_obtenidas.push(cargar);
-
-    if (casilla.childNodes.length > 0) {
-        vl = true;
-    }
-
-    return vl;
 
 }
