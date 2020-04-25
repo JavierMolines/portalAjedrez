@@ -1,7 +1,7 @@
 function mostrar_premovimiento(posiA, posiB) {
 
-    if (posiA === null || posiA === "" ||  posiA === undefined || posiB === null || posiB === "" || posiB === undefined) {
-        return ;
+    if (posiA === null || posiA === "" || posiA === undefined || posiB === null || posiB === "" || posiB === undefined) {
+        return;
     }
 
     let casilla_modificar = document.getElementById(`cuadro[${posiA},${posiB}]`);
@@ -18,26 +18,26 @@ function mostrar_premovimiento(posiA, posiB) {
 
         parametros_enviar.propiedad_mayor_que = "50% - 135%";
         parametros_enviar.propiedad_menor_que = "50% - 85%";
-        
-    // TELEFONOS NORMAL
+
+        // TELEFONOS NORMAL
     } else if (parametros_enviar.propiedad_pantalla < 450) {
-        
+
         parametros_enviar.propiedad_mayor_que = "50% - 130%";
         parametros_enviar.propiedad_menor_que = "50% - 70%";
 
-    } 
+    }
 
     pre_movimiento_puntero.classList.add("parrafo_pre_movimiento");
     pre_movimiento_puntero.innerHTML = "&#10060;";
 
-    if(/<\/i>/.test(validacionPiezaColocada)){
+    if (/<\/i>/.test(validacionPiezaColocada)) {
         pre_movimiento_puntero.style.top = `calc(${parametros_enviar.propiedad_mayor_que})`;
     } else {
         pre_movimiento_puntero.style.top = `calc(${parametros_enviar.propiedad_menor_que})`;
     }
 
     casilla_modificar.appendChild(pre_movimiento_puntero);
-    
+
 }
 
 function borrar_premovimiento() {
@@ -65,7 +65,7 @@ function ubicacion_plano(posicion1, posicion2) {
     };
 
     return enviar;
-    
+
 }
 
 function obtener_posicion(elemento) {
@@ -73,7 +73,7 @@ function obtener_posicion(elemento) {
     let posicion = elemento.id.replace("cuadro", "");
     let final = posicion.replace("[", "").replace("]", "").split(",");
     return final;
-    
+
 }
 
 function obtener_posicion_pieza(elemento) {
@@ -81,7 +81,7 @@ function obtener_posicion_pieza(elemento) {
     let posicion = elemento.parentElement.id.replace("cuadro", "");
     let final = posicion.replace("[", "").replace("]", "").split(",");
     return final;
-    
+
 }
 
 function obtener_ID_pieza(pieza) {
@@ -135,18 +135,32 @@ function obtener_posicion_pieza_objeto(elemento) {
 
     };
     return propiedades;
-    
+
 }
 
 function capturar_casilla_padre(hijo) {
 
     let posicion = hijo.parentElement;
     return posicion;
-    
+
+}
+
+function obtener_hijo_detalles_ID(casilla) {
+
+    if (casilla.childNodes.length > 0) {
+
+        let hijo = casilla.childNodes[0];
+        let detalles_ID = obtener_ID_pieza(hijo);
+        return detalles_ID;
+
+    }
+
+    return false;
+
 }
 
 function coordenadas_cartesianas(nuevo_posY, nuevo_posX, casos) {
-    
+
     let cuadrantes = [
 
         "",
@@ -178,7 +192,7 @@ function cambiar_turno(pieza_jugada) {
         movimiento_actual = ggValidaciones[0];
 
     }
-    
+
 }
 
 function deshabilitar_enroque(pieza_jugada) {
@@ -190,9 +204,9 @@ function deshabilitar_enroque(pieza_jugada) {
     } else if (pieza_jugada == "rey" && movimiento_actual == ggValidaciones[1]) {
 
         enroque_blanco = [false, false];
-        
+
     }
-    
+
 }
 
 function filtrar_calculos_obtenidos_para_mostrar(posY, posX) {
@@ -233,7 +247,7 @@ function filtrar_movimientos_alfil(localizacion, saltos, cuadrante) {
                     indicador = true;
                     break;
                 }
-                
+
             }
 
             break;
@@ -252,7 +266,7 @@ function filtrar_movimientos_alfil(localizacion, saltos, cuadrante) {
                     indicador = true;
                     break;
                 }
-                
+
             }
 
             break;
@@ -271,7 +285,7 @@ function filtrar_movimientos_alfil(localizacion, saltos, cuadrante) {
                     indicador = true;
                     break;
                 }
-                
+
             }
 
             break;
@@ -290,7 +304,7 @@ function filtrar_movimientos_alfil(localizacion, saltos, cuadrante) {
                     indicador = true;
                     break;
                 }
-                
+
             }
 
             break;
@@ -299,7 +313,7 @@ function filtrar_movimientos_alfil(localizacion, saltos, cuadrante) {
     }
 
     return indicador;
-   
+
 }
 
 function filtrar_movimientos_torre(posicionamiento, movimiento) {

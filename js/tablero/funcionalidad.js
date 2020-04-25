@@ -1,21 +1,21 @@
-function movimiento_pieza(pieza, tipo){
+function movimiento_pieza(pieza, tipo) {
 
     if (pieza.style.color == movimiento_actual) {
 
-        setTimeout(()=>{
+        setTimeout(() => {
 
             pieza_seleccionada = [pieza, obtener_posicion_pieza(pieza), tipo];
 
             if (ayuda_movimientos == 1) {
 
-                pre_movimiento(pieza);  
+                pre_movimiento(pieza);
 
             }
 
         }, 10);
-        
+
     }
-    
+
 }
 
 function pre_movimiento(pieza) {
@@ -59,7 +59,7 @@ function asignar_movimiento_piezas() {
     /*  - VALIDACION - */
 
     if (pieza_seleccionada == "") {
-        return ;
+        return;
     }
 
     /*  - VARIABLES - */
@@ -73,7 +73,7 @@ function asignar_movimiento_piezas() {
         targetPosY: parseInt(posicion[0]),
         targetPosX: parseInt(posicion[1])
 
-    };    
+    };
 
     /*  - MOVIMIENTOS - */
 
@@ -88,18 +88,18 @@ function asignar_movimiento_piezas() {
     } else if (pieza_seleccionada[2] == "caballo") {
 
         validar_movimiento_caballo(posicionamiento, this);
-        
+
     } else if (pieza_seleccionada[2] == "torre") {
 
         validar_movimiento_torre(posicionamiento, this);
-        
+
     } else if (pieza_seleccionada[2] == "reina") {
 
         validar_movimiento_bishop(posicionamiento, this);
         validar_movimiento_torre(posicionamiento, this);
 
     } else if (pieza_seleccionada[2] == "rey") {
-        
+
         validar_movimiento_rey(posicionamiento, this);
 
     }
@@ -131,13 +131,7 @@ function interaccion_pieza(pieza, casilla) {
     if (movimiento_valido === true) {
 
         // COMPROBAR SI SE ESTA EN JAQUE
-        if(jaque === true){
-            console.log(`Las ${movimiento_actual} estan en jaque.`);
-        } else {
-            console.log(`Las ${movimiento_actual} estan jugando. Comprobar si reciben jaque`);
-        }
-
-        if (atunconpan(pieza_en_movimiento, casilla, jaque) === true) {
+        if (detectar_jaque(pieza_en_movimiento, casilla, jaque) === true) {
             return;
         }
 
@@ -156,7 +150,7 @@ function interaccion_pieza(pieza, casilla) {
         comprobar_jaque(pieza_en_movimiento);
         validar_promocion_peon(pieza_en_movimiento, casilla);
         cambiar_turno(pieza_en_movimiento.style.color);
-        
+
     }
 
 }

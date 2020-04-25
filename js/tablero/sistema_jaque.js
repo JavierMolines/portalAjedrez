@@ -434,13 +434,13 @@ function comprobar_jaque(pieza) {
 
 }
 
-function atunconpan(pieza_en_movimiento, casilla_destino, flujo_jaque) {
+function detectar_jaque(pieza_en_movimiento, casilla_destino, flujo_jaque) {
 
-    let indicador           = 0;
-    let validacion          = false;
-    let local_pieza         = obtener_ID_pieza(pieza_en_movimiento);
-    let casillas_obtenidas  = vl_casillas_entorno(casilla_destino);
-    let flujos_mensajes     = ["escapando del jaque".toUpperCase(), "bloqueando el jaque".toUpperCase()];
+    let indicador = 0;
+    let validacion = false;
+    let local_pieza = obtener_ID_pieza(pieza_en_movimiento);
+    let casillas_obtenidas = vl_casillas_entorno(casilla_destino);
+    let flujos_mensajes = ["escapando del jaque".toUpperCase(), "bloqueando el jaque".toUpperCase()];
 
     if (flujo_jaque === true) {
 
@@ -490,11 +490,11 @@ function comprobar_casillas_adyacentes_jaque(casillas_obtenidas) {
         let flujo = info[0];
         let target = info[1];
 
-        if(flujo === "torre" && target.childNodes.length > 0){
+        if (flujo === "torre" && target.childNodes.length > 0) {
             vl_torre.push(target.childNodes[0]);
         }
 
-        if(flujo === "bishop" && target.childNodes.length > 0){
+        if (flujo === "bishop" && target.childNodes.length > 0) {
             vl_bisho.push(target.childNodes[0]);
         }
 
@@ -504,11 +504,11 @@ function comprobar_casillas_adyacentes_jaque(casillas_obtenidas) {
 
 }
 
-function vl_casillas_capturadas(casillas_obtenidas, local_pieza, casilla_destino, flujo_jaque){
+function vl_casillas_capturadas(casillas_obtenidas, local_pieza, casilla_destino, flujo_jaque) {
 
     let validacion = false;
 
-    if(flujo_jaque === true){
+    if (flujo_jaque === true) {
 
         for (let contador = 0; contador < casillas_obtenidas.length; contador++) {
             let informacion = casillas_obtenidas[contador];
@@ -567,43 +567,101 @@ function comparar_piezas_detectadas_jaque(casilla, curso_del_flujo) {
 
 function comparar_piezas_detectadas_normal(casillas_obtenidas, local_pieza, casilla_destino) {
 
-    let monarca_flujo         = "";
-    let coincidencias         = [];
-    let monarca_detectado     = false;
-    let validacion            = false;
-    let casillas_nuevas       = vl_casillas_entorno(casilla_destino);
-    let propiedades_validadas = obtener_propiedades(casillas_obtenidas, local_pieza);
+    let monarca_flujo = "";
+    let coincidencias = [];
+    let monarca_detectado = false;
+    let validacion = false;
+    let casillas_nuevas = vl_casillas_entorno(casilla_destino);
+    let propiedades_validadas = obtener_propiedades(casillas_obtenidas, local_pieza, "actual");
 
-    coincidencias     = propiedades_validadas.array_coincidencias;
+    coincidencias = propiedades_validadas.array_coincidencias;
     monarca_detectado = propiedades_validadas.monarca_detectado;
-    monarca_flujo     = propiedades_validadas.monarca_flujo;
-    
-    for(let contador = 0; contador < coincidencias.length; contador++){
+    monarca_flujo = propiedades_validadas.monarca_flujo;
+
+    for (let contador = 0; contador < coincidencias.length; contador++) {
 
         let enemigo = coincidencias[contador];
-        if(monarca_detectado === true && monarca_flujo === enemigo.detalles.tipo && enemigo.detalles.tipo === enemigo.movimiento){
+        if (monarca_detectado === true && monarca_flujo === enemigo.detalles.tipo && enemigo.detalles.tipo === enemigo.movimiento) {
             validacion = true;
             break;
         }
 
     }
 
+    if (validacion === true) {
+
+        let propiedades_nuevas = obtener_propiedades(casillas_nuevas, local_pieza, "nuevo");
+        let pieza_detectada = obtener_hijo_detalles_ID(casilla_destino);
+        validacion = saber_si_es_valido_moverse(propiedades_validadas, propiedades_nuevas, pieza_detectada);
+
+    }
+
     return validacion;
 }
 
-function obtener_propiedades(casillas_obtenidas, local_pieza){
+function saber_si_es_valido_moverse(propiedades_validadas, propiedades_nuevas, pieza_detectada) {
+
+    let validacion = true;
+
+    if (propiedades_validadas.array_coincidencias.length > 0) {
+
+        for (let contador = 0; contador < propiedades_validadas.array_coincidencias.length; contador++) {
+
+            let informacion = propiedades_validadas.array_coincidencias[contador];
+
+            // SI SE MUEVE COMIENDO UNA PIEZA
+            if (pieza_detectada !== false) {
+                if (informacion.detalles.tipo === pieza_detectada.tipo &&
+                    informacion.detalles.identificador === pieza_detectada.identificador &&
+                    informacion.detalles.color === pieza_detectada.color) {
+
+                    validacion = false;
+                    break;
+                }
+            }
+
+            // SI SE MUEVE DENTRO DEL RANGO
+            if (propiedades_nuevas.array_coincidencias.length > 0) {
+
+                for (let contador_interno = 0; contador_interno < propiedades_nuevas.array_coincidencias.length; contador_interno++) {
+
+                    let informacion_nueva = propiedades_nuevas.array_coincidencias[contador_interno];
+
+                    if (informacion.tipo === informacion_nueva.tipo &&
+                        informacion.identificador === informacion_nueva.identificador &&
+                        informacion.color === informacion_nueva.color) {
+
+                        validacion = false;
+                        break;
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+    return validacion;
+
+}
+
+function obtener_propiedades(casillas_obtenidas, local_pieza, identificador) {
 
     let validacion_completa = {
-        monarca_detectado   : false,
-        monarca_flujo       : "",
-        array_coincidencias : []
+        id: identificador,
+        monarca_detectado: false,
+        monarca_flujo: "",
+        array_coincidencias: []
     };
 
     for (let contador = 0; contador < casillas_obtenidas.length; contador++) {
 
         let informacion = casillas_obtenidas[contador];
-        let accion      = informacion[0];
-        let casilla     = informacion[1];
+        let accion = informacion[0];
+        let casilla = informacion[1];
 
         if (casilla.childNodes.length > 0) {
 
@@ -639,11 +697,11 @@ function obtener_propiedades(casillas_obtenidas, local_pieza){
 
 function vl_casillas_entorno(casilla_destino) {
 
-    let casillas_obtenidas    = [];
-    let posicion              = casilla_destino.id.replace("cuadro", "");
-    let final                 = posicion.replace("[", "").replace("]", "").split(",");
-    let localizacion          = { posY: parseInt(final[0]), posX: parseInt(final[1]) };
-    let movimiento_vertical   = [localizacion.posY + 2, localizacion.posY - 2, localizacion.posX + 1, localizacion.posX - 1];
+    let casillas_obtenidas = [];
+    let posicion = casilla_destino.id.replace("cuadro", "");
+    let final = posicion.replace("[", "").replace("]", "").split(",");
+    let localizacion = { posY: parseInt(final[0]), posX: parseInt(final[1]) };
+    let movimiento_vertical = [localizacion.posY + 2, localizacion.posY - 2, localizacion.posX + 1, localizacion.posX - 1];
     let movimiento_horizontal = [localizacion.posX + 2, localizacion.posX - 2, localizacion.posY + 1, localizacion.posY - 1];
 
     // VERTICAL Y HORIZONTAL
