@@ -5,7 +5,7 @@ function validar_promocion_peon(pieza_recibida, casilla_recibida) {
     let pieza_movida = obtener_ID_pieza(pieza_recibida);
     let casilla_actual = obtener_posicion(casilla_recibida);
 
-    if (pieza_movida.tipo === "peon" && pieza_movida.color === "white" && casilla_actual[0] === "8" || pieza_movida.tipo === "peon" && pieza_movida.color === "black" && casilla_actual[0] === "1") {
+    if (pieza_movida.tipo === "peon" && pieza_movida.color === ggValidaciones[1] && casilla_actual[0] === "8" || pieza_movida.tipo === "peon" && pieza_movida.color === ggValidaciones[0] && casilla_actual[0] === "1") {
         casilla_coronacion = true;
     }
 

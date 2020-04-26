@@ -254,7 +254,7 @@ function comprobar_peon_al_paso(destino, indicador) {
 
         let flujo = 0;
 
-        if (movimiento_actual === "white") {
+        if (movimiento_actual === ggValidaciones[1]) {
             flujo = -1;
         } else {
             flujo = 1;
