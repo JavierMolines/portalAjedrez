@@ -480,9 +480,12 @@ function detectar_jaque(pieza_en_movimiento, casilla_destino, flujo_jaque) {
 
 function comprobar_casillas_adyacentes_jaque(casillas_obtenidas) {
 
-    let vl_torre = [];
-    let vl_bisho = [];
     let validation = true;
+    let monarca = {
+        detectado: false,
+        coordenadas: {},
+        flujo: ""
+    };
 
     for (let contador = 0; contador < casillas_obtenidas.length; contador++) {
 
@@ -490,12 +493,25 @@ function comprobar_casillas_adyacentes_jaque(casillas_obtenidas) {
         let flujo = info[0];
         let target = info[1];
 
-        if (flujo === "torre" && target.childNodes.length > 0) {
-            vl_torre.push(target.childNodes[0]);
-        }
+        if (target.childNodes.length > 0) {
 
-        if (flujo === "bishop" && target.childNodes.length > 0) {
-            vl_bisho.push(target.childNodes[0]);
+            let pieza = obtener_hijo_detalles_ID(target);
+            pieza.movimiento = flujo;
+            if(pieza.tipo === "rey" && pieza.color === movimiento_actual){
+                monarca.detectado = true;
+                monarca.coordenadas = pieza.coordenadas;
+                monarca.flujo = flujo;
+                casillas_obtenidas.splice(contador, 1);
+                contador = 0;
+            }
+
+            if(monarca.detectado === true && monarca.flujo === pieza.movimiento){
+
+                if(validar_posiciones_jaque_indirecto_continuo_distante(monarca, pieza) === true){
+                    validation = false;
+                }
+    
+            }
         }
 
     }
@@ -640,14 +656,10 @@ function saber_si_es_valido_moverse(propiedades_validadas, propiedades_nuevas, p
 
             let informacion = propiedades_validadas.array_coincidencias[contador];
 
-            console.log(informacion);
-            console.log(pieza_detectada);
-
             // SI SE MUEVE COMIENDO UNA PIEZA
             if (pieza_detectada !== false) {
                 if (informacion.coordenadas.posX === pieza_detectada.coordenadas.posX &&
                     informacion.coordenadas.posY === pieza_detectada.coordenadas.posY ) {
-                    console.log("COMER");
                     validacion = false;
                     break;
                 } else {
@@ -666,7 +678,6 @@ function saber_si_es_valido_moverse(propiedades_validadas, propiedades_nuevas, p
                         informacion.detalles.respaldo === informacion_nueva.detalles.respaldo &&
                         informacion.detalles.color === informacion_nueva.detalles.color &&
                         informacion.detalles.tipo === informacion_nueva.detalles.tipo) {
-                        console.log("DENTRO DEL RANGO");
                         validacion = false;
                         break;
 
