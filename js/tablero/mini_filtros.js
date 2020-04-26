@@ -151,6 +151,7 @@ function obtener_hijo_detalles_ID(casilla) {
 
         let hijo = casilla.childNodes[0];
         let detalles_ID = obtener_ID_pieza(hijo);
+        detalles_ID.coordenadas = crear_coordenadas_casilla(casilla);
         return detalles_ID;
 
     }

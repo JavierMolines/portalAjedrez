@@ -553,21 +553,27 @@ function comparar_piezas_detectadas_jaque(casilla, curso_del_flujo) {
 
 function comparar_piezas_detectadas_normal(casillas_obtenidas, local_pieza, casilla_destino) {
 
-    let monarca_flujo = "";
+    let monarca = {
+        flujo: "",
+        detectado: false,
+        coordenadas: {},
+    };
+
     let coincidencias = [];
-    let monarca_detectado = false;
     let validacion = false;
     let casillas_nuevas = vl_casillas_entorno(casilla_destino, local_pieza);
     let propiedades_validadas = obtener_propiedades(casillas_obtenidas, local_pieza);
 
     coincidencias = propiedades_validadas.array_coincidencias;
-    monarca_detectado = propiedades_validadas.monarca_detectado;
-    monarca_flujo = propiedades_validadas.monarca_flujo;
+    monarca.detectado = propiedades_validadas.monarca_detectado;
+    monarca.flujo = propiedades_validadas.monarca_flujo;
+    monarca.coordenadas = propiedades_validadas.coordenadas;
 
     for (let contador = 0; contador < coincidencias.length; contador++) {
 
         let enemigo = coincidencias[contador];
-        if (monarca_detectado === true && monarca_flujo === enemigo.detalles.tipo && enemigo.detalles.tipo === enemigo.movimiento) {
+        let distancia = validar_posiciones_jaque_indirecto_continuo_distante(monarca, enemigo);
+        if (distancia === true && monarca.detectado === true && monarca.flujo === enemigo.detalles.tipo && enemigo.detalles.tipo === enemigo.movimiento) {
             validacion = true;
             break;
         }
@@ -585,12 +591,48 @@ function comparar_piezas_detectadas_normal(casillas_obtenidas, local_pieza, casi
     return validacion;
 }
 
+function validar_posiciones_jaque_indirecto_continuo_distante(monarca, enemigo) {
+
+    let validacion = false;
+
+    if(monarca.detectado === true && monarca.flujo === enemigo.movimiento){
+
+        if(enemigo.movimiento === "bishop"){
+
+            let calculoY = monarca.coordenadas.posY - enemigo.coordenadas.posY;
+            let calculoX = monarca.coordenadas.posX - enemigo.coordenadas.posX;
+
+            if (Math.sign(calculoY) === -1) {
+                calculoY *= -1;
+            }
+            if (Math.sign(calculoX) === -1) {
+                calculoX *= -1;
+            }
+            if(calculoY === calculoX){
+                validacion = true;
+            }
+    
+        } else if(enemigo.movimiento === "torre"){
+
+            if(monarca.coordenadas.posY === enemigo.coordenadas.posY){
+                validacion = true;
+            }
+
+            if(monarca.coordenadas.posX === enemigo.coordenadas.posX){
+                validacion = true;
+            }
+
+        }
+
+    }
+
+    return validacion;
+    
+}
+
 function saber_si_es_valido_moverse(propiedades_validadas, propiedades_nuevas, pieza_detectada) {
 
     let validacion = true;
-
-    console.log(propiedades_validadas.array_coincidencias);
-    console.log(propiedades_nuevas.array_coincidencias);
 
     if (propiedades_validadas.array_coincidencias.length > 0) {
 
@@ -598,11 +640,14 @@ function saber_si_es_valido_moverse(propiedades_validadas, propiedades_nuevas, p
 
             let informacion = propiedades_validadas.array_coincidencias[contador];
 
+            console.log(informacion);
+            console.log(pieza_detectada);
+
             // SI SE MUEVE COMIENDO UNA PIEZA
             if (pieza_detectada !== false) {
-                if (informacion.detalles.tipo === pieza_detectada.tipo &&
-                    informacion.detalles.identificador === pieza_detectada.identificador &&
-                    informacion.detalles.color === pieza_detectada.color) {
+                if (informacion.coordenadas.posX === pieza_detectada.coordenadas.posX &&
+                    informacion.coordenadas.posY === pieza_detectada.coordenadas.posY ) {
+                    console.log("COMER");
                     validacion = false;
                     break;
                 } else {
@@ -621,8 +666,7 @@ function saber_si_es_valido_moverse(propiedades_validadas, propiedades_nuevas, p
                         informacion.detalles.respaldo === informacion_nueva.detalles.respaldo &&
                         informacion.detalles.color === informacion_nueva.detalles.color &&
                         informacion.detalles.tipo === informacion_nueva.detalles.tipo) {
-
-                        console.log("COINCIDENCIA");
+                        console.log("DENTRO DEL RANGO");
                         validacion = false;
                         break;
 
@@ -645,6 +689,7 @@ function obtener_propiedades(casillas_obtenidas, local_pieza) {
     let validacion_completa = {
         monarca_detectado: false,
         monarca_flujo: "",
+        coordenadas: {},
         array_coincidencias: []
     };
 
@@ -653,6 +698,7 @@ function obtener_propiedades(casillas_obtenidas, local_pieza) {
         let informacion = casillas_obtenidas[contador];
         let accion = informacion[0];
         let casilla = informacion[1];
+        let casilla_detalles = crear_coordenadas_casilla(casilla);
 
         if (casilla.childNodes.length > 0) {
 
@@ -670,7 +716,8 @@ function obtener_propiedades(casillas_obtenidas, local_pieza) {
 
                 let enemigo = {
                     movimiento: accion,
-                    detalles: propiedades
+                    detalles: propiedades,
+                    coordenadas: casilla_detalles
                 };
 
                 validacion_completa.array_coincidencias.push(enemigo);
@@ -679,6 +726,7 @@ function obtener_propiedades(casillas_obtenidas, local_pieza) {
             if (propiedades.tipo === "rey" && propiedades.color === local_pieza.color) {
                 validacion_completa.monarca_flujo = accion;
                 validacion_completa.monarca_detectado = true;
+                validacion_completa.coordenadas = casilla_detalles;
             }
 
         }
