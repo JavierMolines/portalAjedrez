@@ -424,7 +424,7 @@ function comprobar_jaque(pieza) {
         // REGRESAR COLOR
         setTimeout(() => {
             casilla_jaque.style.backgroundColor = color_respaldo;
-        }, 2000);
+        }, 800);
 
         console.log(mensaje_jaque);
 
@@ -463,7 +463,6 @@ function detectar_jaque(pieza_en_movimiento, casilla_destino, flujo_jaque) {
         }
 
         let mostrar = { mensaje: flujos_mensajes[indicador], pieza: local_pieza };
-        console.log(mostrar);
 
     } else {
 

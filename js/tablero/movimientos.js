@@ -11,6 +11,10 @@
 function validar_premovimiento_peon(localizacion, propiedades_pieza) {
 
     let rango = 1;
+    let destino = {
+        posX: 0,
+        posY: 0
+    };
 
     if (movimiento_actual == ggValidaciones[1]) {
         if (localizacion.posY == 2) {
@@ -24,7 +28,7 @@ function validar_premovimiento_peon(localizacion, propiedades_pieza) {
 
     for (let contador = 1; contador <= rango; contador++) {
 
-        if (propiedades_pieza.color == ggValidaciones[1]) {
+        if (propiedades_pieza.color == ggValidaciones[1]) {// BLANCAS
 
             let verificar_posicion_rango = false;
             let nueva_casilla = document.getElementById(`cuadro[${localizacion.posY + contador},${localizacion.posX}]`);
@@ -69,11 +73,14 @@ function validar_premovimiento_peon(localizacion, propiedades_pieza) {
 
             }
 
+            destino.posX = localizacion.posX;
+            destino.posY = localizacion.posY;
+
             if (verificar_posicion_rango === true) {
                 break;
             }
 
-        } else if (propiedades_pieza.color == ggValidaciones[0]) {
+        } else if (propiedades_pieza.color == ggValidaciones[0]) {// NEGRAS
 
             let verificar_posicion_rango = false;
             let nueva_casilla = document.getElementById(`cuadro[${localizacion.posY - contador},${localizacion.posX}]`);
@@ -120,11 +127,17 @@ function validar_premovimiento_peon(localizacion, propiedades_pieza) {
 
             }
 
+            destino.posX = localizacion.posX;
+            destino.posY = localizacion.posY;
+
             if (verificar_posicion_rango === true) {
                 break;
             }
 
+        }
 
+        if (peon_al_paso.estatus === true) {
+            comprobar_peon_al_paso(destino, "pre");
         }
 
     }
@@ -426,6 +439,10 @@ function validar_movimiento_peon(posicionamiento, casilla_destino_final) {
     let casilla_delantera;
     let movimiento_valido = false;
     let enviar_interaccion = [];
+    let destino = {
+        posX: 0,
+        posY: 0,
+    };
 
     if (posicionamiento.flujo == ggValidaciones[1]) {
 
@@ -446,6 +463,7 @@ function validar_movimiento_peon(posicionamiento, casilla_destino_final) {
                         if (casilla_delantera.childNodes.length > 0) {
                             return;
                         }
+                        activar_doble_paso(posicionamiento);
                     }
 
                     movimiento_valido = true;
@@ -528,6 +546,15 @@ function validar_movimiento_peon(posicionamiento, casilla_destino_final) {
 
                 }
 
+                if (peon_al_paso.estatus === true) {
+                    destino.posX = posicionamiento.posX;
+                    destino.posY = posicionamiento.posY;
+                    if (comprobar_peon_al_paso(destino, "normal") === true) {
+                        movimiento_valido = true;
+                        enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
+                    }
+                }
+
             }
 
         }
@@ -551,6 +578,7 @@ function validar_movimiento_peon(posicionamiento, casilla_destino_final) {
                         if (casilla_delantera.childNodes.length > 0) {
                             return;
                         }
+                        activar_doble_paso(posicionamiento);
                     }
 
                     movimiento_valido = true;
@@ -633,19 +661,24 @@ function validar_movimiento_peon(posicionamiento, casilla_destino_final) {
 
                 }
 
+                if (peon_al_paso.estatus === true) {
+                    destino.posX = posicionamiento.posX;
+                    destino.posY = posicionamiento.posY;
+                    if (comprobar_peon_al_paso(destino, "normal") === true) {
+                        movimiento_valido = true;
+                        enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
+                    }
+                }
+
             }
 
         }
 
     }
 
-
     if (movimiento_valido === true) {
-
         interaccion_pieza(enviar_interaccion[0], enviar_interaccion[1]);
-
     }
-
 
 }
 
@@ -714,7 +747,7 @@ function validar_movimiento_bishop(posicionamiento, casilla_destino_final) {
         }
     }
 
-    if(movimiento_valido === true){
+    if (movimiento_valido === true) {
 
         interaccion_pieza(enviar_interaccion[0], enviar_interaccion[1]);
 
@@ -744,12 +777,12 @@ function validar_movimiento_torre(posicionamiento, casilla_destino_final) {
 
     }
 
-    if(movimiento_valido === true){
+    if (movimiento_valido === true) {
 
         interaccion_pieza(enviar_interaccion[0], enviar_interaccion[1]);
 
     }
-    
+
 }
 
 function validar_movimiento_rey(posicionamiento, casilla_destino_final) {

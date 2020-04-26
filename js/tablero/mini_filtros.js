@@ -228,6 +228,90 @@ function filtrar_calculos_obtenidos_para_mostrar(posY, posX) {
 
 }
 
+function activar_doble_paso(posicion) {
+
+    console.log("PEON AL PASO ACTIVADO");
+    peon_al_paso.estatus = true;
+    peon_al_paso.posX = posicion.targetPosX;
+    peon_al_paso.posY = posicion.targetPosY;
+    peon_al_paso.by = movimiento_actual;
+
+}
+
+function desactivar_doble_paso() {
+
+    console.log("PEON AL PASO DESACTIVADO");
+    peon_al_paso.estatus = false;
+    peon_al_paso.posX = 0;
+    peon_al_paso.posY = 0;
+
+}
+
+function comprobar_peon_al_paso(destino, indicador) {
+
+    let validacion = false;
+    let array_BOOL = [false, false];
+
+    if (destino.posY === peon_al_paso.posY) {
+
+        let flujo = 0;
+
+        if (movimiento_actual === "white") {
+            flujo = -1;
+        } else {
+            flujo = 1;
+        }
+
+        let casilla = { posiA: { posX: 0, poxY: 0 }, posiB: { posX: 0, poxY: 0 } };
+        let posible_peon_al_paso1 = document.getElementById(`cuadro[${destino.posY},${destino.posX - 1}]`);
+        let posible_peon_al_paso2 = document.getElementById(`cuadro[${destino.posY},${destino.posX + 1}]`);
+
+        if (posible_peon_al_paso1 !== null) {
+            casilla.posiA = crear_coordenadas_casilla(posible_peon_al_paso1);
+        }
+
+        if (posible_peon_al_paso1 !== null) {
+            casilla.posiB = crear_coordenadas_casilla(posible_peon_al_paso2);
+        }
+
+        if (peon_al_paso.posX === casilla.posiA.posX && peon_al_paso.posY === casilla.posiA.posY) {
+            array_BOOL[0] = true; 
+        }
+
+        if (peon_al_paso.posX === casilla.posiB.posX && peon_al_paso.posY === casilla.posiB.posY) {
+            array_BOOL[1] = true;
+        }
+
+        if (indicador === "pre" && array_BOOL[0] === true || array_BOOL[1] === true) {
+            mostrar_premovimiento(peon_al_paso.posY - (flujo), peon_al_paso.posX);
+        }
+
+        if (indicador === "normal") {
+
+            if(array_BOOL[0] === true){
+                validacion = true;
+                posible_peon_al_paso1.childNodes[0].remove();
+            }
+
+            if(array_BOOL[1] === true){
+                validacion = true;
+                posible_peon_al_paso2.childNodes[0].remove();
+            }
+
+        }
+
+    }
+
+    return validacion;
+
+}
+
+/*
+
+    FILTROS MOVIMIENTOS DISTANTES
+
+*/
+
 function filtrar_movimientos_alfil(localizacion, saltos, cuadrante) {
 
     let indicador = false;
@@ -404,7 +488,6 @@ function filtrar_movimientos_torre(posicionamiento, movimiento) {
                     indicador = true;
                     break;
                 }
-
 
             }
 

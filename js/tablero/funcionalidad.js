@@ -135,6 +135,11 @@ function interaccion_pieza(pieza, casilla) {
             return;
         }
 
+        // VALIDAR PEON AL PASO
+        if(peon_al_paso.estatus === true && peon_al_paso.by !== movimiento_actual){
+            desactivar_doble_paso();
+        }
+
         // COMER PIEZA SI LA CASILLA ES VALIDA
         if (comer_pieza === true) {
             casilla.removeChild(casilla.childNodes[0]);
