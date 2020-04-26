@@ -230,7 +230,6 @@ function filtrar_calculos_obtenidos_para_mostrar(posY, posX) {
 
 function activar_doble_paso(posicion) {
 
-    console.log("PEON AL PASO ACTIVADO");
     peon_al_paso.estatus = true;
     peon_al_paso.posX = posicion.targetPosX;
     peon_al_paso.posY = posicion.targetPosY;
@@ -240,7 +239,6 @@ function activar_doble_paso(posicion) {
 
 function desactivar_doble_paso() {
 
-    console.log("PEON AL PASO DESACTIVADO");
     peon_al_paso.estatus = false;
     peon_al_paso.posX = 0;
     peon_al_paso.posY = 0;

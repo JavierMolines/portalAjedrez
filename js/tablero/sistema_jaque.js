@@ -747,6 +747,28 @@ function obtener_propiedades(casillas_obtenidas, local_pieza) {
 
 }
 
+function rey_saque(pieza_en_movimiento, casilla) {
+
+    let validacion = false;
+    let obtener_rey = obtener_ID_pieza(pieza_en_movimiento);
+    let casillas_obtenidas = vl_casillas_entorno(casilla, "normal");
+    let casillas_validadas = obtener_propiedades(casillas_obtenidas, obtener_rey);
+
+    for (let contador = 0; contador < casillas_validadas.array_coincidencias.length; contador++) {
+
+        let propiedades = casillas_validadas.array_coincidencias[contador];
+
+        if(propiedades.movimiento === propiedades.detalles.tipo && obtener_rey.color !== propiedades.detalles.color){
+            validacion = true;
+            break;
+        }
+        
+    }
+
+    return validacion;
+    
+}
+
 function vl_casillas_entorno(casilla_destino, local_pieza) {
 
     let casillas_obtenidas = [];

@@ -130,6 +130,15 @@ function interaccion_pieza(pieza, casilla) {
     // ACCIONES CUANDO SE MUEVE LA PIEZA
     if (movimiento_valido === true) {
 
+        // MOVIMIENTO ANTICIPADO DEL REY PARA SU PROTECCION
+        let obtener_rey = obtener_ID_pieza(pieza_en_movimiento);
+        if(obtener_rey.tipo === "rey"){
+            let resultado = rey_saque(pieza_en_movimiento, casilla);
+            if(resultado === true){
+                return;
+            }
+        }
+
         // COMPROBAR SI SE ESTA EN JAQUE
         if (detectar_jaque(pieza_en_movimiento, casilla, jaque) === true) {
             return;
