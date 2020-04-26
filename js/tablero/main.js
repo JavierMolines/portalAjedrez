@@ -16,9 +16,10 @@ var pieza_seleccionada = "";
 var ayuda_movimientos  = 1;
 var jaque_mate         = false;
 var jaque              = false;
-var enroque_blanco     = [true, true];
-var enroque_negro      = [true, true];
-var peon_al_paso       = {posX: 0, posY: 0, estatus: false, by: ""};
+var enroque_blanco     = [ true, true ];
+var enroque_negro      = [ true, true ];
+var pos_jaque_rey      = { posY: 0, posX: 0 };
+var peon_al_paso       = { posX: 0, posY: 0, estatus: false, by: "" };
 
 /*
 

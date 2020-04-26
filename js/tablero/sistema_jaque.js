@@ -416,6 +416,7 @@ function comprobar_jaque(pieza) {
     if (rey_en_jaque === true) {
 
         pieza_del_jaque = obtener_ID_pieza(pieza);
+        pos_jaque_rey = crear_coordenadas_casilla(casilla_jaque);
         let mensaje_jaque = `${tipo_pieza[0].toUpperCase()} de color ${tipo_pieza[1]} le dio jaque al ${coincidencia_detectada[0]} ${coincidencia_detectada[1]}`;
         let color_respaldo = casilla_jaque.style.backgroundColor;
         casilla_jaque.style.backgroundColor = "red";
@@ -755,14 +756,11 @@ function rey_saque(pieza_en_movimiento, casilla) {
     let casillas_validadas = obtener_propiedades(casillas_obtenidas, obtener_rey);
 
     for (let contador = 0; contador < casillas_validadas.array_coincidencias.length; contador++) {
-
         let propiedades = casillas_validadas.array_coincidencias[contador];
-
         if(propiedades.movimiento === propiedades.detalles.tipo && obtener_rey.color !== propiedades.detalles.color){
             validacion = true;
             break;
         }
-        
     }
 
     return validacion;

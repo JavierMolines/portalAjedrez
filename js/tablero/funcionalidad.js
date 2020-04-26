@@ -165,6 +165,9 @@ function interaccion_pieza(pieza, casilla) {
         validar_promocion_peon(pieza_en_movimiento, casilla);
         cambiar_turno(pieza_en_movimiento.style.color);
 
+        // VALIDACION FIN DEL JUEGO
+        detectar_jaque_mate(pieza_en_movimiento, casilla);
+        
     }
 
 }
