@@ -22,6 +22,10 @@
 
 	text-align: left;
 	grid-column: 4 / 6;
+	display: grid;
+	gap: 5%;
+	align-content: center;
+	grid-template-rows: auto auto auto;
 
 }
 

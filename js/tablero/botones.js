@@ -2,7 +2,7 @@ function crear_botones() {
 
     let contenedor = document.getElementById("botones_opciones_tablero");
 
-    for (let contador = 0; contador < 3; contador++) {
+    for (let contador = 0; contador < 2; contador++) {
 
         let botones = document.createElement("button");
         botones.classList.add("botones_opciones");
@@ -22,11 +22,11 @@ function crear_botones() {
 
                 // -- INICIO REINICIAR VARIABLES GLOBALES
 
-                jaque_mate         = false;
-                jaque              = false;
-                enroque_blanco     = [true, true];
-                enroque_negro      = [true, true];
-                movimiento_actual  = colores[1];
+                jaque_mate = false;
+                jaque = false;
+                enroque_blanco = [true, true];
+                enroque_negro = [true, true];
+                movimiento_actual = colores[1];
 
                 // -- FINAL REINICIAR VARIABLES GLOBALES
 
@@ -36,18 +36,6 @@ function crear_botones() {
             });
 
         } else if (contador == 1) {
-
-            botones.id = "boton_regresar";
-            botones.classList.add("botones_apagados");
-            botones.disabled = true;
-            botones.innerHTML = "RETROCEDER";
-            botones.addEventListener("click", () => {
-
-                console.log("PROXIMAMENTE");
-
-            });
-
-        } else if (contador == 2) {
 
             botones.id = "boton_ayuda";
             botones.innerHTML = `AYUDA: ON`;
@@ -71,6 +59,20 @@ function crear_botones() {
                 console.log(`AYUDA ESTADO: ${ayuda_movimientos}`);
 
             });
+
+        } else if (contador == 2) {
+
+        /*
+            botones.id = "boton_regresar";
+            botones.classList.add("botones_apagados");
+            botones.disabled = true;
+            botones.innerHTML = "RETROCEDER";
+            botones.addEventListener("click", () => {
+
+                console.log("PROXIMAMENTE");
+
+            });
+        */
 
         }
 
