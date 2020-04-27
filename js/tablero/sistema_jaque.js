@@ -601,9 +601,15 @@ function validar_posiciones_jaque_indirecto_continuo_distante(monarca, enemigo) 
 
     let validacion = false;
 
-    if(monarca.detectado === true && monarca.flujo === enemigo.movimiento){
+    if (monarca.detectado === true && monarca.flujo === enemigo.movimiento) {
 
-        if(enemigo.movimiento === "bishop"){
+        if (enemigo.movimiento === "caballo") {
+
+            if (monarca.coordenadas.posY === enemigo.coordenadas.posY && monarca.coordenadas.posX === enemigo.coordenadas.posX) {
+                validacion = true;
+            }
+
+        } else if (enemigo.movimiento === "bishop") {
 
             let calculoY = monarca.coordenadas.posY - enemigo.coordenadas.posY;
             let calculoX = monarca.coordenadas.posX - enemigo.coordenadas.posX;
@@ -614,17 +620,17 @@ function validar_posiciones_jaque_indirecto_continuo_distante(monarca, enemigo) 
             if (Math.sign(calculoX) === -1) {
                 calculoX *= -1;
             }
-            if(calculoY === calculoX){
-                validacion = true;
-            }
-    
-        } else if(enemigo.movimiento === "torre"){
-
-            if(monarca.coordenadas.posY === enemigo.coordenadas.posY){
+            if (calculoY === calculoX) {
                 validacion = true;
             }
 
-            if(monarca.coordenadas.posX === enemigo.coordenadas.posX){
+        } else if (enemigo.movimiento === "torre") {
+
+            if (monarca.coordenadas.posY === enemigo.coordenadas.posY) {
+                validacion = true;
+            }
+
+            if (monarca.coordenadas.posX === enemigo.coordenadas.posX) {
                 validacion = true;
             }
 
