@@ -437,19 +437,11 @@ function comprobar_jaque(pieza) {
 
 function detectar_jaque(pieza_en_movimiento, casilla_destino, flujo_jaque) {
 
-    let indicador = 0;
     let validacion = false;
     let local_pieza = obtener_ID_pieza(pieza_en_movimiento);
     let casillas_obtenidas = vl_casillas_entorno(casilla_destino, "normal");
-    let flujos_mensajes = ["escapando del jaque".toUpperCase(), "bloqueando el jaque".toUpperCase()];
 
     if (flujo_jaque === true) {
-
-        if (local_pieza.tipo !== "rey") {
-
-            // FLUJO MENSAJE
-            indicador = 1;
-        }
 
         if (local_pieza.tipo === "rey") {
 
@@ -462,8 +454,6 @@ function detectar_jaque(pieza_en_movimiento, casilla_destino, flujo_jaque) {
             validacion = comprobar_casillas_adyacentes_jaque(casillas_obtenidas);
 
         }
-
-        let mostrar = { mensaje: flujos_mensajes[indicador], pieza: local_pieza };
 
     } else {
 
@@ -770,67 +760,50 @@ function rey_saque(pieza_en_movimiento, casilla) {
 function vl_casillas_entorno(casilla_destino, local_pieza) {
 
     let casillas_obtenidas = [];
+    let cuadrantes = ["I", "II", "III", "IV"];
     let posicion = casilla_destino.id.replace("cuadro", "");
     let final = posicion.replace("[", "").replace("]", "").split(",");
     let localizacion = { posY: parseInt(final[0]), posX: parseInt(final[1]) };
-    let movimiento_vertical = [localizacion.posY + 2, localizacion.posY - 2, localizacion.posX + 1, localizacion.posX - 1];
-    let movimiento_horizontal = [localizacion.posX + 2, localizacion.posX - 2, localizacion.posY + 1, localizacion.posY - 1];
+    let posiciones_caballo = { cuerpo_positivo: 2, cuerpo_negativo: -2, cabeza_positivo: 1, cabeza_negativo: -1 };
 
     let flujo = "torre";
 
     // VERTICAL Y HORIZONTAL
-    for (let contador = 1; contador < 9; contador++) {
-        if (localizacion.posX + contador < 9) {
-            let cuadro = document.getElementById(`cuadro[${localizacion.posY},${localizacion.posX + contador}]`);
-            let existencia = comprobar_saltos_nueva_pieza(cuadro, local_pieza);
-            if (existencia === true) {
-                continue;
-            }
-            let vl = vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
-            if (vl === true) {
-                break;
-            }
-        }
-    }
+    for (let indicador = 0; indicador < 4; indicador++) {
+        for (let movimientos = 1; movimientos < 9; movimientos++) {
 
-    for (let contador = 1; contador < 9; contador++) {
-        if (localizacion.posX - contador > 0) {
-            let cuadro = document.getElementById(`cuadro[${localizacion.posY},${localizacion.posX - contador}]`);
-            let existencia = comprobar_saltos_nueva_pieza(cuadro, local_pieza);
-            if (existencia === true) {
-                continue;
-            }
-            let vl = vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
-            if (vl === true) {
-                break;
-            }
-        }
-    }
+            let new_posY = 0;
+            let new_posX = 0;
 
-    for (let contador = 1; contador < 9; contador++) {
-        if (localizacion.posY + contador < 9) {
-            let cuadro = document.getElementById(`cuadro[${localizacion.posY + contador},${localizacion.posX}]`);
-            let existencia = comprobar_saltos_nueva_pieza(cuadro, local_pieza);
-            if (existencia === true) {
-                continue;
+            switch (cuadrantes[indicador]) {
+                case "I":
+                    new_posX = localizacion.posX + movimientos;
+                    new_posY = localizacion.posY;
+                    break;
+                case "II":
+                    new_posX = localizacion.posX - movimientos;
+                    new_posY = localizacion.posY;
+                    break;
+                case "III":
+                    new_posX = localizacion.posX;
+                    new_posY = localizacion.posY + movimientos;
+                    break;
+                case "IV":
+                    new_posX = localizacion.posX;
+                    new_posY = localizacion.posY - movimientos;
+                    break;
             }
-            let vl = vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
-            if (vl === true) {
-                break;
-            }
-        }
-    }
 
-    for (let contador = 1; contador < 9; contador++) {
-        if (localizacion.posY - contador > 0) {
-            let cuadro = document.getElementById(`cuadro[${localizacion.posY - contador},${localizacion.posX}]`);
-            let existencia = comprobar_saltos_nueva_pieza(cuadro, local_pieza);
-            if (existencia === true) {
-                continue;
-            }
-            let vl = vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
-            if (vl === true) {
-                break;
+            if (new_posX > 0 && new_posX < 9 && new_posY > 0 && new_posY < 9) {
+                let cuadro = document.getElementById(`cuadro[${new_posY},${new_posX}]`);
+                let existencia = comprobar_saltos_nueva_pieza(cuadro, local_pieza);
+                if (existencia === true) {
+                    continue;
+                }
+                let vl = vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
+                if (vl === true) {
+                    break;
+                }  
             }
         }
     }
@@ -838,58 +811,41 @@ function vl_casillas_entorno(casilla_destino, local_pieza) {
     flujo = "bishop";
 
     // DIAGONAL
-    for (let move = 1; move < 8; move++) {
-        if (localizacion.posY + move < 9 && localizacion.posX + move < 9) {
-            let cuadro = document.getElementById(`cuadro[${localizacion.posY + move},${localizacion.posX + move}]`);
-            let existencia = comprobar_saltos_nueva_pieza(cuadro, local_pieza);
-            if (existencia === true) {
-                continue;
-            }
-            let vl = vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
-            if (vl === true) {
-                break;
-            }
-        }
-    }
+    for (let indicador = 0; indicador < 4; indicador++) {
+        for (let movimientos = 1; movimientos < 9; movimientos++) {
 
-    for (let move = 1; move < 8; move++) {
-        if (localizacion.posY + move < 9 && localizacion.posX - move > 0) {
-            let cuadro = document.getElementById(`cuadro[${localizacion.posY + move},${localizacion.posX - move}]`);
-            let existencia = comprobar_saltos_nueva_pieza(cuadro, local_pieza);
-            if (existencia === true) {
-                continue;
-            }
-            let vl = vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
-            if (vl === true) {
-                break;
-            }
-        }
-    }
+            let new_posY = 0;
+            let new_posX = 0;
 
-    for (let move = 1; move < 8; move++) {
-        if (localizacion.posY - move > 0 && localizacion.posX - move > 0) {
-            let cuadro = document.getElementById(`cuadro[${localizacion.posY - move},${localizacion.posX - move}]`);
-            let existencia = comprobar_saltos_nueva_pieza(cuadro, local_pieza);
-            if (existencia === true) {
-                continue;
+            switch (cuadrantes[indicador]) {
+                case "I":
+                    new_posX = localizacion.posX + movimientos;
+                    new_posY = localizacion.posY + movimientos;
+                    break;
+                case "II":
+                    new_posX = localizacion.posX - movimientos;
+                    new_posY = localizacion.posY + movimientos;
+                    break;
+                case "III":
+                    new_posX = localizacion.posX - movimientos;
+                    new_posY = localizacion.posY - movimientos;
+                    break;
+                case "IV":
+                    new_posX = localizacion.posX + movimientos;
+                    new_posY = localizacion.posY - movimientos;
+                    break;
             }
-            let vl = vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
-            if (vl === true) {
-                break;
-            }
-        }
-    }
 
-    for (let move = 1; move < 8; move++) {
-        if (localizacion.posY - move > 0 && localizacion.posX + move < 9) {
-            let cuadro = document.getElementById(`cuadro[${localizacion.posY - move},${localizacion.posX + move}]`);
-            let existencia = comprobar_saltos_nueva_pieza(cuadro, local_pieza);
-            if (existencia === true) {
-                continue;
-            }
-            let vl = vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
-            if (vl === true) {
-                break;
+            if (new_posX > 0 && new_posX < 9 && new_posY > 0 && new_posY < 9) {
+                let cuadro = document.getElementById(`cuadro[${new_posY},${new_posX}]`);
+                let existencia = comprobar_saltos_nueva_pieza(cuadro, local_pieza);
+                if (existencia === true) {
+                    continue;
+                }
+                let vl = vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
+                if (vl === true) {
+                    break;
+                }
             }
         }
     }
@@ -897,22 +853,42 @@ function vl_casillas_entorno(casilla_destino, local_pieza) {
     flujo = "caballo";
 
     // CABALLO
-    for (let index = 0; index < 2; index++) {
-        for (let contador = 2; contador < 4; contador++) {
-            let vector = ubicacion_plano(movimiento_vertical[index], movimiento_vertical[contador]);
-            if (vector !== false) {
-                let cuadro = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
-                vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
-            }
-        }
-    }
+    for (let indicador = 0; indicador < 4; indicador++) {
+        for (let direcciones = 0; direcciones < 2; direcciones++) {
 
-    for (let index = 0; index < 2; index++) {
-        for (let contador = 2; contador < 4; contador++) {
-            let vector = ubicacion_plano(movimiento_horizontal[contador], movimiento_horizontal[index]);
+            let new_posY = 0;
+            let new_posX = 0;
+            let sumador = 0;
+
+            if (direcciones === 0) {
+                sumador = posiciones_caballo.cabeza_positivo;
+            } else {
+                sumador = posiciones_caballo.cabeza_negativo;
+            }
+
+            switch (indicador) {
+                case 0: // ARRIBA
+                    new_posY = localizacion.posY + posiciones_caballo.cuerpo_positivo;
+                    new_posX = localizacion.posX + sumador;
+                    break;
+                case 1: // ABAJO
+                    new_posY = localizacion.posY + posiciones_caballo.cuerpo_negativo;
+                    new_posX = localizacion.posX + sumador;
+                    break;
+                case 2: // DERECHA
+                    new_posY = localizacion.posY + sumador;
+                    new_posX = localizacion.posX + posiciones_caballo.cuerpo_positivo;
+                    break;
+                case 3: // IZQUIERDA
+                    new_posY = localizacion.posY + sumador;
+                    new_posX = localizacion.posX + posiciones_caballo.cuerpo_negativo;
+                    break;
+            }
+
+            let vector = ubicacion_plano(new_posY, new_posX);
             if (vector !== false) {
                 let cuadro = document.getElementById(`cuadro[${vector.target_posY},${vector.target_posX}]`);
-                vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
+                casillas_obtenidas.push([flujo, cuadro]);
             }
         }
     }
