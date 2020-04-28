@@ -470,6 +470,8 @@ function detectar_jaque(pieza_en_movimiento, casilla_destino, flujo_jaque) {
 
 function validar_interaccion_pieza_defensora(casilla_destino) {
 
+    let pieza_bloqueadora_a = false;
+    let pieza_bloqueadora_b = false;
     let contenedor = [];
     let pieza_target = crear_coordenadas_casilla(casilla_destino);
     let pieza_destino_comer = obtener_hijo_detalles_ID(casilla_destino);
@@ -484,6 +486,8 @@ function validar_interaccion_pieza_defensora(casilla_destino) {
 
     let destino_posibles = ["VERTICAL", "HORIZONTAL", "BARRA-NORMAL", "BARRA-INVERTIDA"];
     for (let index = 0; index < destino_posibles.length; index++) {
+        pieza_bloqueadora_a = false;
+        pieza_bloqueadora_b = false;
         for (let contador_interno = 1; contador_interno <= 8; contador_interno++) {
 
             // DEFINIR VARIABLE
@@ -535,23 +539,29 @@ function validar_interaccion_pieza_defensora(casilla_destino) {
                 linea_seguir.posicion_negativo.posY < 9 &&
                 linea_seguir.posicion_negativo.posX > 0 &&
                 linea_seguir.posicion_negativo.posX < 9) {
-
-                let destino = document.getElementById(`cuadro[${linea_seguir.posicion_negativo.posY},${linea_seguir.posicion_negativo.posX}]`);
-                let formato = { destinos_indicador: destinos_indicador, casilla: destino };
-                contenedor.push(formato);
+                if (pieza_bloqueadora_a === false) {
+                    let destino = document.getElementById(`cuadro[${linea_seguir.posicion_negativo.posY},${linea_seguir.posicion_negativo.posX}]`);
+                    let formato = { destinos_indicador: destinos_indicador, casilla: destino };
+                    contenedor.push(formato);
+                    if (detectar_hijo_casilla(destino) === true) {
+                        pieza_bloqueadora_a = true;
+                    };
+                }
             }
 
             if (linea_seguir.posicion_positivo.posY > 0 &&
                 linea_seguir.posicion_positivo.posY < 9 &&
                 linea_seguir.posicion_positivo.posX > 0 &&
                 linea_seguir.posicion_positivo.posX < 9) {
-
-                let destino = document.getElementById(`cuadro[${linea_seguir.posicion_positivo.posY},${linea_seguir.posicion_positivo.posX}]`);
-                let formato = { destinos_indicador: destinos_indicador, casilla: destino };
-                contenedor.push(formato);
-
+                if (pieza_bloqueadora_b === false) {
+                    let destino = document.getElementById(`cuadro[${linea_seguir.posicion_positivo.posY},${linea_seguir.posicion_positivo.posX}]`);
+                    let formato = { destinos_indicador: destinos_indicador, casilla: destino };
+                    contenedor.push(formato);
+                    if (detectar_hijo_casilla(destino) === true) {
+                        pieza_bloqueadora_b = true;
+                    };
+                }
             }
-
         }
     }
 
@@ -566,6 +576,8 @@ function validar_interaccion_pieza_defensora(casilla_destino) {
 }
 
 function proteger_rey(contenedor) {
+
+    console.log(contenedor);
 
     let validacion = false;
     let vl_monarca = false;
