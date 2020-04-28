@@ -18,6 +18,7 @@ var jaque_mate         = false;
 var jaque              = false;
 var enroque_blanco     = [ true, true ];
 var enroque_negro      = [ true, true ];
+var pos_pieza_jaque    = { posY: 0, posX: 0 };
 var pos_jaque_rey      = { posY: 0, posX: 0 };
 var peon_al_paso       = { posX: 0, posY: 0, estatus: false, by: "" };
 

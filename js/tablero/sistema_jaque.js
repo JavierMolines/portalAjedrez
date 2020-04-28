@@ -415,7 +415,7 @@ function comprobar_jaque(pieza) {
     // SE REALIZO UN JAQUE
     if (rey_en_jaque === true) {
 
-        pieza_del_jaque = obtener_ID_pieza(pieza);
+        pos_pieza_jaque = obtener_posicion_pieza_objeto(pieza);
         pos_jaque_rey = crear_coordenadas_casilla(casilla_jaque);
         let mensaje_jaque = `${tipo_pieza[0].toUpperCase()} de color ${tipo_pieza[1]} le dio jaque al ${coincidencia_detectada[0]} ${coincidencia_detectada[1]}`;
         let color_respaldo = casilla_jaque.style.backgroundColor;
@@ -451,7 +451,7 @@ function detectar_jaque(pieza_en_movimiento, casilla_destino, flujo_jaque) {
         } else {
 
             // VALIDAR PROTECCION DEL REY
-            validacion = comprobar_casillas_adyacentes_jaque(casillas_obtenidas);
+            validacion = validar_interaccion_pieza_defensora(casilla_destino);
 
         }
 
@@ -468,45 +468,140 @@ function detectar_jaque(pieza_en_movimiento, casilla_destino, flujo_jaque) {
 
 }
 
-function comprobar_casillas_adyacentes_jaque(casillas_obtenidas) {
+function validar_interaccion_pieza_defensora(casilla_destino) {
 
+    let contenedor = [];
+    let pieza_target = crear_coordenadas_casilla(casilla_destino);
+    let pieza_destino_comer = obtener_hijo_detalles_ID(casilla_destino);
     let validation = true;
-    let monarca = {
-        detectado: false,
-        coordenadas: {},
-        flujo: ""
-    };
 
-    for (let contador = 0; contador < casillas_obtenidas.length; contador++) {
+    // PERMITIR COMER SI LA PIEZA A CAPTURAR ES LA DEL JAQUE
+    if (pieza_destino_comer !== false &&
+        pos_pieza_jaque.posY === pieza_destino_comer.coordenadas.posY &&
+        pos_pieza_jaque.posX === pieza_destino_comer.coordenadas.posX) {
+        return false;
+    }
 
-        let info = casillas_obtenidas[contador];
-        let flujo = info[0];
-        let target = info[1];
+    let destino_posibles = ["VERTICAL", "HORIZONTAL", "BARRA-NORMAL", "BARRA-INVERTIDA"];
+    for (let index = 0; index < destino_posibles.length; index++) {
+        for (let contador_interno = 1; contador_interno <= 8; contador_interno++) {
 
-        if (target.childNodes.length > 0) {
-
-            let pieza = obtener_hijo_detalles_ID(target);
-            pieza.movimiento = flujo;
-            if(pieza.tipo === "rey" && pieza.color === movimiento_actual){
-                monarca.detectado = true;
-                monarca.coordenadas = pieza.coordenadas;
-                monarca.flujo = flujo;
-                casillas_obtenidas.splice(contador, 1);
-                contador = 0;
-            }
-
-            if(monarca.detectado === true && monarca.flujo === pieza.movimiento){
-
-                if(validar_posiciones_jaque_indirecto_continuo_distante(monarca, pieza) === true){
-                    validation = false;
+            // DEFINIR VARIABLE
+            let linea_seguir = {
+                posicion_positivo: {
+                    posX: 0,
+                    posY: 0
+                },
+                posicion_negativo: {
+                    posX: 0,
+                    posY: 0
                 }
-    
+            };
+
+            // INDICADOR DE FLUJO A SEGUIR, PUEDE SER ALFIL O TORRE
+            let destinos_indicador = destino_posibles[index];
+            switch (destinos_indicador) {
+                case destino_posibles[0]:
+                    // FLUJO 1
+                    linea_seguir.posicion_positivo.posX = pieza_target.posX;
+                    linea_seguir.posicion_positivo.posY = pieza_target.posY + contador_interno;
+                    linea_seguir.posicion_negativo.posX = pieza_target.posX;
+                    linea_seguir.posicion_negativo.posY = pieza_target.posY - contador_interno;
+                    break;
+                case destino_posibles[1]:
+                    // FLUJO 2
+                    linea_seguir.posicion_positivo.posX = pieza_target.posX + contador_interno;
+                    linea_seguir.posicion_positivo.posY = pieza_target.posY;
+                    linea_seguir.posicion_negativo.posX = pieza_target.posX - contador_interno;
+                    linea_seguir.posicion_negativo.posY = pieza_target.posY;
+                    break;
+                case destino_posibles[2]:
+                    // FLUJO 3
+                    linea_seguir.posicion_positivo.posX = pieza_target.posX + contador_interno;
+                    linea_seguir.posicion_positivo.posY = pieza_target.posY + contador_interno;
+                    linea_seguir.posicion_negativo.posX = pieza_target.posX - contador_interno;
+                    linea_seguir.posicion_negativo.posY = pieza_target.posY - contador_interno;
+                    break;
+                case destino_posibles[3]:
+                    // FLUJO 4
+                    linea_seguir.posicion_positivo.posX = pieza_target.posX - contador_interno;
+                    linea_seguir.posicion_positivo.posY = pieza_target.posY + contador_interno;
+                    linea_seguir.posicion_negativo.posX = pieza_target.posX + contador_interno;
+                    linea_seguir.posicion_negativo.posY = pieza_target.posY - contador_interno;
+                    break;
             }
+
+            if (linea_seguir.posicion_negativo.posY > 0 &&
+                linea_seguir.posicion_negativo.posY < 9 &&
+                linea_seguir.posicion_negativo.posX > 0 &&
+                linea_seguir.posicion_negativo.posX < 9) {
+
+                let destino = document.getElementById(`cuadro[${linea_seguir.posicion_negativo.posY},${linea_seguir.posicion_negativo.posX}]`);
+                let formato = { destinos_indicador: destinos_indicador, casilla: destino };
+                contenedor.push(formato);
+            }
+
+            if (linea_seguir.posicion_positivo.posY > 0 &&
+                linea_seguir.posicion_positivo.posY < 9 &&
+                linea_seguir.posicion_positivo.posX > 0 &&
+                linea_seguir.posicion_positivo.posX < 9) {
+
+                let destino = document.getElementById(`cuadro[${linea_seguir.posicion_positivo.posY},${linea_seguir.posicion_positivo.posX}]`);
+                let formato = { destinos_indicador: destinos_indicador, casilla: destino };
+                contenedor.push(formato);
+
+            }
+
+        }
+    }
+
+    if(contenedor.length > 0){
+        if(proteger_rey(contenedor) === true){
+            validation = false;
+        }
+    }
+
+    return validation;
+
+}
+
+function proteger_rey(contenedor) {
+
+    let validacion = false;
+    let vl_monarca = false;
+    let vl_atancate = false;
+    let flujo_monarca = "";
+    let flujo_atacante = "";
+
+    for (let contador = 0; contador < contenedor.length; contador++) {
+
+        let informacion = contenedor[contador];
+        let pieza_detectada = obtener_hijo_detalles_ID(informacion.casilla);
+
+        if (pieza_detectada !== false) {
+
+            if (pieza_detectada.coordenadas.posX === pos_jaque_rey.posX &&
+                pieza_detectada.coordenadas.posY === pos_jaque_rey.posY) {
+                vl_monarca = true;
+                flujo_monarca = informacion.destinos_indicador;
+            }
+
+            if (pieza_detectada.coordenadas.posX === pos_pieza_jaque.posX &&
+                pieza_detectada.coordenadas.posY === pos_pieza_jaque.posY) {
+                vl_atancate = true;
+                flujo_atacante = informacion.destinos_indicador;
+
+            }
+
         }
 
     }
 
-    return validation;
+    if (vl_atancate === true && vl_monarca === true && flujo_monarca === flujo_atacante) {
+        validacion = true;
+    }
+
+    return validacion;
 
 }
 
@@ -639,7 +734,7 @@ function validar_posiciones_jaque_indirecto_continuo_distante(monarca, enemigo) 
     }
 
     return validacion;
-    
+
 }
 
 function saber_si_es_valido_moverse(propiedades_validadas, propiedades_nuevas, pieza_detectada) {
@@ -655,7 +750,7 @@ function saber_si_es_valido_moverse(propiedades_validadas, propiedades_nuevas, p
             // SI SE MUEVE COMIENDO UNA PIEZA
             if (pieza_detectada !== false) {
                 if (informacion.coordenadas.posX === pieza_detectada.coordenadas.posX &&
-                    informacion.coordenadas.posY === pieza_detectada.coordenadas.posY ) {
+                    informacion.coordenadas.posY === pieza_detectada.coordenadas.posY) {
                     validacion = false;
                     break;
                 } else {
@@ -753,14 +848,14 @@ function rey_saque(pieza_en_movimiento, casilla) {
 
     for (let contador = 0; contador < casillas_validadas.array_coincidencias.length; contador++) {
         let propiedades = casillas_validadas.array_coincidencias[contador];
-        if(propiedades.movimiento === propiedades.detalles.tipo && obtener_rey.color !== propiedades.detalles.color){
+        if (propiedades.movimiento === propiedades.detalles.tipo && obtener_rey.color !== propiedades.detalles.color) {
             validacion = true;
             break;
         }
     }
 
     return validacion;
-    
+
 }
 
 function vl_casillas_entorno(casilla_destino, local_pieza) {
@@ -809,7 +904,7 @@ function vl_casillas_entorno(casilla_destino, local_pieza) {
                 let vl = vl_pieza_interna(cuadro, flujo, casillas_obtenidas);
                 if (vl === true) {
                     break;
-                }  
+                }
             }
         }
     }
@@ -921,16 +1016,16 @@ function comprobar_saltos_nueva_pieza(casilla, local_pieza) {
 
     let validacion = false;
 
-    if(typeof(local_pieza) !== "string"){
+    if (typeof (local_pieza) !== "string") {
 
         let pieza_validar = obtener_hijo_detalles_ID(casilla);
-    
+
         if (pieza_validar.tipo === local_pieza.tipo &&
             pieza_validar.color === local_pieza.color &&
             pieza_validar.identificador === local_pieza.identificador) {
-    
+
             validacion = true;
-    
+
         }
 
     }

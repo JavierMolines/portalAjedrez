@@ -91,7 +91,7 @@ function obtener_ID_pieza(pieza) {
 
         tipo: separacion[0],
         color: separacion[1],
-        identificador: separacion[2]
+        identificador: separacion[2],
 
     };
     return propiedades;
@@ -147,17 +147,28 @@ function capturar_casilla_padre(hijo) {
 
 function obtener_hijo_detalles_ID(casilla) {
 
+    let informacion = false;
     if (casilla.childNodes.length > 0) {
 
         let hijo = casilla.childNodes[0];
         let detalles_ID = obtener_ID_pieza(hijo);
         detalles_ID.coordenadas = crear_coordenadas_casilla(casilla);
-        return detalles_ID;
+        informacion = detalles_ID;
 
     }
 
-    return false;
+    return informacion;
 
+}
+
+function detectar_hijo_casilla(casilla) {
+
+    let validacion = false;
+    if(casilla.childNodes.length > 0){
+        validacion = true;
+    }
+    return validacion;
+    
 }
 
 function coordenadas_cartesianas(nuevo_posY, nuevo_posX, casos) {
