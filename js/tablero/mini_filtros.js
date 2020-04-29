@@ -256,6 +256,18 @@ function desactivar_doble_paso() {
 
 }
 
+function crear_pieza(coordenadas) {
+
+    if(coordenadas.posX === 0 || coordenadas.posY === 0){
+        return false;
+    }
+
+    let casilla = document.getElementById(`cuadro[${coordenadas.posY},${coordenadas.posX}]`);
+    let nueva_pieza = obtener_hijo_detalles_ID(casilla);
+    return nueva_pieza;
+    
+}
+
 function comprobar_peon_al_paso(destino, indicador) {
 
     let validacion = false;

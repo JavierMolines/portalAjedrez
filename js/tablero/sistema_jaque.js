@@ -577,8 +577,6 @@ function validar_interaccion_pieza_defensora(casilla_destino) {
 
 function proteger_rey(contenedor) {
 
-    console.log(contenedor);
-
     let validacion = false;
     let vl_monarca = false;
     let vl_atancate = false;
