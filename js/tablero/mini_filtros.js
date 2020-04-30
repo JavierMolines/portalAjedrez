@@ -9,21 +9,21 @@ function mostrar_premovimiento(posiA, posiB) {
     let pre_movimiento_puntero = document.createElement("p");
     let parametros_enviar = {
         propiedad_pantalla: screen.width,
-        propiedad_mayor_que: "50% - 140%",
-        propiedad_menor_que: "50% - 85%",
+        propiedad_mayor_que: "25% - 105%",  //CASILLA OCUPADA
+        propiedad_menor_que: "25% - 50%",   //CASILLA VACIA
     };
 
     // TELEFONOS PEQUEÑOS
     if (parametros_enviar.propiedad_pantalla < 330) {
 
-        parametros_enviar.propiedad_mayor_que = "50% - 135%";
-        parametros_enviar.propiedad_menor_que = "50% - 85%";
+        parametros_enviar.propiedad_mayor_que = "25% - 110%";
+        parametros_enviar.propiedad_menor_que = "25% - 65%";
 
-        // TELEFONOS NORMAL
+    // TELEFONOS NORMAL
     } else if (parametros_enviar.propiedad_pantalla < 450) {
 
-        parametros_enviar.propiedad_mayor_que = "50% - 130%";
-        parametros_enviar.propiedad_menor_que = "50% - 70%";
+        parametros_enviar.propiedad_mayor_que = "25% - 115%";
+        parametros_enviar.propiedad_menor_que = "25% - 70%";
 
     }
 
@@ -265,6 +265,14 @@ function crear_pieza(coordenadas) {
     let casilla = document.getElementById(`cuadro[${coordenadas.posY},${coordenadas.posX}]`);
     let nueva_pieza = obtener_hijo_detalles_ID(casilla);
     return nueva_pieza;
+    
+}
+
+function crear_pieza_hibrida(local_pieza) {
+
+    let pieza = document.getElementById(`${local_pieza.tipo}_${local_pieza.color}_${local_pieza.identificador}`);
+    let casilla = obtener_posicion_pieza_objeto(pieza);
+    return casilla;
     
 }
 
