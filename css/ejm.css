@@ -45,7 +45,7 @@
 	position: fixed;
 	font-size: 50px;
 	cursor: pointer;
-	background-color: green;
+	background-color: rgb(0, 153, 51);
 	border-radius: 50px;
 
 }
@@ -76,7 +76,7 @@
 .pica {
 	text-align: center;
 	font-size: 60px;
-	color: rgb(1, 255, 1);
+	color: rgb(0, 153, 51);
 }
 
 .pica2 {

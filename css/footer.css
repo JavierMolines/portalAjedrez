@@ -10,6 +10,7 @@
 
 #footer h3 {
 
+	color: rgb(51, 51, 51);
 	font-size: 25px;
 	line-height: 3;
 	grid-column: 2 / 4;
@@ -45,14 +46,14 @@
 
 	margin-right: 5%;
 	font-size: 25px;
-	color: black;
+	color: rgb(51, 51, 51);
 
 }
 
 .copyright {
 
 	text-align: center;
-	color: rgb(1, 255, 1);
+	color: rgb(0, 153, 0);
 	background-color: rgb(41, 41, 61); /* For browsers that do not support gradients */
     background-image: linear-gradient(rgb(41, 41, 61), rgb(26, 26, 26)); /* Standard syntax (must be last) */
 	grid-column: 1 / 7;
@@ -64,36 +65,44 @@
 /* TELEFONOS */
 @media screen and (max-width: 600px){
 
+	#footer {
+
+		grid-template-columns: repeat(10, 10%);
+
+	}
+
 	#footer h3 {
 
 		margin-top: 0%;
-		grid-column: 1 / 7;
+		grid-column: 2 / 10;
 		margin-bottom: 0%;
-	
+		font-size: 18px;
+
 	}
 	
 	.findMe {
 	
-		grid-column: 2 / 6;
+		grid-column: 2 / 10;
+		grid-template-columns: auto auto auto;
 		margin-bottom: 6%;
 	
 	}
 
-	.findMe div {
+	.findMe a {
 
 		font-size: 12px;
-	
-	}
-	
-	.findMe div i {
-	
-		font-size: 17px;
-	
-	}
-	
 
+	}
+	
+	.findMe a i {
+	
+		font-size: 13px;
+	
+	}
+	
 	.copyright {
 
+		grid-column: 1 / 11;
 		font-size: 9px;
 
 	}

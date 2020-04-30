@@ -3,7 +3,7 @@
 	text-align: center;
 	width: 100%;
 	float: left;
-	color: rgb(1, 255, 1);
+	color: rgb(0, 153, 51);
 }
 
 .s50 {
@@ -55,8 +55,8 @@
 	text-align: center;
 	width: 94%;
 	padding: 3%;
-	background-color: black;
-	color: rgb(1, 255, 1);
+	background-color: rgb(38, 38, 38);
+	color: rgb(0, 153, 51);
 	float: left;
 }
 
@@ -89,7 +89,7 @@
 	font-size: 2vw;
 	padding: 2%;
 	color: rgb(1, 255, 74);
-	background-color: black;
+	background-color: rgb(38, 38, 38);
 	-webkit-animation-name: example; /* Safari 4.0 - 8.0 */
     -webkit-animation-duration: 10s; /* Safari 4.0 - 8.0 */
     -webkit-animation-iteration-count: infinite;
@@ -99,34 +99,34 @@
 }
 
 @-webkit-keyframes poncho {
-    0%   {background-color: black;}
+    0%   {background-color: rgb(38, 38, 38);}
     25%  {background-color: orange;}
-    50%  {background-color: black;}
+    50%  {background-color: rgb(38, 38, 38);}
     75%  {background-color: blue;}
-    100% {background-color: black;}
+    100% {background-color: rgb(38, 38, 38);}
 }
 
 @keyframes poncho {
-    0%   {background-color: black;}
+    0%   {background-color: rgb(38, 38, 38);}
     25%  {background-color: orange;}
-    50%  {background-color: black;}
+    50%  {background-color: rgb(38, 38, 38);}
     75%  {background-color: blue;}
-    100% {background-color: black;}
+    100% {background-color: rgb(38, 38, 38);}
 }
 
 .asdasdsdsds {
 	background-color: white;
-	color: black;
+	color: rgb(38, 38, 38);
 }
 
 .asdasdasdasd {
 	background-color: white;
-	color: black;
+	color: rgb(38, 38, 38);
 }
 
 .tabcontent {
 	text-align: center;
-	color: black;
+	color: rgb(38, 38, 38);
 	font-size: 2.3vw;
 	padding: 1%;
 	margin: 1%;
@@ -137,7 +137,7 @@
 }
 
 th {
-	color: rgb(1, 255, 1); 
+	color: rgb(0, 153, 51); 
 }
 
 table {

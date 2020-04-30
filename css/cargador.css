@@ -35,7 +35,7 @@ body {
 	padding-left: 4%;
 	padding-right: 4%;
 	font-size: 7.8vw;
-	color: rgb(1, 255, 1);
+	color: rgb(0, 153, 51);
 	background-color: rgb(0, 0, 0, 0.7);
 }
 
@@ -46,7 +46,7 @@ body {
 	padding-left: 5%;
 	padding-right: 4%;
 	font-size: 45px;
-	color: rgb(1, 255, 1);
+	color: rgb(0, 153, 51);
 	background-color: rgb(0, 0, 0, 0.7);
 }
 
@@ -60,7 +60,7 @@ body {
 
 .barra {
 	float: left;
-	color: black;
+	color: rgb(38, 38, 38);
 	width: 96%;
 	padding-left: 3%;
 	padding-top: 1%; 
@@ -83,8 +83,9 @@ body {
 }
 
 .subtitu {
+	text-align: center;
 	font-size: 55px;
-	color: rgb(1, 255, 1);
+	color: rgb(0, 153, 51);
 }
 
 .texto {
@@ -95,7 +96,7 @@ body {
 
 .adaptacion {
 	margin: 1%;
-	border: 3px inset green;
+	border: 3px inset rgb(0, 153, 51);
 	border-radius: 40px;
 	float: right;
 	width: 50%;
@@ -160,7 +161,7 @@ body {
 
 .contenedor_principal_detalle_pieza > span {
 
-	color: rgb(1, 255, 1);
+	color: rgb(0, 153, 51);
 	font-size: 30px;
 	width: 5%;
 	position: absolute;
@@ -184,7 +185,7 @@ body {
 
 .contenedor_principal_detalle_pieza > h2 {
 
-	color: rgb(1, 255, 1);
+	color: rgb(0, 153, 51);
 	text-align: center;
 	font-size: 60px;
 

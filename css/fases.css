@@ -6,7 +6,7 @@
 	border-radius: 30px;
 	background-color: rgb(255, 255, 255, 0.7);
 	border: 2px outset white;
-	color: black;
+	color: rgb(38, 38, 38);
 	float: left;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .titulitos {
-	color: black;
+	color: rgb(38, 38, 38);
 	font-size: 30px;
 	text-align: center;
 }
@@ -59,7 +59,7 @@
 	margin-top: 5%;
 	float: left;
 	text-align: center;
-	color: rgb(1, 255, 1); 
+	color: rgb(0, 153, 51); 
 }
 
 .inicio p {
@@ -86,7 +86,7 @@
 	font-size: 60px;
 	padding: 2%;
 	text-align: center;
-	color: rgb(1, 255, 1); 
+	color: rgb(0, 153, 51); 
 }
 
 .sepasepasepa {
@@ -149,7 +149,7 @@ p {
 
 .centrado {
 	text-align: center;
-	color: rgb(1, 255, 1); 
+	color: rgb(0, 153, 51); 
 	font-size: 40px;
 }
 
