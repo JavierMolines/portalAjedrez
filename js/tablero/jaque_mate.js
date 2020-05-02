@@ -7,7 +7,7 @@ function detectar_jaque_mate(casilla) {
         let vl_bloqueo_distancia = validacion_movimiento_distancia();
 
         if (vl_pieza_monarca === true && vl_pieza_enemiga === true && vl_bloqueo_distancia === true) {
-            console.log("GAME OVER");
+            crear_ventana_ganador();
             movimiento_actual = "gameover";
         }
 
@@ -364,4 +364,60 @@ function validar_peon_bloqueador_detectado(pieza, coordenadas_destino) {
     }
 
     return validacion;
+}
+
+function crear_ventana_ganador() {
+
+    let ganador = "";
+    let contenedor_fondo = document.createElement("div");
+    let contenedor = document.createElement("div");
+    let titulo = document.createElement("h1");
+    let imagen_victoria = document.createElement("img");
+    let contenedor_botones = document.createElement("div");
+    let boton_reiniciar = document.createElement("button");
+    let boton_cerrar = document.createElement("button");
+
+    contenedor_fondo.classList.add("contenedor_principal_detalle_pieza");
+    contenedor_fondo.classList.add("contenedor_detalles_no_desplegados");
+    contenedor.classList.add("informacion_mate");
+
+    if(movimiento_actual === ggValidaciones[0]){
+        ganador = ggValidaciones[1];
+        imagen_victoria.src = "../../imagenes/rey_ganador_blanco.png";
+    } else {
+        ganador = ggValidaciones[0];
+        imagen_victoria.src = "../../imagenes/rey_ganador_negro.png";
+    }
+
+    titulo.innerHTML = `EL GANADOR CON JAQUE MATE SON LAS ${ganador.toUpperCase()}`;
+    boton_cerrar.innerHTML = "CERRAR";
+    boton_reiniciar.innerHTML = "REINICIAR";
+
+    boton_reiniciar.addEventListener("click", ()=>{
+        reiniciar_partida();
+        borrar_modal(contenedor_fondo);
+    });
+    boton_cerrar.addEventListener("click", ()=>{
+        borrar_modal(contenedor_fondo);
+    });
+
+    // AGREGAR A LA PANTALLA
+    contenedor.appendChild(titulo);
+    contenedor.appendChild(imagen_victoria);
+    contenedor_botones.appendChild(boton_reiniciar);
+    contenedor_botones.appendChild(boton_cerrar);
+    contenedor.appendChild(contenedor_botones);
+    contenedor_fondo.appendChild(contenedor);
+    document.body.appendChild(contenedor_fondo);
+
+    setTimeout(()=> {
+        contenedor_fondo.classList.replace("contenedor_detalles_no_desplegados", "contenedor_detalles_desplegados");
+    }, 200);
+}
+
+function borrar_modal(contenedor_fondo) {
+    contenedor_fondo.classList.replace("contenedor_detalles_desplegados", "contenedor_detalles_no_desplegados");
+    setTimeout(() => {
+        contenedor_fondo.remove();
+    }, 2000);
 }

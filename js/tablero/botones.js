@@ -15,23 +15,7 @@ function crear_botones() {
             botones.classList.add("botones_tablero");
             botones.addEventListener("click", () => {
 
-                let piezas = document.querySelectorAll("div > i");
-                for (let contador = 0; contador < piezas.length; contador++) {
-                    piezas[contador].parentNode.removeChild(piezas[contador]);
-                }
-
-                // -- INICIO REINICIAR VARIABLES GLOBALES
-
-                jaque_mate = false;
-                jaque = false;
-                enroque_blanco = [true, true];
-                enroque_negro = [true, true];
-                movimiento_actual = colores[1];
-
-                // -- FINAL REINICIAR VARIABLES GLOBALES
-
-                borrar_premovimiento();
-                crear_piezas();
+                reiniciar_partida();
 
             });
 
@@ -79,5 +63,27 @@ function crear_botones() {
         contenedor.appendChild(botones);
 
     }
+
+}
+
+function reiniciar_partida() {
+
+    let piezas = document.querySelectorAll("div > i");
+    for (let contador = 0; contador < piezas.length; contador++) {
+        piezas[contador].parentNode.removeChild(piezas[contador]);
+    }
+
+    // -- INICIO REINICIAR VARIABLES GLOBALES
+
+    jaque_mate = false;
+    jaque = false;
+    enroque_blanco = [true, true];
+    enroque_negro = [true, true];
+    movimiento_actual = colores[1];
+
+    // -- FINAL REINICIAR VARIABLES GLOBALES
+
+    borrar_premovimiento();
+    crear_piezas();
 
 }
