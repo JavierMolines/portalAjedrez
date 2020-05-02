@@ -383,10 +383,10 @@ function crear_ventana_ganador() {
 
     if(movimiento_actual === ggValidaciones[0]){
         ganador = ggValidaciones[1];
-        imagen_victoria.src = "../../imagenes/rey_ganador_blanco.png";
+        imagen_victoria.src = "../imagenes/rey_ganador_blanco.png";
     } else {
         ganador = ggValidaciones[0];
-        imagen_victoria.src = "../../imagenes/rey_ganador_negro.png";
+        imagen_victoria.src = "../imagenes/rey_ganador_negro.png";
     }
 
     titulo.innerHTML = `EL GANADOR CON JAQUE MATE SON LAS ${ganador.toUpperCase()}`;
