@@ -2,18 +2,13 @@ function detectar_jaque_mate(casilla) {
 
     if (jaque === true) {
 
-        let movimientos_del_rey = false;
-        let acciones_disponibles = false;
         let vl_pieza_monarca = capturar_casillas_posibles_rey();
         let vl_pieza_enemiga = debilidades_pieza_atacante(casilla);
         let vl_bloqueo_distancia = validacion_movimiento_distancia();
 
-        console.log(vl_pieza_monarca);
-        console.log(vl_pieza_enemiga);
-
-        if (movimientos_del_rey === vl_pieza_monarca && acciones_disponibles === vl_pieza_enemiga) {
-            //console.log("GAME OVER");
-            //movimiento_actual = "gameover";
+        if (vl_pieza_monarca === true && vl_pieza_enemiga === true && vl_bloqueo_distancia === true) {
+            console.log("GAME OVER");
+            movimiento_actual = "gameover";
         }
 
     }
@@ -171,5 +166,202 @@ function debilidades_pieza_atacante(casilla) {
 }
 
 function validacion_movimiento_distancia() {
-    
+
+    let validacion = false;
+    let objeto_monarca = crear_pieza(pos_jaque_rey);
+    let objeto_atacante = crear_pieza(pos_pieza_jaque);
+    let direccion_validacion = "";
+
+    if(objeto_atacante.tipo === "caballo"){
+
+        validacion = true;
+
+    } else if (objeto_monarca.coordenadas.posY === objeto_atacante.coordenadas.posY) {
+        if(objeto_atacante.coordenadas.posX > objeto_monarca.coordenadas.posX){
+            direccion_validacion = "IZQUIERDA";
+        } else {
+            direccion_validacion = "DERECHA";
+        }
+    } else if(objeto_monarca.coordenadas.posX === objeto_atacante.coordenadas.posX) {
+        if(objeto_atacante.coordenadas.posY > objeto_monarca.coordenadas.posY){
+            direccion_validacion = "ABAJO";
+        } else {
+            direccion_validacion = "ARRIBA";
+        }
+    } else {
+        if(objeto_atacante.coordenadas.posY > objeto_monarca.coordenadas.posY && objeto_atacante.coordenadas.posX < objeto_monarca.coordenadas.posX){
+            direccion_validacion = "IV";
+        }
+        if(objeto_atacante.coordenadas.posY > objeto_monarca.coordenadas.posY && objeto_atacante.coordenadas.posX > objeto_monarca.coordenadas.posX){
+            direccion_validacion = "III";
+        }
+        if(objeto_atacante.coordenadas.posY < objeto_monarca.coordenadas.posY && objeto_atacante.coordenadas.posX > objeto_monarca.coordenadas.posX){
+            direccion_validacion = "II";
+        }
+        if(objeto_atacante.coordenadas.posY < objeto_monarca.coordenadas.posY && objeto_atacante.coordenadas.posX < objeto_monarca.coordenadas.posX){
+            direccion_validacion = "I";
+        }
+    }
+
+    if (validacion === false) {
+        validacion = validar_resta_movimientos_resultados(direccion_validacion, objeto_monarca, objeto_atacante);    
+    }
+
+    return validacion;
+}
+
+function validar_resta_movimientos_resultados(direccion, monarca, atacante) {
+
+    let validacion = true;
+    let casillas_distantes = 0;
+    let bishop_coor = { coor_Y: 0, coor_X: 0};
+
+    switch (direccion) {
+        case "ARRIBA":
+            casillas_distantes = monarca.coordenadas.posY - atacante.coordenadas.posY;
+            casillas_distantes--;
+            break;
+        case "ABAJO":
+            casillas_distantes = atacante.coordenadas.posY - monarca.coordenadas.posY;
+            casillas_distantes--;
+            break;
+        case "IZQUIERDA":
+            casillas_distantes = atacante.coordenadas.posX - monarca.coordenadas.posX;
+            casillas_distantes--;
+            break;
+        case "DERECHA":
+            casillas_distantes = monarca.coordenadas.posX - atacante.coordenadas.posX;
+            casillas_distantes--;
+            break;
+        case "I":
+            bishop_coor = {
+                coor_Y: monarca.coordenadas.posY - atacante.coordenadas.posY,
+                coor_X: monarca.coordenadas.posX - atacante.coordenadas.posX
+            };
+            break;
+        case "II":
+            bishop_coor = {
+                coor_Y: monarca.coordenadas.posY - atacante.coordenadas.posY,
+                coor_X: atacante.coordenadas.posX - monarca.coordenadas.posX
+            };
+            break;
+        case "III":
+            bishop_coor = {
+                coor_Y: atacante.coordenadas.posY - monarca.coordenadas.posY,
+                coor_X: atacante.coordenadas.posX - monarca.coordenadas.posX
+            };
+            break;
+        case "IV":
+            bishop_coor = {
+                coor_Y: atacante.coordenadas.posY - monarca.coordenadas.posY,
+                coor_X: monarca.coordenadas.posX - atacante.coordenadas.posX
+            };
+            break;
+    }
+
+    if (bishop_coor.coor_Y !== 0 && bishop_coor.coor_X !== 0) {
+        if (bishop_coor.coor_Y === bishop_coor.coor_X) {
+            casillas_distantes = bishop_coor.coor_Y -= 1;  
+        }
+    }
+
+    for (let contador = 1; contador <= casillas_distantes; contador++) {
+
+        let destino_final = {};
+        let sumador_Y = contador;
+        let sumador_X = contador;
+
+        if (direccion === "ABAJO") {
+            sumador_Y *= -1;
+        }
+
+        if (direccion === "IZQUIERDA") {
+            sumador_X *= -1;
+        }
+
+        if (direccion === "ARRIBA" || direccion === "ABAJO") {
+            destino_final = {
+                posY: atacante.coordenadas.posY + sumador_Y,
+                posX: atacante.coordenadas.posX,
+            };
+        } else if(direccion === "DERECHA" || direccion === "IZQUIERDA"){
+            destino_final = {
+                posY: atacante.coordenadas.posY,
+                posX: atacante.coordenadas.posX + sumador_X,
+            };
+        } else if(direccion === "I"){
+            destino_final = {
+                posY: atacante.coordenadas.posY + sumador_Y,
+                posX: atacante.coordenadas.posX + sumador_X,
+            };
+        } else if(direccion === "II"){
+            destino_final = {
+                posY: atacante.coordenadas.posY + sumador_Y,
+                posX: atacante.coordenadas.posX - sumador_X,
+            };
+        } else if(direccion === "III"){
+            destino_final = {
+                posY: atacante.coordenadas.posY - sumador_Y,
+                posX: atacante.coordenadas.posX - sumador_X,
+            };
+        } else if(direccion === "IV"){
+            destino_final = {
+                posY: atacante.coordenadas.posY - sumador_Y,
+                posX: atacante.coordenadas.posX + sumador_X,
+            };
+        }
+
+        let casilla_nueva_detectar = document.getElementById(`cuadro[${destino_final.posY},${destino_final.posX}]`);
+        let casillas_obtenidas = vl_casillas_entorno(casilla_nueva_detectar, "normal");
+        
+        for (let detector = 0; detector < casillas_obtenidas.length; detector++) {
+            let informacion = casillas_obtenidas[detector];
+            if (informacion[1].childNodes.length > 0) {
+                let pieza = obtener_hijo_detalles_ID(informacion[1]);
+                if (pieza.color === movimiento_actual) {
+
+                    if (pieza.tipo === "peon" && informacion[0] === "torre" && validar_peon_bloqueador_detectado(pieza, destino_final) === true ||
+                        pieza.tipo === "bishop" && informacion[0] === "bishop" ||
+                        pieza.tipo === "reina" && informacion[0] === "bishop" ||
+                        pieza.tipo === "reina" && informacion[0] === "torre" ||
+                        pieza.tipo === "torre" && informacion[0] === "torre" ||
+                        pieza.tipo === "caballo" && informacion[0] === "caballo") {
+                        validacion = false;
+                        break;
+                    }
+
+                }
+            }
+        }
+    }
+
+    return validacion;
+}
+
+function validar_peon_bloqueador_detectado(pieza, coordenadas_destino) {
+
+    let validacion = false;
+    let respaldar_coor_Y = pieza.coordenadas.posY;
+
+    if (pieza.color === ggValidaciones[0]) {
+        pieza.coordenadas.posY += -1;
+    } else if (pieza.color === ggValidaciones[1]) {
+        pieza.coordenadas.posY += 1;
+    }
+
+    if(pieza.coordenadas.posY === coordenadas_destino.posY && pieza.coordenadas.posX === coordenadas_destino.posX){
+        validacion = true;
+    }
+
+    if(respaldar_coor_Y === 7 && pieza.color === ggValidaciones[0]){
+        pieza.coordenadas.posY += -1;
+    } else if(respaldar_coor_Y === 2 && pieza.color === ggValidaciones[1]){
+        pieza.coordenadas.posY += 1;
+    }
+
+    if(pieza.coordenadas.posY === coordenadas_destino.posY && pieza.coordenadas.posX === coordenadas_destino.posX){
+        validacion = true;
+    }
+
+    return validacion;
 }
