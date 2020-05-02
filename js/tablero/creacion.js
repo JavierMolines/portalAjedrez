@@ -52,12 +52,12 @@ function crear_cuadros_vectores() {
 
 function crear_piezas() {
 
+    crear_reinas();
+    crear_reyes();
     crear_peones();
     crear_caballos();
     crear_bishop();
     crear_torres();
-    crear_reinas();
-    crear_reyes();
     
 }
 

@@ -446,6 +446,7 @@ function detectar_jaque(pieza_en_movimiento, casilla_destino, flujo_jaque) {
         if (local_pieza.tipo === "rey") {
 
             // VALIDAR HUIDA DEL REY
+            casillas_obtenidas = vl_casillas_entorno(casilla_destino, local_pieza);
             validacion = vl_casillas_capturadas(casillas_obtenidas, local_pieza, casilla_destino, flujo_jaque);
 
         } else {
@@ -816,12 +817,18 @@ function obtener_propiedades(casillas_obtenidas, local_pieza) {
 
             let impermeable = casilla.childNodes[0];
             let propiedades = obtener_ID_pieza(impermeable);
-
             propiedades.respaldo = propiedades.tipo;
 
             if (propiedades.tipo === "reina" && accion === "bishop" || propiedades.tipo === "reina" && accion === "torre") {
                 propiedades.tipo = accion;
-                propiedades.respaldo = "reina";
+            }
+
+            if(propiedades.tipo === "peon" && accion === "bishop" && propiedades.color !== local_pieza.color){
+                let detectar_peon_nuevo = obtener_hijo_detalles_ID(casilla); 
+                let casilla_final = crear_pieza_hibrida(local_pieza);
+                if(validar_destino_peon(detectar_peon_nuevo, casilla_final) === true){
+                    propiedades.tipo = accion;
+                }
             }
 
             if (accion === propiedades.tipo && propiedades.color !== local_pieza.color) {
@@ -862,6 +869,36 @@ function rey_saque(pieza_en_movimiento, casilla) {
             validacion = true;
             break;
         }
+    }
+
+    return validacion;
+
+}
+
+function validar_destino_peon(pieza_interna, pieza_destino) {
+
+    let validacion = false;
+
+    let new_pos_peon = {
+        pos_Y_modificada: pieza_interna.coordenadas.posY,
+        pos_X_modificada_minus: pieza_interna.coordenadas.posX,
+        pos_X_modificada_plus: pieza_interna.coordenadas.posX
+    };
+
+    if (pieza_interna.color === ggValidaciones[1]) {
+        new_pos_peon.pos_Y_modificada += 1;
+    } else if (pieza_interna.color === ggValidaciones[0]) {
+        new_pos_peon.pos_Y_modificada -= 1;
+    }
+
+    new_pos_peon.pos_X_modificada_minus -= 1;
+    new_pos_peon.pos_X_modificada_plus += 1;
+
+    if ((pieza_destino.posX === new_pos_peon.pos_X_modificada_minus || pieza_destino.posX === new_pos_peon.pos_X_modificada_plus) &&
+        pieza_destino.posY === new_pos_peon.pos_Y_modificada) {
+
+        validacion = true;
+
     }
 
     return validacion;

@@ -528,3 +528,32 @@ function filtrar_movimientos_torre(posicionamiento, movimiento) {
     return indicador;
 
 }
+
+function filtrar_coordenadas_peon_jaquemate(monarca_coordenadas, peon_coordenadas) {
+
+    let validacion = false;
+
+    let new_pos_peon = {
+        pos_Y_modificada: peon_coordenadas.posY,
+        pos_X_modificada_minus: peon_coordenadas.posX,
+        pos_X_modificada_plus: peon_coordenadas.posX
+    };
+
+    if (movimiento_actual === ggValidaciones[1]) {
+        new_pos_peon.pos_Y_modificada -= 1;
+    } else if (movimiento_actual === ggValidaciones[0]) {
+        new_pos_peon.pos_Y_modificada += 1;
+    }
+
+    new_pos_peon.pos_X_modificada_minus -= 1;
+    new_pos_peon.pos_X_modificada_plus += 1;
+
+    if ((monarca_coordenadas.posX === new_pos_peon.pos_X_modificada_minus || monarca_coordenadas.posX === new_pos_peon.pos_X_modificada_plus) &&
+        monarca_coordenadas.posY === new_pos_peon.pos_Y_modificada) {
+
+        validacion = true;
+
+    }
+
+    return validacion;
+}
