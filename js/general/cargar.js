@@ -1,8 +1,26 @@
+function colocar_eventos() {
 
-cargar_footer_nav("../views/componentes/navegacion.html", document.getElementById("cargar_nav"));//NAVEGACION
-cargar_footer_nav("../views/componentes/footer.html", document.getElementById("cargar_footer"));//FOOTER
+    let paginas = ["ventajas.html", "how.html", "what.html", "ejm.html"];
+    let buscador = document.body.querySelectorAll("nav a");
 
-function cargar_footer_nav(url_direccion, contenedor) {
+    for (let contador = 0; contador < buscador.length; contador++) {
+
+        let vista  = paginas[contador]; 
+        let link_a = buscador[contador];
+
+        link_a.addEventListener('click', ()=> {
+
+            let contenedor = document.getElementById("contenido_ajax");
+            let enviar = `../views/secciones/${vista}`;
+            cargar_vista(enviar, contenedor);
+
+        });
+        
+    }
+    
+}
+
+function cargar_vista(url_direccion, contenedor) {
 
     var peticion = new XMLHttpRequest();
     peticion.open("GET", url_direccion);
@@ -16,3 +34,5 @@ function cargar_footer_nav(url_direccion, contenedor) {
     };
 
 }
+
+colocar_eventos();

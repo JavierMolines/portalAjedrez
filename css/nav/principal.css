@@ -1,0 +1,41 @@
+nav {
+
+    z-index: 999;
+    top: 0px;
+    left: 0px;
+    position: fixed;
+    background-color: white;
+    color: black;
+    width: 96%;
+    display: flex;
+    padding: 0% 2%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+nav > div {
+
+    width: 60%;
+    align-items: center;
+    justify-content: end;
+    display: flex;
+    flex-direction: row;
+
+}
+
+nav > div > a {
+
+    color: black;
+    padding: 1%;
+    margin: 0% 1%;
+    text-decoration: none;
+
+}
+
+nav > div > a:hover {
+
+    color: magenta;
+
+}

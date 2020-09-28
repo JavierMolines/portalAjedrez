@@ -1,0 +1,53 @@
+.corte_criminal {
+
+    display: grid;
+    padding: 1% 5%;
+    grid-template-columns: 50% 50%;
+
+}
+
+.filaContenido {
+
+    width: 96%;
+    margin: 2%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    background-color: white;
+
+}
+
+.cortarDerecha {
+
+    text-align: left;
+    clip-path: polygon(90% 0, 100% 50%, 90% 100%, 0 100%, 0 0);
+
+}
+
+.cortarIzquierda {
+
+    text-align: right;
+    clip-path: polygon(10% 0, 100% 0, 100% 100%, 10% 100%, 0 50%);
+
+}
+
+.informacion {
+
+    padding: 1%;
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.informacion > h3 {
+
+    color: var(--color_titulos_claros);
+
+}
+
+.informacion > p {
+
+    color: black;
+
+}
