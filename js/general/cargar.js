@@ -10,19 +10,20 @@ function colocar_eventos() {
     for (let contador = 0; contador < buscador.length; contador++) {
 
         let vista = paginas[contador];
+        let crear = vista === "ejm.html" ? true : false;
         let link_a = buscador[contador];
 
         link_a.addEventListener('click', () => {
 
             let enviar = link_principal + vista;
-            cargar_vista(enviar, contenedor);
+            cargar_vista(enviar, contenedor, crear);
 
         });
 
     }
 }
 
-function cargar_vista(url_direccion, contenedor) {
+function cargar_vista(url_direccion, contenedor, crear) {
 
     var peticion = new XMLHttpRequest();
     peticion.open("GET", url_direccion);
@@ -31,6 +32,10 @@ function cargar_vista(url_direccion, contenedor) {
         if (peticion.readyState == 4 && peticion.status == 200) {
 
             contenedor.innerHTML = peticion.responseText;
+
+            if(crear === true){
+                crear_juego_ajedrez(); 
+            }
 
         }
     };

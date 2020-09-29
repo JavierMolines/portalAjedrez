@@ -1,5 +1,7 @@
 :root {
 
+    --tamaño_casillas       : 90px;
+    --tamaño_response       : 35px;
     --color_titulos_claros  : rgb(153, 0, 112);
     --color_titulos_oscuros : rgb(230, 0, 168);
 

@@ -39,6 +39,11 @@ var ggValidaciones     = ["black", "white"];
 var movimiento_actual  = "white";
 
 // CREAR TABLERO, Y LAS PIEZAS DE JUEGO, ADEMAS ARRANCAR EL INICIO DEL JUEGO
-crear_botones();
-crear_cuadros_vectores();
-crear_piezas();
+
+function crear_juego_ajedrez() {
+
+    crear_botones();
+    crear_cuadros_vectores();
+    crear_piezas();
+    
+}

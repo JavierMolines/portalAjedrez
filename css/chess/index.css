@@ -1,0 +1,65 @@
+#tablero_principal_ajedrez {
+
+    display: grid;
+    grid-template-columns: repeat(8, var(--tamaño_casillas));
+    justify-content: center;
+
+}
+
+#tablero_principal_ajedrez > div {
+
+    height: var(--tamaño_casillas);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#tablero_principal_ajedrez > div > i {
+
+    font-size: 3vw;
+
+}
+
+#tablero_principal_ajedrez > div > p {
+
+    font-size: 2vw;
+    position: absolute;
+
+}
+
+.fas {
+
+    cursor: pointer;
+
+}
+
+@media only screen and (max-width: 600px) {
+
+    #tablero_principal_ajedrez {
+
+        margin-top: 25%;
+        grid-template-columns: repeat(8, var(--tamaño_response));
+    
+    }
+    
+    #tablero_principal_ajedrez > div {
+    
+        height: var(--tamaño_response);
+    
+    }
+
+    #tablero_principal_ajedrez > div > i {
+
+        font-size: 20px;
+    
+    }
+    
+    #tablero_principal_ajedrez > div > p {
+    
+        font-size: 20px;
+    
+    }
+    
+}
