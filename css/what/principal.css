@@ -19,6 +19,12 @@
 
 }
 
+.contenido_flx_fases > div > p {
+
+    font-size: 1.2vw;
+
+}
+
 .dividir_flx_normas_tablas {
 
     display: grid;
@@ -33,9 +39,28 @@
 
 }
 
-
 .dividir_flx_normas_tablas > div > p {
 
     text-align: justify;
+    font-size: 1.2vw;
+
+}
+
+.dividir_flx_normas_tablas > div > ul {
+
+    font-size: 1.2vw;
+
+}
+
+.contenido_principal_fase { 
+
+    text-align: center;
+
+}
+
+.contenido_principal_fase > p { 
+
+    text-align: center;
+    font-size: 1.2vw;
 
 }
