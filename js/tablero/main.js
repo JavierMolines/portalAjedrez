@@ -44,6 +44,6 @@ function crear_juego_ajedrez() {
 
     crear_botones();
     crear_cuadros_vectores();
-    crear_piezas();
+    crear_elementos_juego();
     
 }
