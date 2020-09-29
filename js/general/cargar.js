@@ -1,6 +1,6 @@
 function colocar_eventos() {
 
-    let paginas = ["ventajas.html", "how.html", "what.html", "ejm.html"];
+    let paginas = ["ventajas.html", "who.html", "what.html", "ejm.html"];
     let buscador = document.body.querySelectorAll("nav a");
 
     for (let contador = 0; contador < buscador.length; contador++) {

@@ -1,0 +1,41 @@
+.contenido_flx_fases {
+
+    display: grid;
+    grid-template-columns: 32% 32% 32%;
+    justify-content: space-between;
+
+}
+
+.contenido_flx_fases > div {
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.contenido_flx_fases > div > h3 {
+
+    text-align: center;
+
+}
+
+.dividir_flx_normas_tablas {
+
+    display: grid;
+    grid-template-columns: 45% 45%;
+    justify-content: space-between;
+
+}
+
+.dividir_flx_normas_tablas > div > h3 {
+
+    text-align: center;
+
+}
+
+
+.dividir_flx_normas_tablas > div > p {
+
+    text-align: justify;
+
+}

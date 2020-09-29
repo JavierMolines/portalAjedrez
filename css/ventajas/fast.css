@@ -16,7 +16,6 @@
     text-align: center;
     justify-content: center;
     align-items: center;
-    color: white;
 
 }
 
@@ -28,7 +27,6 @@
 
 .titulo_general {
 
-    color: var(--color_titulos_oscuros);
     text-align: center;
 
 }
