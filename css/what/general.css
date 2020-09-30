@@ -1,0 +1,15 @@
+.contenedor_presentacion_fases_ajedrez {
+
+    padding: 0% 5%;
+    background-color: white;
+
+}
+
+.contenedor_presentacion_fases_ajedrez > p {
+
+    font-size: 1.2vw; 
+    text-align: justify; 
+    padding-bottom: 2%;
+    color: black;
+
+}

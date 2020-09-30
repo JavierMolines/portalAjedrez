@@ -1,7 +1,8 @@
 .contenido_flx_fases {
 
+    padding: 1% 5%;
     display: grid;
-    grid-template-columns: 32% 32% 32%;
+    grid-template-columns: repeat(3, 30%);
     justify-content: space-between;
 
 }
@@ -9,25 +10,31 @@
 .contenido_flx_fases > div {
 
     display: flex;
+    padding: 0% 5%;
     flex-direction: column;
+    color: white;
 
 }
 
-.contenido_flx_fases > div > h3 {
+.contenido_flx_fases div h3 {
 
     text-align: center;
 
 }
 
-.contenido_flx_fases > div > p {
+.contenido_flx_fases div p {
 
     font-size: 1.2vw;
 
 }
 
+/*  SIGUIENTE  */
+
 .dividir_flx_normas_tablas {
 
+    padding: 0% 5%;
     display: grid;
+    background-color: white;
     grid-template-columns: 45% 45%;
     justify-content: space-between;
 

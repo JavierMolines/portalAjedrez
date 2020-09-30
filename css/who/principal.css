@@ -1,15 +1,9 @@
 .presentador_chess_who {
 
+    background-color: white;
     display: flex;
     flex-direction: column;
     padding: 0% 5%;
-
-}
-
-.presentador_chess_who > h3 {
-
-    text-align: center;
-    font-size: 2vw;
 
 }
 
@@ -23,22 +17,26 @@
 .presentacion_imagenes {
 
     display: flex;
+    justify-content: center;
     flex-direction: row;
-    padding: 0% 4%;
+    padding: 2% 4%;
 
 }
 
 .presentacion_imagenes > img {
 
    margin: 1%;
+   width: 33%;
+   height: 300px;
 
 }
 
 .separador_who_elo {
 
+    background-color: white;
     display: grid;
     grid-template-columns: 45% 55%;
-    padding: 0% 5%;
+    padding: 2% 5%;
     margin-bottom: 2%;
 
 }

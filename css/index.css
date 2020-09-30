@@ -3,12 +3,21 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0px;
     padding: 0px;
-   background-color: wheat;
+    background-color: rgb(26, 24, 24);
 
 }
 
 #contenido_ajax {
 
-    margin-top: 5%;
+    margin-top: 3%;
+
+}
+
+.titulo_general {
+
+    padding: 4%;
+    background-color: white;
+    color: var(--color_titulos_generales);
+    text-align: center;
 
 }

@@ -1,8 +1,16 @@
 :root {
 
-    --tamaño_casillas       : 90px;
-    --tamaño_response       : 35px;
-    --color_titulos_claros  : rgb(153, 0, 112);
-    --color_titulos_oscuros : rgb(230, 0, 168);
+    /* PROPIEDADES GENERALES */
+    --tamaño_casillas         : 90px;
+    --tamaño_response         : 35px;
 
+    /* COLORES DE TEXTOS */
+    --color_titulos_claros    : rgb(153, 0, 112);
+    --color_titulos_oscuros   : rgb(230, 0, 168);
+    --color_prueba_general    : rgb(117, 13, 121);
+    --color_titulos_generales : rgb(66, 27, 60);
+
+    /*  FONDOS PANTALLA  */
+    --fondo_viñetas_ventaja   : white;
+    
 }

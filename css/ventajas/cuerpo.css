@@ -13,7 +13,7 @@
     display: flex;
     justify-content: center;
     flex-direction: row;
-    background-color: white;
+    background-color: var(--fondo_viñetas_ventaja);
 
 }
 
@@ -40,8 +40,21 @@
 
 }
 
+.informacion > h3 {
+
+    color:  rgb(117, 13, 121);
+
+}
+
 .informacion > p {
 
     color: black;
+    font-size: 1vw;
+
+}
+
+.espacio_color_prueba {
+
+    background-color: white;
 
 }

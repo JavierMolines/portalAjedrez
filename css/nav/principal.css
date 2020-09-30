@@ -4,8 +4,8 @@ nav {
     top: 0px;
     left: 0px;
     position: fixed;
-    background-color: white;
-    color: black;
+    background-color: rgb(43, 24, 46);
+    color: white;
     width: 88%;
     display: flex;
     padding: 0% 6%;
@@ -27,7 +27,8 @@ nav > div {
 
 nav > div > a {
 
-    color: black;
+    letter-spacing: 2px;
+    color: white;
     padding: 1%;
     margin: 0% 1%;
     text-decoration: none;
@@ -36,6 +37,6 @@ nav > div > a {
 
 nav > div > a:hover {
 
-    color: magenta;
+    color: green;
 
 }
