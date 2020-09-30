@@ -3,23 +3,21 @@ nav {
     z-index: 999;
     top: 0px;
     left: 0px;
-    position: fixed;
-    background-color: rgb(43, 24, 46);
     color: white;
     width: 88%;
-    display: flex;
     padding: 0% 6%;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    position: fixed;
+    background-color: rgb(43, 24, 46);
+
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
 
 }
 
 nav > div {
 
-    width: 60%;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
     display: flex;
     flex-direction: row;
 
@@ -38,5 +36,50 @@ nav > div > a {
 nav > div > a:hover {
 
     color: green;
+
+}
+
+.apagado {
+
+    display: none;
+
+}
+
+button {
+
+    border: none;
+    background-color: transparent;
+
+}
+
+nav > button > i {
+
+    color: white;
+    font-size: 20px;
+
+}
+
+@media only screen and (max-width: 600px) {
+
+    .contraido {
+
+        display: none;
+    
+    }
+
+    .apagado {
+
+        display: block;
+    
+    }
+
+    nav > div {
+
+        float: left;
+        width: 100%;
+        flex-direction: column;
+        text-align: center;
+    
+    }
 
 }

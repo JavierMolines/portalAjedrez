@@ -22,9 +22,9 @@
     <nav>
 
         <h2>Ajedrez Didactico</h2>
-        <button style="display: none;"><i class="fa fa-navicon"></i></button>
+        <button class="apagado"><i onclick="menu_desplegable();" class="fas fa-bars"></i></button>
 
-        <div>
+        <div id="menu_principal" class="contraido">
             <a href="javascript:void(0)">Inicio</a>
             <a href="javascript:void(0)">Conoceme</a>
             <a href="javascript:void(0)">Desarrollo</a>
@@ -41,6 +41,7 @@
 
     <!-- JS PRINCIPALES -->
     <script src="../js/general/cargar.js"></script>
+    <script src="../js/general/menu.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <!-- JS PARA EL TABLERO Y EL JUEGO-->
     <script src="../js/tablero/movimientos.js"></script>

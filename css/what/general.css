@@ -13,3 +13,13 @@
     color: black;
 
 }
+
+@media only screen and (max-width: 600px) {
+
+    .contenedor_presentacion_fases_ajedrez > p {
+
+        font-size: 12px;
+    
+    }
+    
+}

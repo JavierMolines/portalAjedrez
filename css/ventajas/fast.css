@@ -38,7 +38,13 @@
 
     .conte_cartilla_flx {
 
-        flex-direction: row;
+        flex-direction: column;
+    
+    }
+
+    .contenedor_cartilla > p {
+
+        font-size: 12px;
     
     }
     

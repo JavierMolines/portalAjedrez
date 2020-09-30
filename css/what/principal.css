@@ -71,3 +71,50 @@
     font-size: 1.2vw;
 
 }
+
+@media only screen and (max-width: 600px) {
+
+    .dividir_flx_normas_tablas {
+
+        grid-template-columns: 100%;
+        
+    }
+
+    .contenido_flx_fases {
+
+        grid-template-columns: 100%;
+    
+    }
+
+    .contenido_flx_fases > div > img {
+
+        height: 200px;
+    
+    }
+
+    .dividir_flx_normas_tablas > div > p {
+
+        font-size: 12px;
+    
+    }
+    
+    .dividir_flx_normas_tablas > div > ul {
+    
+        font-size: 12px;
+    
+    }
+
+    .contenido_flx_fases div h3 {
+
+        font-size: 16px;
+    
+    }
+    
+    .contenido_flx_fases div p {
+    
+        font-size: 12px;
+    
+    }
+    
+    
+}

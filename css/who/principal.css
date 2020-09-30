@@ -73,3 +73,51 @@
     width: 50%;
 
 }
+
+@media only screen and (max-width: 600px) {
+
+    .separador_who_elo {
+
+        grid-template-columns: 100%;
+    
+    }
+
+    .presentacion_imagenes {
+
+        flex-direction: column;
+    
+    }
+
+    .presentacion_imagenes > img {
+
+        margin: 4% 1%;
+        width: 98%;
+        height: 100px;
+     
+     }
+
+    .presentador_chess_who > p {
+
+        font-size: 12px;
+    
+    }
+
+    .separador_who_elo > div > h3 {
+
+        font-size: 15px;
+    
+    }
+
+    .separador_who_elo > div > p {
+
+        font-size: 12px;
+        
+    }
+    
+    .separador_who_elo > div > table {
+    
+        font-size: 12px;
+    
+    }
+    
+}
