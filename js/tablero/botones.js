@@ -2,8 +2,6 @@ function crear_botones() {
 
     let contenedor = document.getElementById("botones_opciones_tablero");
 
-    console.log(contenedor);
-
     for (let contador = 0; contador < 2; contador++) {
 
         let botones = document.createElement("button");

@@ -18,6 +18,10 @@ function colocar_eventos() {
             let enviar = link_principal + vista;
             cargar_vista(enviar, contenedor, crear);
 
+            if (window.innerWidth <= 600) {
+                menu_desplegable();
+            }
+
         });
 
     }

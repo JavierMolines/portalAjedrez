@@ -14,7 +14,17 @@ nav {
 
 }
 
-nav > div {
+.contenedor_btn_haddler {
+
+    align-items: center;
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: row;
+
+}
+
+
+.menu_principal {
 
     align-items: center;
     justify-content: flex-end;
@@ -23,8 +33,9 @@ nav > div {
 
 }
 
-nav > div > a {
 
+.menu_principal a {
+    
     letter-spacing: 2px;
     color: white;
     padding: 1%;
@@ -33,7 +44,7 @@ nav > div > a {
 
 }
 
-nav > div > a:hover {
+.menu_principal a:hover {
 
     color: green;
 
@@ -52,7 +63,7 @@ button {
 
 }
 
-nav > button > i {
+.contenedor_btn_haddler > button > i {
 
     color: white;
     font-size: 20px;
@@ -60,6 +71,12 @@ nav > button > i {
 }
 
 @media only screen and (max-width: 600px) {
+
+    nav {
+
+        grid-template-columns: repeat(1, 100%);
+    
+    }
 
     .contraido {
 
@@ -73,13 +90,16 @@ nav > button > i {
     
     }
 
-    nav > div {
+    .contenedor_btn_haddler {
 
-        float: left;
-        width: 100%;
+        justify-content: space-around;
+
+    }
+
+    .menu_principal {
+
         flex-direction: column;
-        text-align: center;
-    
+      
     }
 
 }

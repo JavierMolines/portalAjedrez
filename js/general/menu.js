@@ -1,6 +1,6 @@
 function menu_desplegable() {
 
-    let contenedor  = document.getElementById("menu_principal");
+    let contenedor  = document.querySelector(".menu_principal");
     let clase_lista = contenedor.className;
     
     if(/contraido/ig.test(clase_lista) === true){

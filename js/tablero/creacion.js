@@ -75,7 +75,6 @@ function crear_elementos_juego() {
                 elemento_pieza.addEventListener("click", () => movimiento_pieza(elemento_pieza, pieza));
     
                 if (calculo == 0) {
-                    console.log(colores);
                     elemento_pieza.style.color = colores[calculo+1];
                     elemento_pieza.id = `${pieza}_${colores[1]}_${nueva_pieza}`;
                 } else {
