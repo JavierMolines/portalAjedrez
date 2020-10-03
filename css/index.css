@@ -21,3 +21,13 @@ body {
     text-align: center;
 
 }
+
+@media only screen and (max-width: 600px) {
+
+   .titulo_general {
+
+        padding-top: 15%;
+
+   }
+
+}

@@ -3,6 +3,7 @@
     display: grid;
     grid-template-columns: repeat(8, var(--tamaño_casillas));
     justify-content: center;
+    margin-bottom: 2%;
 
 }
 
@@ -18,20 +19,16 @@
 
 #tablero_principal_ajedrez > div > i {
 
+    cursor: pointer;
     font-size: 3vw;
 
 }
 
 #tablero_principal_ajedrez > div > p {
 
+    cursor: pointer;
     font-size: 2vw;
     position: absolute;
-
-}
-
-.fas {
-
-    cursor: pointer;
 
 }
 
@@ -39,7 +36,6 @@
 
     #tablero_principal_ajedrez {
 
-        margin-top: 25%;
         grid-template-columns: repeat(8, var(--tamaño_response));
     
     }
@@ -52,7 +48,7 @@
 
     #tablero_principal_ajedrez > div > i {
 
-        font-size: 20px;
+        font-size: 24px;
     
     }
     

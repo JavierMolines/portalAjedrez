@@ -3,67 +3,42 @@ function crear_botones() {
     let contenedor = document.getElementById("botones_opciones_tablero");
 
     for (let contador = 0; contador < 2; contador++) {
-
+        
         let botones = document.createElement("button");
-        botones.classList.add("botones_opciones");
 
-        if (contador == 0) {
+        switch (contador) {
 
-            botones.id = "boton_reiniciar";
-            botones.innerHTML = "REINICIAR";
-            botones.disabled = false;
-            botones.classList.add("botones_tablero");
-            botones.addEventListener("click", () => {
+            case 0:
+                botones.id = "boton_reiniciar";
+                botones.innerHTML = "REINICIAR";
+                botones.disabled = false;
+                botones.addEventListener("click", () => reiniciar_partida());
+                break;
 
-                reiniciar_partida();
+            case 1:
+                botones.id = "boton_ayuda";
+                botones.innerHTML = `AYUDA: ON`;
+                botones.disabled = false;
+                botones.addEventListener("click", () => {
 
-            });
+                    if (ayuda_movimientos == 1) {
+                        ayuda_movimientos = 0;
+                        botones.innerHTML = `AYUDA: OFF`;
+                    } else {
+                        ayuda_movimientos = 1;
+                        botones.innerHTML = `AYUDA: ON`;
+                    }
 
-        } else if (contador == 1) {
+                    borrar_premovimiento();
+                });
+                break;
 
-            botones.id = "boton_ayuda";
-            botones.innerHTML = `AYUDA: ON`;
-            botones.classList.add("botones_tablero");
-            botones.disabled = false;
-            botones.addEventListener("click", () => {
-
-                if (ayuda_movimientos == 1) {
-
-                    ayuda_movimientos = 0;
-                    botones.innerHTML = `AYUDA: OFF`;
-
-                } else {
-
-                    ayuda_movimientos = 1;
-                    botones.innerHTML = `AYUDA: ON`;
-
-                }
-
-                borrar_premovimiento();
-                console.log(`AYUDA ESTADO: ${ayuda_movimientos}`);
-
-            });
-
-        } else if (contador == 2) {
-
-        /*
-            botones.id = "boton_regresar";
-            botones.classList.add("botones_apagados");
-            botones.disabled = true;
-            botones.innerHTML = "RETROCEDER";
-            botones.addEventListener("click", () => {
-
-                console.log("PROXIMAMENTE");
-
-            });
-        */
-
+            default:
+                break;
         }
 
         contenedor.appendChild(botones);
-
     }
-
 }
 
 function reiniciar_partida() {
@@ -84,6 +59,6 @@ function reiniciar_partida() {
     // -- FINAL REINICIAR VARIABLES GLOBALES
 
     borrar_premovimiento();
-    crear_piezas();
+    crear_elementos_juego();
 
 }

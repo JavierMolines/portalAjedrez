@@ -1,47 +1,23 @@
 function crear_cuadros_vectores() {
 
     let indicador_color = 0;
-    //let colores_clase   = ["ficha_blanca", "ficha_negro"];
     let colores_tablero = [coloresTablero[0], coloresTablero[1]];
-    //let lista = ["A","B","C","D","E","F","G","H"];
 
     for (let contador = 8; contador > 0; contador--) {
-
         for (let cuadros = 1; cuadros < 9; cuadros++) {
 
-            //let clase_agregar = "";
-            let color_agregar = "";
+            let color_agregar = indicador_color == 0 ? cuadros % 2 ? colores_tablero[0] : colores_tablero[1] : cuadros % 2 ? colores_tablero[1] : colores_tablero[0];
             let cuadro = document.createElement("div");
+
             cuadro.id = `cuadro[${contador},${cuadros}]`;
             cuadro.addEventListener("click", asignar_movimiento_piezas);
-            document.getElementById("tablero_principal_ajedrez").appendChild(cuadro);
-
-            if (indicador_color == 0) {
-                if (cuadros % 2) {
-                    //clase_agregar = colores_clase[0];
-                    color_agregar = colores_tablero[0];
-                } else {
-                    //clase_agregar = colores_clase[1];
-                    color_agregar = colores_tablero[1];
-                }
-            } else {
-                if (cuadros % 2) {
-                    //clase_agregar = colores_clase[1];
-                    color_agregar = colores_tablero[1];
-                } else {
-                    //clase_agregar = colores_clase[0];
-                    color_agregar = colores_tablero[0];
-                }    
-            }
-
-            //cuadro.classList.add(clase_agregar); 
             cuadro.style.backgroundColor = color_agregar;
     
             if (cuadros % 8 == 0) {
-    
                 indicador_color = indicador_color == 0 ? 1 : 0;
-    
             }
+
+            document.getElementById("tablero_principal_ajedrez").appendChild(cuadro);
         }
     }
 }

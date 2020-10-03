@@ -16,7 +16,7 @@ function mostrar_premovimiento(posiA, posiB) {
 
 function borrar_premovimiento() {
 
-    let selector = document.querySelectorAll("p");
+    let selector = document.querySelectorAll("#tablero_principal_ajedrez p");
     if (selector.length > 0) {
         for (let contador = 0; contador < selector.length; contador++) {
             selector[contador].remove();
