@@ -1,4 +1,3 @@
-
 var link_principal = "../views/secciones/";
 var paginas        = ["ventajas.html", "who.html", "what.html", "ejm.html"];
 var contenedor     = document.getElementById("contenido_ajax");
@@ -17,6 +16,7 @@ function colocar_eventos() {
 
             let enviar = link_principal + vista;
             cargar_vista(enviar, contenedor, crear);
+            window.scrollTo(0, 0);
 
             if (window.innerWidth <= 600) {
                 menu_desplegable();

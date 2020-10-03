@@ -33,7 +33,6 @@ nav {
 
 }
 
-
 .menu_principal a {
     
     letter-spacing: 2px;
@@ -74,8 +73,17 @@ button {
 
     nav {
 
+        top: -1px;
         grid-template-columns: repeat(1, 100%);
     
+    }
+
+    .menu_principal a {
+    
+        width: 50%;
+        text-align: center;
+        padding: 4% 0%;
+
     }
 
     .contraido {
