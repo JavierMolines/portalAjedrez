@@ -703,46 +703,46 @@ function validar_movimiento_bishop(posicionamiento, casilla_destino_final) {
     let movimiento_valido = false;
     let enviar_interaccion = [];
 
-    for (let move = 1; move < 8; move++) {
-        if (posicionamiento.posY + move == posicionamiento.targetPosY && posicionamiento.posX + move == posicionamiento.targetPosX) {
-            let indicador = filtrar_movimientos_alfil(posicionamiento, move, "cuadranteI");
-            if (indicador !== true) {
-                movimiento_valido = true;
-                enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
-                break;
-            }
-        }
-    }
+    for (let direccion = 0; direccion < 4; direccion++) {
+        for (let move = 1; move < 8; move++) {
 
-    for (let move = 1; move < 8; move++) {
-        if (posicionamiento.posY + move == posicionamiento.targetPosY && posicionamiento.posX - move == posicionamiento.targetPosX) {
-            let indicador = filtrar_movimientos_alfil(posicionamiento, move, "cuadranteII");
-            if (indicador !== true) {
-                movimiento_valido = true;
-                enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
-                break;
-            }
-        }
-    }
+            let calculo_y = 0;
+            let calculo_x = 0;
+            let cuadrante = "";
 
-    for (let move = 1; move < 8; move++) {
-        if (posicionamiento.posY - move == posicionamiento.targetPosY && posicionamiento.posX - move == posicionamiento.targetPosX) {
-            let indicador = filtrar_movimientos_alfil(posicionamiento, move, "cuadranteIII");
-            if (indicador !== true) {
-                movimiento_valido = true;
-                enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
-                break;
+            switch (direccion) {
+                case 0:
+                    cuadrante = "cuadranteI";
+                    calculo_x = posicionamiento.posX + move;
+                    calculo_y = posicionamiento.posY + move;
+                    break;
+                case 1:
+                    cuadrante = "cuadranteII";
+                    calculo_x = posicionamiento.posX - move;
+                    calculo_y = posicionamiento.posY + move;
+                    break;
+                case 2:
+                    cuadrante = "cuadranteIII";
+                    calculo_x = posicionamiento.posX - move;
+                    calculo_y = posicionamiento.posY - move;
+                    break;
+                case 3:
+                    cuadrante = "cuadranteIV";
+                    calculo_x = posicionamiento.posX + move;
+                    calculo_y = posicionamiento.posY - move;
+                    break;
+                default:
+                    break;
             }
-        }
-    }
 
-    for (let move = 1; move < 8; move++) {
-        if (posicionamiento.posY - move == posicionamiento.targetPosY && posicionamiento.posX + move == posicionamiento.targetPosX) {
-            let indicador = filtrar_movimientos_alfil(posicionamiento, move, "cuadranteIV");
-            if (indicador !== true) {
-                movimiento_valido = true;
-                enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
-                break;
+            if (calculo_y == posicionamiento.targetPosY && 
+                calculo_x == posicionamiento.targetPosX) {
+                let indicador = filtrar_movimientos_alfil(posicionamiento, move, cuadrante);
+                if (indicador !== true) {
+                    movimiento_valido = true;
+                    enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
+                    break;
+                }
             }
         }
     }
@@ -756,25 +756,22 @@ function validar_movimiento_bishop(posicionamiento, casilla_destino_final) {
 
 function validar_movimiento_torre(posicionamiento, casilla_destino_final) {
 
-    let movimiento_valido = false;
+    let movimiento_valido  = false;
     let enviar_interaccion = [];
+    let flujo_movimiento   = "";
 
     if (posicionamiento.posX == posicionamiento.targetPosX) {
-
-        let indicador = filtrar_movimientos_torre(posicionamiento, "vertical");
-        if (indicador !== true) {
-            movimiento_valido = true;
-            enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
-        }
-
+        flujo_movimiento = "vertical";
     } else if (posicionamiento.posY == posicionamiento.targetPosY) {
+        flujo_movimiento = "horizontal";
+    }
 
-        let indicador = filtrar_movimientos_torre(posicionamiento, "horizontal");
+    if(flujo_movimiento !== ""){
+        let indicador = filtrar_movimientos_torre(posicionamiento, flujo_movimiento);
         if (indicador !== true) {
             movimiento_valido = true;
             enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
-        }
-
+        } 
     }
 
     if (movimiento_valido === true) {
@@ -798,111 +795,54 @@ function validar_movimiento_rey(posicionamiento, casilla_destino_final) {
 
         interaccion_pieza(pieza_seleccionada, casilla_destino_final);
 
+    } else {  // VALIDAR ENROQUE
 
-    } else {
+        if (posicionamiento.targetPosY == 1 && posicionamiento.targetPosX == 7 && enroque_blanco[1] == true ||
+            posicionamiento.targetPosY == 1 && posicionamiento.targetPosX == 3 && enroque_blanco[0] == true || 
+            posicionamiento.targetPosY == 8 && posicionamiento.targetPosX == 7 && enroque_negro[1] == true ||
+            posicionamiento.targetPosY == 8 && posicionamiento.targetPosX == 3 && enroque_negro[0] == true) {
 
-        // ENROQUE
-        if (movimiento_actual == ggValidaciones[1]) {
+            let validar_pos = true;
+            let divisores   = [];
+            let direcciones = posicionamiento.targetPosX == 7 ? 2 : 3;
+            let ident_auto  = direcciones == 2 ? 1 : 0;
+            let internos    = [
+                ["cuadro[8,8]", "cuadro[8,5]", "cuadro[8,7]", "cuadro[8,6]"],   // BLACK RIGHT
+                ["cuadro[8,1]", "cuadro[8,5]", "cuadro[8,3]", "cuadro[8,4]"],   // BLACK LEFT
+                ["cuadro[1,8]", "cuadro[1,5]", "cuadro[1,7]", "cuadro[1,6]"],   // WHITE RIGHT
+                ["cuadro[1,1]", "cuadro[1,5]", "cuadro[1,3]", "cuadro[1,4]"]    // WHITE LEFT
+            ];
 
-            if (posicionamiento.targetPosY == 1 && posicionamiento.targetPosX == 7 && enroque_blanco[1] == true) {
-
-                for (let contador = 1; contador <= 2; contador++) {
-
-                    let casilla_enroque = document.getElementById(`cuadro[${posicionamiento.posY},${posicionamiento.posX + contador}]`);
-                    if (casilla_enroque.childNodes.length > 0) {
-                        return;
-                    }
-
-                }
-
-                let torre_derecha = document.getElementById(`torre_${ggValidaciones[1]}_1`);
-
-                document.getElementById("cuadro[1,8]").removeChild(torre_derecha);
-                document.getElementById("cuadro[1,5]").removeChild(pieza_seleccionada[0]);
-                document.getElementById("cuadro[1,7]").appendChild(pieza_seleccionada[0]);
-                document.getElementById("cuadro[1,6]").appendChild(torre_derecha);
-
-                // APAGAR EL ENROQUE Y QUE INICIE EL SIGUIENTE TURNO
-                enroque_blanco = [false, false];
-                movimiento_actual = ggValidaciones[0];
-
+            if(movimiento_actual == ggValidaciones[1]){
+                divisores = ident_auto == 1 ? internos[2] : internos[3];
+            } else {
+                divisores = ident_auto == 1 ? internos[0] : internos[1];
             }
 
-            if (posicionamiento.targetPosY == 1 && posicionamiento.targetPosX == 3 && enroque_blanco[0] == true) {
-
-                for (let contador = 1; contador <= 3; contador++) {
-
-                    let casilla_enroque = document.getElementById(`cuadro[${posicionamiento.posY},${posicionamiento.posX - contador}]`);
-                    if (casilla_enroque.childNodes.length > 0) {
-                        return;
-                    }
-
+            for (let contador = 1; contador <= direcciones; contador++) {
+                let calculador = direcciones == 2 ? posicionamiento.posX + contador : posicionamiento.posX - contador;
+                let pieza_para_validar_contenido = document.getElementById(`cuadro[${posicionamiento.posY},${calculador}]`);
+                if (pieza_para_validar_contenido.childNodes.length > 0) {
+                    validar_pos = false;
                 }
-
-                let torre_izquierda = document.getElementById(`torre_${ggValidaciones[1]}_0`);
-
-                document.getElementById("cuadro[1,1]").removeChild(torre_izquierda);
-                document.getElementById("cuadro[1,5]").removeChild(pieza_seleccionada[0]);
-                document.getElementById("cuadro[1,3]").appendChild(pieza_seleccionada[0]);
-                document.getElementById("cuadro[1,4]").appendChild(torre_izquierda);
-
-                // APAGAR EL ENROQUE Y QUE INICIE EL SIGUIENTE TURNO
-                enroque_blanco = [false, false];
-                movimiento_actual = ggValidaciones[0];
-
             }
 
-        } else {
+            if(validar_pos){
+                let torre = document.getElementById(`torre_${movimiento_actual}_${ident_auto}`);
 
-            if (posicionamiento.targetPosY == 8 && posicionamiento.targetPosX == 7 && enroque_negro[1] == true) {
+                document.getElementById(divisores[0]).removeChild(torre);
+                document.getElementById(divisores[1]).removeChild(pieza_seleccionada[0]);
+                document.getElementById(divisores[2]).appendChild(pieza_seleccionada[0]);
+                document.getElementById(divisores[3]).appendChild(torre);
 
-                for (let contador = 1; contador <= 2; contador++) {
-
-                    let casilla_enroque = document.getElementById(`cuadro[${posicionamiento.posY},${posicionamiento.posX + contador}]`);
-                    if (casilla_enroque.childNodes.length > 0) {
-                        return;
-                    }
-
+                if(movimiento_actual == ggValidaciones[1]){
+                    movimiento_actual = ggValidaciones[0];
+                    enroque_blanco = [false, false];
+                } else {
+                    movimiento_actual = ggValidaciones[1];
+                    enroque_negro = [false, false];
                 }
-
-                let torre_derecha = document.getElementById(`torre_${ggValidaciones[0]}_1`);
-
-                document.getElementById("cuadro[8,8]").removeChild(torre_derecha);
-                document.getElementById("cuadro[8,5]").removeChild(pieza_seleccionada[0]);
-                document.getElementById("cuadro[8,7]").appendChild(pieza_seleccionada[0]);
-                document.getElementById("cuadro[8,6]").appendChild(torre_derecha);
-
-                // APAGAR EL ENROQUE Y QUE INICIE EL SIGUIENTE TURNO
-                enroque_negro = [false, false];
-                movimiento_actual = ggValidaciones[1];
-
             }
-
-            if (posicionamiento.targetPosY == 8 && posicionamiento.targetPosX == 3 && enroque_negro[0] == true) {
-
-                for (let contador = 1; contador <= 3; contador++) {
-
-                    let casilla_enroque = document.getElementById(`cuadro[${posicionamiento.posY},${posicionamiento.posX - contador}]`);
-                    if (casilla_enroque.childNodes.length > 0) {
-                        return;
-                    }
-
-                }
-
-                let torre_izquierda = document.getElementById(`torre_${ggValidaciones[0]}_0`);
-
-                document.getElementById("cuadro[8,1]").removeChild(torre_izquierda);
-                document.getElementById("cuadro[8,5]").removeChild(pieza_seleccionada[0]);
-                document.getElementById("cuadro[8,3]").appendChild(pieza_seleccionada[0]);
-                document.getElementById("cuadro[8,4]").appendChild(torre_izquierda);
-
-                // APAGAR EL ENROQUE Y QUE INICIE EL SIGUIENTE TURNO
-                enroque_negro = [false, false];
-                movimiento_actual = ggValidaciones[1];
-
-            }
-
         }
-
     }
 }

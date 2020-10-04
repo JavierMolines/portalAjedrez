@@ -33,9 +33,9 @@ var peon_al_paso       = { posX: 0, posY: 0, estatus: false, by: "" };
 */
 
 var colorAyudaCasilla  = "aqua";
-var coloresTablero     = ["#a6a6a6", "#404040"];
-var colores            = ["black", "white"];
-var ggValidaciones     = ["black", "white"];
+var coloresTablero     = ["#a6a6a6", "#140d06"];
+var colores            = ["rgb(118, 77, 35)", "white"];
+var ggValidaciones     = ["rgb(118, 77, 35)", "white"];
 var movimiento_actual  = "white";
 
 // CREAR TABLERO, Y LAS PIEZAS DE JUEGO, ADEMAS ARRANCAR EL INICIO DEL JUEGO
@@ -46,4 +46,26 @@ function crear_juego_ajedrez() {
     crear_cuadros_vectores();
     crear_elementos_juego();
     
+}
+
+function reiniciar_partida() {
+
+    let piezas = document.querySelectorAll("div > i");
+    for (let pieza of piezas) {
+        pieza.parentNode.removeChild(pieza);
+    }
+
+    // -- INICIO REINICIAR VARIABLES GLOBALES
+
+    jaque             = false;
+    jaque_mate        = false;
+    enroque_blanco    = [true, true];
+    enroque_negro     = [true, true];
+    movimiento_actual = colores[1];
+
+    // -- FINAL REINICIAR VARIABLES GLOBALES
+
+    borrar_premovimiento();
+    crear_elementos_juego();
+
 }

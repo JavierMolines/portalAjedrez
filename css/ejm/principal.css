@@ -2,7 +2,7 @@
 
     display: grid;
     padding: 0% 5%;
-    grid-template-columns: repeat(1, 50%);
+    grid-template-columns: repeat(1, 80%);
     justify-content: center;
 
 }
@@ -10,7 +10,7 @@
 .video > iframe {
 
     width: 100%;
-    height: 500px;
+    height: 700px;
 
 }
 

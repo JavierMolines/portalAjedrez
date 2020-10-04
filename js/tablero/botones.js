@@ -10,26 +10,21 @@ function crear_botones() {
 
             case 0:
                 botones.id = "boton_reiniciar";
-                botones.innerHTML = "REINICIAR";
+                botones.innerHTML = "Reiniciar";
                 botones.disabled = false;
                 botones.addEventListener("click", () => reiniciar_partida());
                 break;
 
             case 1:
                 botones.id = "boton_ayuda";
-                botones.innerHTML = `AYUDA: ON`;
+                botones.innerHTML = titulo_boton_ayuda();
                 botones.disabled = false;
                 botones.addEventListener("click", () => {
 
-                    if (ayuda_movimientos == 1) {
-                        ayuda_movimientos = 0;
-                        botones.innerHTML = `AYUDA: OFF`;
-                    } else {
-                        ayuda_movimientos = 1;
-                        botones.innerHTML = `AYUDA: ON`;
-                    }
-
+                    ayuda_movimientos = ayuda_movimientos == 1 ? 0 : 1;
+                    botones.innerHTML = titulo_boton_ayuda();
                     borrar_premovimiento();
+
                 });
                 break;
 
@@ -41,24 +36,11 @@ function crear_botones() {
     }
 }
 
-function reiniciar_partida() {
-
-    let piezas = document.querySelectorAll("div > i");
-    for (let contador = 0; contador < piezas.length; contador++) {
-        piezas[contador].parentNode.removeChild(piezas[contador]);
-    }
-
-    // -- INICIO REINICIAR VARIABLES GLOBALES
-
-    jaque_mate = false;
-    jaque = false;
-    enroque_blanco = [true, true];
-    enroque_negro = [true, true];
-    movimiento_actual = colores[1];
-
-    // -- FINAL REINICIAR VARIABLES GLOBALES
-
-    borrar_premovimiento();
-    crear_elementos_juego();
+function titulo_boton_ayuda() {
+    
+    let prefijo = "PreMovimientos: ";
+    let estado  = ayuda_movimientos == 0 ? "OFF" : "ON";
+    let titulo  = prefijo + estado;
+    return titulo;
 
 }
