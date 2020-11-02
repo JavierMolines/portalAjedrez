@@ -59,3 +59,19 @@
     }
     
 }
+
+@media only screen and (max-width: 360px) {
+
+    #tablero_principal_ajedrez {
+
+        grid-template-columns: repeat(8, var(--tamaño_junior));
+    
+    }
+    
+    #tablero_principal_ajedrez > div {
+    
+        height: var(--tamaño_junior);
+    
+    }
+    
+}

@@ -427,8 +427,6 @@ function comprobar_jaque(pieza) {
             casilla_jaque.style.backgroundColor = color_respaldo;
         }, 800);
 
-        console.log(mensaje_jaque);
-
     } else {
         jaque = rey_en_jaque;
     }

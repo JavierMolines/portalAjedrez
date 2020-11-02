@@ -2,7 +2,7 @@ function crear_botones() {
 
     let contenedor = document.getElementById("botones_opciones_tablero");
 
-    for (let contador = 0; contador < 2; contador++) {
+    for (let contador = 0; contador < 3; contador++) {
         
         let botones = document.createElement("button");
 
@@ -28,6 +28,13 @@ function crear_botones() {
                 });
                 break;
 
+            case 2:
+                botones.id = "boton_retroceder";
+                botones.innerHTML = "Retroceder";
+                botones.disabled = false;
+                botones.addEventListener("click", () => retroceder_movimiento());
+                break;
+                
             default:
                 break;
         }

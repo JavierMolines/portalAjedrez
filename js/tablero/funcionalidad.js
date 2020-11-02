@@ -113,8 +113,9 @@ function asignar_movimiento_piezas() {
 function interaccion_pieza(pieza, casilla) {
 
     // VARIABLES DE JUGADA
-    let movimiento_valido = false;
-    let comer_pieza = false;
+    let pieza_para_comer    = false;
+    let movimiento_valido   = false;
+    let comer_pieza         = false;
     let pieza_en_movimiento = pieza[0];
 
     // SI LA CASILLA DESTINO ESTA OCUPADA SE PROCEDE A VALIDAR
@@ -140,34 +141,35 @@ function interaccion_pieza(pieza, casilla) {
         }
 
         // COMPROBAR SI SE ESTA EN JAQUE
-        if (detectar_jaque(pieza_en_movimiento, casilla, jaque) === true) {
-            return;
+        if (detectar_jaque(pieza_en_movimiento, casilla, jaque) !== true) {
+
+            // VALIDAR PEON AL PASO
+            if (peon_al_paso.estatus === true && peon_al_paso.by !== movimiento_actual) {
+                desactivar_doble_paso();
+            }
+
+            // COMER PIEZA SI LA CASILLA ES VALIDA
+            if (comer_pieza === true) {
+                pieza_para_comer = casilla.childNodes[0];
+                casilla.removeChild(pieza_para_comer);
+            }
+
+            // MOVER PIEZA
+            pieza_en_movimiento.parentElement.removeChild(pieza_en_movimiento);
+            casilla.appendChild(pieza_en_movimiento);
+
+            // CONTINUAR FLUJO
+            jaque = false;
+            deshabilitar_enroque(pieza[2]);
+            comprobar_jaque(pieza_en_movimiento);
+            validar_promocion_peon(pieza_en_movimiento, casilla);
+            guardar_movimiento(pieza, casilla, pieza_para_comer);
+            cambiar_turno(pieza_en_movimiento.style.color);
+
+            // VALIDACION FIN DEL JUEGO
+            detectar_jaque_mate(casilla);
         }
-
-        // VALIDAR PEON AL PASO
-        if(peon_al_paso.estatus === true && peon_al_paso.by !== movimiento_actual){
-            desactivar_doble_paso();
-        }
-
-        // COMER PIEZA SI LA CASILLA ES VALIDA
-        if (comer_pieza === true) {
-            casilla.removeChild(casilla.childNodes[0]);
-        }
-
-        // MOVER PIEZA
-        pieza_en_movimiento.parentElement.removeChild(pieza_en_movimiento);
-        casilla.appendChild(pieza_en_movimiento);
-
-        // CONTINUAR FLUJO
-        jaque = false;
-        deshabilitar_enroque(pieza[2]);
-        comprobar_jaque(pieza_en_movimiento);
-        validar_promocion_peon(pieza_en_movimiento, casilla);
-        cambiar_turno(pieza_en_movimiento.style.color);
-
-        // VALIDACION FIN DEL JUEGO
-        detectar_jaque_mate(casilla);
-        
+    
     }
 
 }

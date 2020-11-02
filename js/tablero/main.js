@@ -16,6 +16,8 @@ var pieza_seleccionada = "";
 var ayuda_movimientos  = 1;
 var jaque_mate         = false;
 var jaque              = false;
+var contador_jugadas   = 0;
+var historial_jugadas  = [];
 var enroque_blanco     = [ true, true ];
 var enroque_negro      = [ true, true ];
 var pos_pieza_jaque    = { posY: 0, posX: 0 };
@@ -33,10 +35,10 @@ var peon_al_paso       = { posX: 0, posY: 0, estatus: false, by: "" };
 */
 
 var colorAyudaCasilla  = "aqua";
-var coloresTablero     = ["#a6a6a6", "#140d06"];
-var colores            = ["rgb(118, 77, 35)", "white"];
-var ggValidaciones     = ["rgb(118, 77, 35)", "white"];
-var movimiento_actual  = "white";
+var coloresTablero     = ["white", "rgb(13, 13, 13)"];
+var colores            = ["blue", "red"];
+var ggValidaciones     = ["blue", "red"];
+var movimiento_actual  = "red";
 
 // CREAR TABLERO, Y LAS PIEZAS DE JUEGO, ADEMAS ARRANCAR EL INICIO DEL JUEGO
 
@@ -59,6 +61,8 @@ function reiniciar_partida() {
 
     jaque             = false;
     jaque_mate        = false;
+    contador_jugadas  = 0;
+    historial_jugadas = [];
     enroque_blanco    = [true, true];
     enroque_negro     = [true, true];
     movimiento_actual = colores[1];

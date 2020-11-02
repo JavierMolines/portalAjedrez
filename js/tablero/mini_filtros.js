@@ -72,43 +72,41 @@ function obtener_ID_pieza(pieza) {
 
 }
 
+function crear_objeto_coordenadas(posicion_x, posicion_y) {
+
+    let objeto = {
+        posX: parseInt(posicion_x),
+        posY: parseInt(posicion_y)
+    };
+    return objeto;
+    
+}
+
 function obtener_posicion_base_ID(pieza) {
 
-    let string_con_posicion = pieza.parentNode.id.replace("cuadro", "").replace("{", "").replace("}", "").replace("[", "").replace("]", "").split(",");
-    let convertir_objeto = {
-
-        posY: parseInt(string_con_posicion[0]),
-        posX: parseInt(string_con_posicion[1])
-
-    };
-    return convertir_objeto;
+    let string_con_posicion = obtener_coordenadas_base_id(pieza.parentNode.id)
+    return crear_objeto_coordenadas(string_con_posicion[1], string_con_posicion[0]);
 
 }
 
 function crear_coordenadas_casilla(pieza) {
 
-    let string_con_posicion = pieza.id.replace("cuadro", "").replace("{", "").replace("}", "").replace("[", "").replace("]", "").split(",");
-    let convertir_objeto = {
+    let string_con_posicion = obtener_coordenadas_base_id(pieza.id);
+    return crear_objeto_coordenadas(string_con_posicion[1], string_con_posicion[0]);
 
-        posY: parseInt(string_con_posicion[0]),
-        posX: parseInt(string_con_posicion[1])
+}
 
-    };
-    return convertir_objeto;
+function obtener_coordenadas_base_id(texto_ingresado) {
 
+    return texto_ingresado.replace("cuadro", "").replace("{", "").replace("}", "").replace("[", "").replace("]", "").split(",");
+    
 }
 
 function obtener_posicion_pieza_objeto(elemento) {
 
     let posicion = elemento.parentElement.id.replace("cuadro", "");
     let final = posicion.replace("[", "").replace("]", "").split(",");
-    let propiedades = {
-
-        posY: parseInt(final[0]),
-        posX: parseInt(final[1])
-
-    };
-    return propiedades;
+    return crear_objeto_coordenadas(final[1], final[0]);
 
 }
 
@@ -228,6 +226,18 @@ function desactivar_doble_paso() {
     peon_al_paso.posX = 0;
     peon_al_paso.posY = 0;
 
+}
+
+function crear_casilla_data(coordenadas) {
+    
+    let retornar = false;
+
+    if(coordenadas.posX !== 0 && coordenadas.posY !== 0){
+        retornar = document.getElementById(`cuadro[${coordenadas.posY},${coordenadas.posX}]`);
+    }
+    
+    return retornar;
+    
 }
 
 function crear_pieza(coordenadas) {

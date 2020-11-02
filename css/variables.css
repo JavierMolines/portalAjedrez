@@ -2,7 +2,8 @@
 
     /* PROPIEDADES GENERALES */
     --tamaño_casillas         : 90px;
-    --tamaño_response         : 35px;
+    --tamaño_response         : 45px;
+    --tamaño_junior           : 38px;
 
     /* COLORES DE TEXTOS */
     --color_titulos_claros    : rgb(153, 0, 112);
