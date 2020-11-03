@@ -214,18 +214,28 @@ function filtrar_calculos_obtenidos_para_mostrar(posY, posX) {
 function activar_doble_paso(posicion) {
 
     peon_al_paso.estatus = true;
-    peon_al_paso.posX = posicion.targetPosX;
-    peon_al_paso.posY = posicion.targetPosY;
-    peon_al_paso.by = movimiento_actual;
+    peon_al_paso.posX    = posicion.targetPosX;
+    peon_al_paso.posY    = posicion.targetPosY;
+    peon_al_paso.by      = movimiento_actual;
 
 }
 
 function desactivar_doble_paso() {
 
-    peon_al_paso.estatus = false;
-    peon_al_paso.posX = 0;
-    peon_al_paso.posY = 0;
+    peon_al_paso.estatus     = false;
+    peon_al_paso.peon_pasado = false;
+    peon_al_paso.posX        = 0;
+    peon_al_paso.posY        = 0;
 
+}
+
+function asignar_data_objeto(objeto_completo) {
+    let nuevo = {};
+    let data = Object.keys(objeto_completo);
+    for (let iterator of data) {
+        nuevo[iterator] = objeto_completo[iterator];
+    }
+    return nuevo;
 }
 
 function crear_casilla_data(coordenadas) {

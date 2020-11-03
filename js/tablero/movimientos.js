@@ -439,10 +439,17 @@ function validar_movimiento_peon(posicionamiento, casilla_destino_final) {
     let casilla_delantera;
     let movimiento_valido = false;
     let enviar_interaccion = [];
+    let destinos_posibles = {
+        blancas: {
+            avanzar: [3, 4]
+        }
+    };
     let destino = {
         posX: 0,
         posY: 0,
     };
+
+    let destino_destino_final = destinos_posibles.blancas.avanzar;
 
     if (posicionamiento.flujo == ggValidaciones[1]) {
 
@@ -452,23 +459,25 @@ function validar_movimiento_peon(posicionamiento, casilla_destino_final) {
 
             if (posicionamiento.targetPosX == posicionamiento.posX) {
 
-                if (posicionamiento.targetPosY == 3 || posicionamiento.targetPosY == 4) {
-
-                    if (casilla_delantera.childNodes.length > 0) {
-                        return;
-                    }
-
-                    if (posicionamiento.targetPosY == 4) {
-                        casilla_delantera = document.getElementById(`cuadro[${posicionamiento.posY + 2},${posicionamiento.posX}]`);
-                        if (casilla_delantera.childNodes.length > 0) {
-                            return;
+                for (let intentos_destino of destino_destino_final) {
+                    if (posicionamiento.targetPosY == intentos_destino) {
+                        if (casilla_delantera.childNodes.length == 0) {
+                            let permitir = true;
+                            if (posicionamiento.targetPosY == destino_destino_final[1]) {
+                                permitir = false;
+                                casilla_delantera = document.getElementById(`cuadro[${posicionamiento.posY + 2},${posicionamiento.posX}]`);
+                                if (casilla_delantera.childNodes.length == 0) {
+                                    permitir = true;
+                                    activar_doble_paso(posicionamiento);
+                                }
+                            }
+                            if (permitir === true) {
+                                movimiento_valido = true;
+                                enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
+                                break;
+                            }
                         }
-                        activar_doble_paso(posicionamiento);
-                    }
-
-                    movimiento_valido = true;
-                    enviar_interaccion = [pieza_seleccionada, casilla_destino_final];
-
+                    }   
                 }
 
             } else if (posicionamiento.posY + 1 == posicionamiento.targetPosY) {
@@ -828,12 +837,17 @@ function validar_movimiento_rey(posicionamiento, casilla_destino_final) {
             }
 
             if(validar_pos){
-                let torre = document.getElementById(`torre_${movimiento_actual}_${ident_auto}`);
+                
+                let torre    = document.getElementById(`torre_${movimiento_actual}_${ident_auto}`);
+                let enroque  = { flujo: movimiento_actual, data: []};
+                enroque.data = movimiento_actual == ggValidaciones[1] ? enroque_blanco : enroque_negro;
 
                 document.getElementById(divisores[0]).removeChild(torre);
                 document.getElementById(divisores[1]).removeChild(pieza_seleccionada[0]);
                 document.getElementById(divisores[2]).appendChild(pieza_seleccionada[0]);
                 document.getElementById(divisores[3]).appendChild(torre);
+
+                guardar_movimiento(pieza_seleccionada, document.getElementById(divisores[0]), torre, enroque, false);
 
                 if(movimiento_actual == ggValidaciones[1]){
                     movimiento_actual = ggValidaciones[0];
